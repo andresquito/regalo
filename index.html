@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos por Navidad</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Font Awesome para iconos -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">Carro a Control Remoto</div>
+    </div>
+  </header>
+
+  <!-- Product Gallery -->
+  <section class="product-gallery">
+    <div class="container">
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="imagenes/uno.png" alt="Proyector cielo estrellado vista frontal">
+        </div>
+        <div class="gallery-item">
+          <img src="imagenes/dos.jpg" alt="Proyector cielo estrellado vista lateral">
+        </div>
+        <div class="gallery-item">
+          <img src="imagenes/tres.png" alt="Proyector cielo estrellado proyección nocturna">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <p>
+            Carro de juguete con control remoto fácil de usar.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👦</div>
+          <p>
+            Ideal para niños desde los 3 años.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">😄</div>
+          <p>
+            Diversión garantizada para niños y adultos.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Gift Section -->
+  <section class="free-gift">
+    <div class="container">
+      <h2 class="section-title">¡Oferta Especial!</h2>
+
+      <div class="gift-container">
+        <div class="gallery-item">
+          <img src="imagenes/cuatro.png" alt="Proyector cielo estrellado diseño moderno">
+        </div>
+
+        <div class="gift-text">
+          <p> Diseño inspirado en autos de competición.</p>
+
+          <p style="margin-top: 15px">
+            Ideal como regalo original para niños y adultos.
+          </p>
+
+          <ul style="margin-top: 10px; margin-left: 20px">
+            <li>🕹️ Fomenta el juego creativo y el pensamiento estratégico.</li>
+            <li>🏎️ Estilo deportivo que encanta a todas las edades.</li>
+            <li>🧩 Estimula la motricidad fina y la percepción espacial.</li>
+            <li>🎁 Ideal para regalar en navidad.</li>
+          </ul>
+
+          <p style="margin-top: 20px; font-weight: bold">
+            ¡No pierdas esta oportunidad única!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" id="comprar">
+    <div class="container">
+      <h2>¡Oferta por Tiempo Limitado!</h2>
+
+      <div class="price">🔥 $8,99 🔥</div>
+
+      <div class="benefits">
+        <div class="benefit">
+          <div class="shipping">🚚 ENTREGA A DOMICILIO GRATIS</div>
+        </div>
+
+        <div class="benefit">
+          <div class="shipping">💵 PAGO CONTRA ENTREGA</div>
+        </div>
+      </div>
+
+      <div class="whatsapp-info">
+        <h3>📞 ¿Cómo comprar?</h3>
+        <p>
+          Haz clic en el botón de WhatsApp para enviarnos tu pedido.
+        </p>
+        <p>Te contactaremos inmediatamente para coordinar la entrega.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Button -->
+  <div class="float-buttons">
+    <div class="whatsapp-button" onclick="openWhatsApp()">
+      <i class="fab fa-whatsapp"></i>
+      <span class="button-tooltip">Contactar por WhatsApp</span>
+    </div>
+
+  </div>
+
+  <!-- Script -->
+  <script>
+    function openWhatsApp() {
+      const productName = "Proyector Cielo Estrellado";
+      const productPrice = "$8,99";
+
+      const message = `Hola, quiero comprar el Carro a Control Remoto de $8.99 con pago contra entrega.`;
+
+      const encodedMessage = encodeURIComponent(message);
+
+      window.open(
+        `https://wa.me/593987259001?text=${encodedMessage}`,
+        "_blank"
+      );
+    }
+
+  </script>
+
+
+</body>
+</html>
