@@ -58,6 +58,22 @@ header {
 }
 
 /* =====================
+   HERO VIDEO ECOMMERCE PRO
+===================== */
+
+.video-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =====================
    PRODUCT GALLERY
 ===================== */
 .product-gallery {
@@ -305,3 +321,4 @@ header {
     font-size: 3rem;
   }
 }
+
