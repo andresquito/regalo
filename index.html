@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Tienda de Camisetas - Pack Premium</title>
 
-<style>
-  body { margin:0; font-family: Arial, sans-serif; background:#fff; color:#111; }
-  .container { padding:15px; max-width:1200px; margin:auto; }
-  .main { display:flex; flex-wrap:wrap; gap:20px; }
-  .img-section { flex:1 1 400px; }
-  .img-section img { width:100%; border:1px solid #ddd; border-radius:8px; }
-  .thumbs { display:flex; gap:10px; margin-top:10px; overflow-x:auto; }
-  .thumbs img { width:80px; border:1px solid #ddd; border-radius:6px; cursor:pointer; }
-  .details { flex:1 1 300px; }
-  .title { font-size:24px; font-weight:bold; margin-bottom:10px; }
-  .price { font-size:28px; color:#b12704; font-weight:bold; margin:10px 0; }
-  .offer { color:#007600; font-size:16px; margin-bottom:10px; }
-  select, input, button { width:100%; padding:12px; margin:8px 0; font-size:16px; }
-  button { background:#ffa41c; border:none; color:#111; font-weight:bold; border-radius:6px; cursor:pointer; }
-  button:hover { opacity:0.95; }
-</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pack de Camisetas</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Leaflet (Mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 
 <body>
@@ -28,119 +17,153 @@
 <div class="container">
   <div class="main">
 
-    <!-- IMAGEN PRINCIPAL -->
+    <!-- IMÁGENES -->
     <div class="img-section">
-      <img id="mainImg" src="blanco.png" alt="Camisetas Pack Premium"/>
+      <div class="main-img">
+        <img id="mainImg" src="imagenes/blanco.png">
+      </div>
 
-      <!-- MINIATURAS -->
       <div class="thumbs">
-        <img src="blanco.png" onclick="cambiarImagen(this,'Blanco')" />
-        <img src="negro.png" onclick="cambiarImagen(this,'Negro')" />
-        <img src="vino.png" onclick="cambiarImagen(this,'Vino')" />
-        <img src="turquesa.png" onclick="cambiarImagen(this,'Turquesa')" />
+        <img src="imagenes/blanco.png" onclick="cambiarImagen(this)">
+        <img src="imagenes/negro.png" onclick="cambiarImagen(this)">
+        <img src="imagenes/vino.png" onclick="cambiarImagen(this)">
+        <img src="imagenes/turquesa.png" onclick="cambiarImagen(this)">
       </div>
     </div>
 
-    <!-- DATOS DEL PRODUCTO -->
+    <!-- DATOS -->
     <div class="details">
-      <div class="title">Pack de 3 Camisetas Premium</div>
-      <div class="price">$19.99</div>
-      <div class="offer">🏠 Envío GRATIS a domicilio</div>
 
-      <!-- COLOR 1 (CONTROL PRINCIPAL) -->
-      <label>Color camiseta 1</label>
-      <select id="c1" onchange="actualizarImagenPrincipal()">
-        <option value="Blanco" data-img="blanco.png">Blanco</option>
-        <option value="Negro" data-img="negro.png">Negro</option>
-        <option value="Vino" data-img="vino.png">Vino</option>
-        <option value="Turquesa" data-img="turquesa.png">Turquesa</option>
-      </select>
+      <div class="title">Pack de 3 Camisetas</div>
+      <div class="price">$19<span class="cents">.99</span></div>
 
-      <label>Color camiseta 2</label>
-      <select id="c2">
-        <option>Blanco</option>
-        <option>Negro</option>
-        <option>Vino</option>
-        <option>Turquesa</option>
-      </select>
+      <div class="pedido">Realiza tu pedido</div>
 
-      <label>Color camiseta 3</label>
-      <select id="c3">
-        <option>Blanco</option>
-        <option>Negro</option>
-        <option>Vino</option>
-        <option>Turquesa</option>
-      </select>
-
+      <!-- TALLA -->
       <label>Talla</label>
-      <select id="talla">
-        <option>S</option>
-        <option>M</option>
-        <option>L</option>
-        <option>XL</option>
-      </select>
+      <div class="tallas">
+        <button type="button" class="talla-btn" onclick="seleccionarTalla(this,'S')">Pequeña</button>
+        <button type="button" class="talla-btn" onclick="seleccionarTalla(this,'M')">Mediana</button>
+        <button type="button" class="talla-btn" onclick="seleccionarTalla(this,'L')">Grande</button>
+      </div>
+      <input type="hidden" id="talla">
 
+      <!-- COLORES -->
+      <label>Colores del pack</label>
+      <div class="colores-pack">
+        <select id="c1" class="color-select" onchange="cambiarEstiloColor(this)">
+          <option value="">Color 1</option>
+          <option value="Blanco" data-color="#ffffff">Blanco</option>
+          <option value="Negro" data-color="#000000">Negro</option>
+          <option value="Vino" data-color="#6b1b1b">Vino</option>
+          <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+        </select>
+
+        <select id="c2" class="color-select" onchange="cambiarEstiloColor(this)">
+          <option value="">Color 2</option>
+          <option value="Blanco" data-color="#ffffff">Blanco</option>
+          <option value="Negro" data-color="#000000">Negro</option>
+          <option value="Vino" data-color="#6b1b1b">Vino</option>
+          <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+        </select>
+
+        <select id="c3" class="color-select" onchange="cambiarEstiloColor(this)">
+          <option value="">Color 3</option>
+          <option value="Blanco" data-color="#ffffff">Blanco</option>
+          <option value="Negro" data-color="#000000">Negro</option>
+          <option value="Vino" data-color="#6b1b1b">Vino</option>
+          <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+        </select>
+      </div>
+
+      <!-- FECHA Y HORA -->
       <label>Fecha de entrega</label>
       <input type="date" id="fecha">
 
       <label>Hora de entrega</label>
       <input type="time" id="hora">
 
-      <!-- GPS -->
-      <input type="hidden" id="gps">
-      <div id="gpsStatus" style="font-size:14px;color:#888;">
-        📍 Detectando ubicación GPS...
-      </div>
+      <!-- MAPA -->
+      <label>Ubicación de entrega</label>
+      <div id="map"></div>
+      <input type="hidden" id="ubicacion">
+      <div id="ubicacionStatus">📍 Selecciona la ubicación en el mapa</div>
 
-      <button onclick="enviar()">📲 Comprar ahora por WhatsApp</button>
+      <!-- BOTÓN -->
+      <button onclick="enviar()">Enviar pedido por WhatsApp</button>
+
     </div>
   </div>
 </div>
 
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
-// Cambiar imagen desde miniaturas
-function cambiarImagen(img, color){
+/* Imagen */
+function cambiarImagen(img) {
   document.getElementById('mainImg').src = img.src;
-  document.getElementById('c1').value = color;
 }
 
-// Cambiar imagen al cambiar Color 1
-function actualizarImagenPrincipal(){
-  const select = document.getElementById('c1');
-  const img = select.options[select.selectedIndex].getAttribute('data-img');
-  document.getElementById('mainImg').src = img;
+/* Talla */
+function seleccionarTalla(btn, valor) {
+  document.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('talla').value = valor;
 }
 
-// GPS automático
-window.onload = function(){
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(pos=>{
-      document.getElementById('gps').value =
-        `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
-      document.getElementById('gpsStatus').innerText =
-        '✅ Ubicación detectada automáticamente';
-    },()=>{
-      document.getElementById('gpsStatus').innerText =
-        '❌ Debes activar el GPS para comprar';
-    });
+/* Colores */
+function cambiarEstiloColor(select) {
+  const opt = select.options[select.selectedIndex];
+  const color = opt.dataset.color;
+  if (!color) return;
+
+  select.style.backgroundColor = color;
+  select.style.border = '2px solid ' + color;
+
+  if (color === '#000000' || color === '#6b1b1b') {
+    select.style.color = '#fff';
+  } else {
+    select.style.color = '#000';
   }
 }
 
-// Envío a WhatsApp
-function enviar(){
-  const gps = document.getElementById('gps').value;
-  if(!gps){
-    alert('Debes permitir el acceso a tu ubicación GPS para continuar');
+/* MAPA */
+let map = L.map('map').setView([-0.18, -78.47], 14);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+let marker;
+
+map.on('click', e => {
+  if (!marker) marker = L.marker(e.latlng).addTo(map);
+  else marker.setLatLng(e.latlng);
+
+  const link = `https://maps.google.com/?q=${e.latlng.lat},${e.latlng.lng}`;
+  document.getElementById('ubicacion').value = link;
+  document.getElementById('ubicacionStatus').innerText = '✅ Ubicación seleccionada';
+});
+
+/* VALIDACIÓN COMPLETA */
+function enviar() {
+  let faltantes = [];
+
+  if (!talla.value) faltantes.push('talla');
+  if (!c1.value || !c2.value || !c3.value) faltantes.push('los 3 colores');
+  if (!fecha.value) faltantes.push('fecha de entrega');
+  if (!hora.value) faltantes.push('hora de entrega');
+  if (!ubicacion.value) faltantes.push('ubicación');
+
+  if (faltantes.length > 0) {
+    alert('❌ Falta seleccionar:\n- ' + faltantes.join('\n- '));
     return;
   }
 
   const msg =
-    `Pedido:%0A` +
-    `Colores: ${c1.value}, ${c2.value}, ${c3.value}%0A` +
+    `Pedido Pack Camisetas%0A` +
     `Talla: ${talla.value}%0A` +
-    `Entrega: ${fecha.value} ${hora.value}%0A` +
-    `Ubicación GPS: ${gps}%0A` +
-    `Precio: $19.99 (Envío GRATIS)`;
+    `Colores: ${c1.value}, ${c2.value}, ${c3.value}%0A` +
+    `Fecha: ${fecha.value}%0A` +
+    `Hora: ${hora.value}%0A` +
+    `Ubicación: ${ubicacion.value}`;
 
   window.open(`https://wa.me/593987259001?text=${msg}`, '_blank');
 }
@@ -148,6 +171,8 @@ function enviar(){
 
 </body>
 </html>
+
+
 
 
 
