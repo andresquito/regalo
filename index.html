@@ -149,6 +149,50 @@
             margin-bottom: 15px;
         }
         
+        .color-options {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected {
+            border-color: #4b6cb7;
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        
+        .color-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
         .product-actions {
             display: flex;
             justify-content: space-between;
@@ -236,7 +280,7 @@
         }
         
         .selected-list {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
             margin-bottom: 20px;
         }
@@ -255,6 +299,13 @@
         
         .item-name {
             font-weight: 500;
+            max-width: 60%;
+        }
+        
+        .item-color {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 3px;
         }
         
         .item-details {
@@ -303,6 +354,10 @@
             header h1 {
                 font-size: 2rem;
             }
+            
+            .item-name {
+                max-width: 50%;
+            }
         }
         
         @media (max-width: 480px) {
@@ -319,6 +374,10 @@
                 gap: 15px;
                 align-items: flex-start;
             }
+            
+            .item-name {
+                max-width: 40%;
+            }
         }
         
         .empty-cart {
@@ -331,6 +390,27 @@
             font-size: 3rem;
             margin-bottom: 15px;
             color: #ddd;
+        }
+        
+        .color-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .color-option:hover .color-tooltip {
+            opacity: 1;
         }
     </style>
 </head>
@@ -380,6 +460,28 @@
     </footer>
 
     <script>
+        // Colores disponibles para pantalón jean
+        const jeanColors = [
+            { name: "Azul", value: "#1e3a8a", code: "azul" },
+            { name: "Negro", value: "#000000", code: "negro" },
+            { name: "Blanco", value: "#ffffff", code: "blanco" },
+            { name: "Concho de Vino", value: "#7f1d1d", code: "vino" }
+        ];
+
+        // Colores para otros productos que lo requieran
+        const tshirtColors = [
+            { name: "Blanco", value: "#ffffff", code: "blanco" },
+            { name: "Negro", value: "#000000", code: "negro" },
+            { name: "Azul", value: "#1e3a8a", code: "azul" },
+            { name: "Rojo", value: "#dc2626", code: "rojo" }
+        ];
+
+        const sockColors = [
+            { name: "Blanco", value: "#ffffff", code: "blanco" },
+            { name: "Negro", value: "#000000", code: "negro" },
+            { name: "Gris", value: "#6b7280", code: "gris" }
+        ];
+
         // Datos de los productos
         const products = [
             {
@@ -387,70 +489,90 @@
                 name: "Pantalón Jean",
                 description: "Pantalón de mezclilla clásico, corte recto y cómodo para el día a día.",
                 price: 35.99,
-                image: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: jeanColors,
+                defaultColor: "azul"
             },
             {
                 id: 2,
                 name: "Camiseta Manga Corta",
                 description: "Camiseta básica de algodón, perfecta para looks casuales y deportivos.",
                 price: 15.50,
-                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: tshirtColors,
+                defaultColor: "blanco"
             },
             {
                 id: 3,
                 name: "Medias Blancas",
                 description: "Pack de 3 pares de medias blancas de algodón, transpirables y duraderas.",
                 price: 8.75,
-                image: "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: sockColors,
+                defaultColor: "blanco"
             },
             {
                 id: 4,
                 name: "Zapatos Casuales",
                 description: "Zapatos cómodos y versátiles para uso diario, disponibles en varios colores.",
                 price: 49.99,
-                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: false
             },
             {
                 id: 5,
                 name: "Boxer Algodón",
                 description: "Pack de 5 boxers de algodón suave, elásticos y cómodos para todo el día.",
                 price: 22.50,
-                image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: false
             },
             {
                 id: 6,
                 name: "Reloj Deportivo",
                 description: "Reloj digital resistente al agua con cronómetro y múltiples funciones.",
                 price: 65.25,
-                image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: false
             },
             {
                 id: 7,
                 name: "Medias Negras",
                 description: "Pack de 3 pares de medias negras de microfibra, ideales para vestir formal.",
                 price: 9.25,
-                image: "https://images.unsplash.com/photo-1586350977771-b3b3abd50c82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1586350977771-b3b3abd50c82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: sockColors,
+                defaultColor: "negro"
             },
             {
                 id: 8,
                 name: "Camiseta Manga Larga",
                 description: "Camiseta de manga larga de algodón, perfecta para climas frescos.",
                 price: 24.99,
-                image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: tshirtColors,
+                defaultColor: "blanco"
             },
             {
                 id: 9,
                 name: "Saco Plomo",
                 description: "Saco elegante color plomo, ideal para ocasiones formales y de oficina.",
                 price: 89.99,
-                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: false
             },
             {
                 id: 10,
                 name: "Pantalón Deportivo",
                 description: "Pantalón deportivo con cintura elástica, ligero y cómodo para entrenar.",
                 price: 32.50,
-                image: "https://images.unsplash.com/photo-1600688640154-9619e002df30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                image: "https://images.unsplash.com/photo-1600688640154-9619e002df30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: false
             }
         ];
 
@@ -469,12 +591,32 @@
             products.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
+                
+                let colorOptionsHTML = '';
+                if (product.hasColors && product.colors) {
+                    colorOptionsHTML = `
+                        <div class="color-label">Color:</div>
+                        <div class="color-options" id="color-options-${product.id}">
+                            ${product.colors.map((color, index) => `
+                                <div class="color-option ${index === 0 ? 'selected' : ''}" 
+                                     style="background-color: ${color.value}; border: ${color.value === '#ffffff' ? '1px solid #ddd' : 'none'}"
+                                     data-color="${color.code}"
+                                     data-color-name="${color.name}"
+                                     onclick="selectColor(${product.id}, '${color.code}', '${color.name}')">
+                                    <div class="color-tooltip">${color.name}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+                
                 productCard.innerHTML = `
                     <img src="${product.image}" alt="${product.name}" class="product-image">
                     <div class="product-info">
                         <h3 class="product-title">${product.name}</h3>
                         <p class="product-description">${product.description}</p>
                         <div class="product-price">$${product.price.toFixed(2)}</div>
+                        ${colorOptionsHTML}
                         <div class="product-actions">
                             <div class="select-product" onclick="toggleProduct(${product.id})">
                                 <div class="checkbox" id="checkbox-${product.id}"></div>
@@ -492,8 +634,30 @@
             });
         }
         
+        // Seleccionar color para un producto
+        function selectColor(productId, colorCode, colorName) {
+            // Actualizar selección visual
+            const colorOptions = document.querySelectorAll(`#color-options-${productId} .color-option`);
+            colorOptions.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            const selectedOption = document.querySelector(`#color-options-${productId} .color-option[data-color="${colorCode}"]`);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+            
+            // Actualizar en el carrito si el producto está seleccionado
+            if (cart[productId]) {
+                cart[productId].selectedColor = colorCode;
+                cart[productId].selectedColorName = colorName;
+                updateCartDisplay();
+            }
+        }
+        
         // Alternar selección de producto
         function toggleProduct(productId) {
+            const product = products.find(p => p.id === productId);
             const checkbox = document.getElementById(`checkbox-${productId}`);
             const quantityControls = document.getElementById(`quantity-controls-${productId}`);
             
@@ -503,10 +667,16 @@
                 checkbox.classList.remove('checked');
                 quantityControls.style.display = 'none';
             } else {
-                // Agregar producto al carrito
+                // Agregar producto al carrito con color por defecto
+                const defaultColor = product.hasColors ? product.defaultColor : null;
+                const defaultColorName = product.hasColors ? 
+                    product.colors.find(c => c.code === product.defaultColor)?.name : null;
+                
                 cart[productId] = {
-                    ...products.find(p => p.id === productId),
-                    quantity: 1
+                    ...product,
+                    quantity: 1,
+                    selectedColor: defaultColor,
+                    selectedColorName: defaultColorName
                 };
                 checkbox.classList.add('checked');
                 quantityControls.style.display = 'flex';
@@ -558,8 +728,17 @@
                 cartItems.forEach(item => {
                     const itemElement = document.createElement('div');
                     itemElement.className = 'selected-item';
+                    
+                    let colorInfo = '';
+                    if (item.hasColors && item.selectedColorName) {
+                        colorInfo = `<div class="item-color">Color: ${item.selectedColorName}</div>`;
+                    }
+                    
                     itemElement.innerHTML = `
-                        <div class="item-name">${item.name}</div>
+                        <div class="item-name">
+                            ${item.name}
+                            ${colorInfo}
+                        </div>
                         <div class="item-details">
                             <span class="item-quantity">${item.quantity} unidad${item.quantity > 1 ? 'es' : ''}</span>
                             <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
@@ -605,6 +784,11 @@
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
                 message += `• ${item.name}%0A`;
+                
+                if (item.hasColors && item.selectedColorName) {
+                    message += `  Color: ${item.selectedColorName}%0A`;
+                }
+                
                 message += `  Cantidad: ${item.quantity}%0A`;
                 message += `  Precio unitario: $${item.price.toFixed(2)}%0A`;
                 message += `  Subtotal: $${itemTotal.toFixed(2)}%0A%0A`;
