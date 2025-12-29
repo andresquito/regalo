@@ -136,6 +136,20 @@ body {
             margin-top: 10px;
         }
         
+        /* Estilo para el campo de nombre */
+        input[type="text"] {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4b6cb7;
+        }
+        
         .tallas {
             display: flex;
             gap: 10px;
@@ -433,6 +447,10 @@ body {
                 <div class="offer">🚚 Envío GRATIS a domicilio</div>
                 <div class="offer">💵 Pagas al RECIBIR</div>
                 <div class="pedido">Realiza tú Pedido</div>
+
+                <!-- CAMPO AÑADIDO: Nombre del cliente -->
+                <label>Nombre del cliente</label>
+                <input type="text" id="nombre" placeholder="Ingresa tu nombre completo" required>
 
                 <label>Talla</label>
                 <div class="tallas">
@@ -794,6 +812,11 @@ body {
             // Validaciones
             let errores = [];
 
+            const nombreCliente = document.getElementById('nombre').value.trim();
+            if (!nombreCliente) {
+                errores.push("el nombre del cliente");
+            }
+
             if (!document.getElementById('talla').value) {
                 errores.push("la talla");
             }
@@ -817,7 +840,7 @@ body {
             // Si hay errores, mostrar mensaje y NO enviar
             if (errores.length > 0) {
                 alert(
-                    "⚠️ Para poder realizar el pedido te hace falta seleccionar:\n\n" +
+                    "⚠️ Para poder realizar el pedido te hace falta:\n\n" +
                     "• " + errores.join("\n• ")
                 );
                 return;
@@ -826,6 +849,7 @@ body {
             // Mensaje WhatsApp
             const msg =
                 `Pedido pack de 3 camisetas manga corta:%0A` +
+                `Cliente: ${nombreCliente}%0A` +
                 `Talla: ${document.getElementById('talla').value}%0A` +
                 `Colores: ${document.getElementById('c1').value}, ${document.getElementById('c2').value}, ${document.getElementById('c3').value}%0A` +
                 `Entrega: ${document.getElementById('fecha').value} ${document.getElementById('hora').value}%0A` +
