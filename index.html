@@ -505,7 +505,7 @@
     <!-- Mapa para seleccionar ubicación -->
     <div id="map-container" class="map-container">
         <div class="map-instructions">
-            <p><strong>Instrucciones:</strong> Haz clic en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. Puedes acercar/alejar con la rueda del mouse o los controles del mapa.</p>
+            <p><strong>Instrucciones:</strong> Haz clic en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. El indicador azul aparecerá automáticamente en tu ubicación.</p>
         </div>
         
         <div id="map"></div>
@@ -519,7 +519,7 @@
     <script>
         // Variables para el GPS
         let map = null;
-        let marker = null; // SOLO UN INDICADOR AZUL
+        let marker = null; // UN SOLO INDICADOR AZUL
         let selectedLocation = null;
         let selectedAddress = "";
         
@@ -545,7 +545,7 @@
             document.getElementById('mainImg').src = s;
         }
 
-        // Inicializar el mapa
+        // Inicializar el mapa con indicador azul automático
         function initMap(centerLat = 4.60971, centerLng = -74.08175) {
             // Centrar el mapa en una ubicación por defecto
             map = L.map('map').setView([centerLat, centerLng], 15);
@@ -555,17 +555,34 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
             
+            // Intentar obtener la ubicación actual del usuario y poner indicador azul
+            getCurrentLocation();
+            
             // Cuando se hace clic en el mapa
             map.on('click', function(e) {
-                // SOLO UN INDICADOR AZUL - eliminamos cualquier marcador anterior
+                // Si ya hay un marcador, lo movemos
                 if (marker) {
-                    map.removeLayer(marker);
+                    marker.setLatLng([e.latlng.lat, e.latlng.lng]);
+                } else {
+                    // Creamos el marcador azul
+                    marker = L.marker([e.latlng.lat, e.latlng.lng], {
+                        draggable: true
+                    }).addTo(map);
+                    
+                    // Configurar evento para cuando se arrastra
+                    marker.on('dragend', function() {
+                        const newLatLng = marker.getLatLng();
+                        selectedLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
+                        
+                        getAddressFromCoords(newLatLng.lat, newLatLng.lng)
+                            .then(address => {
+                                marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
+                            })
+                            .catch(error => {
+                                marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${newLatLng.lat.toFixed(6)}, ${newLatLng.lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
+                            });
+                    });
                 }
-                
-                // Creamos UN SOLO marcador azul en la ubicación seleccionada
-                marker = L.marker([e.latlng.lat, e.latlng.lng], {
-                    draggable: true
-                }).addTo(map);
                 
                 // Actualizar la ubicación seleccionada
                 selectedLocation = { lat: e.latlng.lat, lng: e.latlng.lng };
@@ -579,8 +596,87 @@
                         console.error("Error al obtener dirección:", error);
                         marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${e.latlng.lat.toFixed(6)}, ${e.latlng.lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
                     });
+            });
+        }
+        
+        // Obtener ubicación actual del usuario y poner indicador azul automático
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLat = position.coords.latitude;
+                        const userLng = position.coords.longitude;
+                        
+                        // Centrar el mapa en la ubicación del usuario
+                        map.setView([userLat, userLng], 16);
+                        
+                        // Crear UN SOLO INDICADOR AZUL en la ubicación del usuario
+                        marker = L.marker([userLat, userLng], {
+                            draggable: true
+                        }).addTo(map);
+                        
+                        // Configurar evento para cuando se arrastra
+                        marker.on('dragend', function() {
+                            const newLatLng = marker.getLatLng();
+                            selectedLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
+                            
+                            getAddressFromCoords(newLatLng.lat, newLatLng.lng)
+                                .then(address => {
+                                    marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
+                                })
+                                .catch(error => {
+                                    marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${newLatLng.lat.toFixed(6)}, ${newLatLng.lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
+                                });
+                        });
+                        
+                        // Actualizar la ubicación seleccionada
+                        selectedLocation = { lat: userLat, lng: userLng };
+                        
+                        // Obtener dirección automáticamente
+                        getAddressFromCoords(userLat, userLng)
+                            .then(address => {
+                                marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
+                            })
+                            .catch(error => {
+                                console.error("Error al obtener dirección:", error);
+                                marker.bindPopup('Tu ubicación actual<br>Arrastra para ajustar').openPopup();
+                            });
+                    },
+                    (error) => {
+                        console.log("No se pudo obtener la ubicación:", error);
+                        // Si no se puede obtener ubicación, usar ubicación por defecto
+                        marker = L.marker([4.60971, -74.08175], {
+                            draggable: true
+                        }).addTo(map);
+                        
+                        selectedLocation = { lat: 4.60971, lng: -74.08175 };
+                        marker.bindPopup('Ubicación por defecto<br>Arrastra para ajustar').openPopup();
+                        
+                        // Configurar evento para cuando se arrastra
+                        marker.on('dragend', function() {
+                            const newLatLng = marker.getLatLng();
+                            selectedLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
+                            
+                            getAddressFromCoords(newLatLng.lat, newLatLng.lng)
+                                .then(address => {
+                                    marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
+                                })
+                                .catch(error => {
+                                    marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${newLatLng.lat.toFixed(6)}, ${newLatLng.lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
+                                });
+                        });
+                    }
+                );
+            } else {
+                // Si el navegador no soporta geolocalización
+                marker = L.marker([4.60971, -74.08175], {
+                    draggable: true
+                }).addTo(map);
                 
-                // Cuando se arrastra el marcador
+                selectedLocation = { lat: 4.60971, lng: -74.08175 };
+                marker.bindPopup('Ubicación por defecto<br>Arrastra para ajustar').openPopup();
+                
+                // Configurar evento para cuando se arrastra
                 marker.on('dragend', function() {
                     const newLatLng = marker.getLatLng();
                     selectedLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
@@ -593,30 +689,6 @@
                             marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${newLatLng.lat.toFixed(6)}, ${newLatLng.lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
                         });
                 });
-            });
-            
-            // Intentar obtener la ubicación actual del usuario PERO NO MOSTRAR MARCADOR
-            getCurrentLocation();
-        }
-        
-        // Obtener ubicación actual del usuario PERO SIN MOSTRAR MARCADOR
-        function getCurrentLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const userLat = position.coords.latitude;
-                        const userLng = position.coords.longitude;
-                        
-                        // Centrar el mapa en la ubicación del usuario PERO NO PONER MARCADOR
-                        map.setView([userLat, userLng], 16);
-                        
-                        // NO creamos marcador de ubicación actual
-                        // SOLO el marcador azul cuando el usuario hace clic
-                    },
-                    (error) => {
-                        console.log("No se pudo obtener la ubicación:", error);
-                    }
-                );
             }
         }
         
