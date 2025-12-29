@@ -14,26 +14,24 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        body {
-            background-color: #f5f7fa;
-           
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .main {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #111;
+}
+
+.container {
+  padding: 15px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
         
         @media (max-width: 768px) {
             .main {
@@ -41,50 +39,48 @@
             }
         }
         
-        .img-section {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .main-img {
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8f9fa;
-        }
-        
-        .main-img img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        
-        .thumbs {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        
-        .thumbs img {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s;
-            object-fit: cover;
-        }
-        
+        /* IMAGEN + MINIATURAS */
+.img-section {
+  display: flex;
+  gap: 10px;
+  flex: 1 1 400px;
+}
+
+/* IMAGEN PRINCIPAL */
+.main-img {
+  flex: 1;
+}
+
+.main-img img {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* MINIATURAS A LA DERECHA (SIEMPRE) */
+.thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.thumbs img {
+  width: 70px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* AJUSTES SOLO PARA MÓVIL (siguen a la derecha) */
+@media (max-width: 600px) {
+  .thumbs img {
+    width: 55px;
+  }
+}        
         .thumbs img:hover {
             border-color: #4b6cb7;
             transform: scale(1.05);
         }
-        
         .details {
             display: flex;
             flex-direction: column;
@@ -92,43 +88,47 @@
         }
         
         .descripcion {
-            color: #666;
+            color: #101010;
             font-size: 0.95rem;
-            margin-bottom: 10px;
+           
         }
         
-        .title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #333;
-        }
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: right;
+}
         
         .price {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #28a745;
+            text-align: right;
+            font-size: 1.7rem;       
+            color: #f02106;
+            font-weight: bold;
         }
         
-        .cents {
-            font-size: 1.5rem;
-        }
+.price .cents {
+  font-size: 0.5em;
+  /* más pequeño */
+  vertical-align: text-bottom;
+  /* lo coloca arriba pero en la misma línea */
+  position: relative;
+  top: -0.2em;
+}
         
-        .offer {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #444;
-            font-weight: 500;
-        }
+.offer {
+  font-size: 16px;
+  color: #007600;
+  margin-bottom: 2px;
+}
         
-        .pedido {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #333;
-            margin-top: 10px;
-            padding-top: 15px;
-            border-top: 2px solid #eaeaea;
-        }
+.pedido {
+  font-size: 20px;
+  color: #050776;
+  font-weight: bold;
+  margin: 20px;
+  text-align: center;
+}
         
         label {
             font-weight: 600;
