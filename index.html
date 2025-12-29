@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seleccionar Ubicación de Entrega</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda de Camisetas - Pack Premium</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
@@ -18,54 +18,250 @@
             background-color: #f5f7fa;
             padding: 20px;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         
         .container {
-            width: 100%;
-            max-width: 500px;
-        }
-        
-        .location-display {
+            max-width: 800px;
+            margin: 0 auto;
             background-color: white;
             border-radius: 15px;
-            padding: 30px;
+            padding: 25px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
         }
         
-        h1 {
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .main {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .img-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .main-img {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        
+        .main-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .thumbs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .thumbs img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            object-fit: cover;
+        }
+        
+        .thumbs img:hover {
+            border-color: #4b6cb7;
+            transform: scale(1.05);
+        }
+        
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .descripcion {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+        
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
             color: #333;
-            margin-bottom: 25px;
-            text-align: center;
+        }
+        
+        .price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #28a745;
+        }
+        
+        .cents {
             font-size: 1.5rem;
         }
         
-        .address-label {
-            font-size: 1.1rem;
+        .offer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #444;
+            font-weight: 500;
+        }
+        
+        .pedido {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 2px solid #eaeaea;
+        }
+        
+        label {
             font-weight: 600;
             color: #444;
-            margin-bottom: 10px;
-            display: block;
+            margin-top: 10px;
+        }
+        
+        .tallas {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .talla-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .talla-btn.active {
+            background-color: #4b6cb7;
+            color: white;
+            border-color: #4b6cb7;
+        }
+        
+        .talla-btn:hover {
+            border-color: #4b6cb7;
+        }
+        
+        .colores-pack {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .color-select {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-weight: 600;
+            cursor: pointer;
+            appearance: none;
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .color-select:focus {
+            outline: none;
+            border-color: #4b6cb7;
+        }
+        
+        input[type="date"],
+        input[type="time"] {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input[type="date"]:focus,
+        input[type="time"]:focus {
+            outline: none;
+            border-color: #4b6cb7;
+        }
+        
+        button[onclick="enviar()"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        button[onclick="enviar()"]:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        /* Estilos para el GPS mejorado */
+        .gps-container {
+            margin-top: 10px;
+        }
+        
+        .select-location-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #4b6cb7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .select-location-btn:hover {
+            background-color: #3a5999;
+            transform: translateY(-2px);
         }
         
         .selected-address {
             background-color: #f8f9fa;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            min-height: 80px;
+            padding: 15px;
+            margin-top: 10px;
+            min-height: 60px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #333;
-            text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
         
         .selected-address.has-address {
@@ -81,200 +277,274 @@
         
         .address-text {
             color: #2c3e50;
-            line-height: 1.5;
-        }
-        
-        .select-location-btn {
-            width: 100%;
-            padding: 16px;
-            background-color: #4b6cb7;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 12px rgba(75, 108, 183, 0.3);
-        }
-        
-        .select-location-btn:hover {
-            background-color: #3a5999;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(75, 108, 183, 0.4);
-        }
-        
-        .select-location-btn:active {
-            transform: translateY(0);
+            line-height: 1.4;
         }
         
         .map-container {
             background-color: white;
             border-radius: 15px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
             display: none;
+        }
+        
+        .map-container.visible {
+            display: block;
             animation: fadeIn 0.3s ease;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translate(-50%, -48%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
         }
         
         #map {
-            height: 400px;
+            height: 350px;
             width: 100%;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
             border: 2px solid #e0e0e0;
         }
         
         .map-instructions {
             background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
             color: #0c5460;
             border-left: 4px solid #4b6cb7;
         }
         
         .map-controls {
             display: flex;
-            gap: 15px;
+            gap: 10px;
         }
         
         .map-btn {
             flex: 1;
-            padding: 14px;
+            padding: 12px;
             border: none;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1rem;
         }
         
         .confirm-btn {
             background-color: #28a745;
             color: white;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
         }
         
         .confirm-btn:hover {
             background-color: #218838;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
         }
         
         .cancel-btn {
             background-color: #6c757d;
             color: white;
-            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
         }
         
         .cancel-btn:hover {
             background-color: #5a6268;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(108, 117, 125, 0.4);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .visible {
-            display: block;
-        }
-        
-        .location-icon {
-            font-size: 1.3rem;
         }
         
         .status-message {
-            padding: 12px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-size: 0.95rem;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 0.9rem;
             display: none;
-            animation: fadeIn 0.3s ease;
+        }
+        
+        .status-message.visible {
+            display: block;
         }
         
         .success {
             background-color: #d4edda;
             color: #155724;
             border-left: 4px solid #28a745;
-            display: block;
         }
         
         .error {
             background-color: #f8d7da;
             color: #721c24;
             border-left: 4px solid #dc3545;
-            display: block;
         }
         
         .info {
             background-color: #d1ecf1;
             color: #0c5460;
             border-left: 4px solid #17a2b8;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.visible {
             display: block;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="location-display">
-            <h1>📍 Ubicación de Entrega</h1>
-            
-            <div class="address-label">Dirección donde se entregará tu pedido:</div>
-            <div id="selected-address" class="selected-address">
-                <span class="no-address">Aún no has seleccionado una ubicación</span>
+        <div class="main">
+            <div class="details">
+                <div class="descripcion">Camiseta de manga corta de color liso y cuello redondo</div>
             </div>
-            
-            <button id="select-location-btn" class="select-location-btn">
-                <span class="location-icon">🗺️</span>
-                Seleccionar Ubicación en el Mapa
-            </button>
-            
-            <div id="status-message" class="status-message"></div>
-        </div>
-        
-        <div id="map-container" class="map-container">
-            <div class="map-instructions">
-                <p><strong>Instrucciones:</strong> Haz clic en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. Puedes acercar/alejar con la rueda del mouse o los controles del mapa.</p>
+
+            <!-- IMÁGENES -->
+            <div class="img-section">
+                <div class="main-img">
+                    <img id="mainImg" src="imagenes/blanco.png" alt="Camisetas Pack Premium" />
+                </div>
+
+                <div class="thumbs">
+                    <img src="imagenes/blanco.png" onclick="cambiarImagen(this,'Blanco')" />
+                    <img src="imagenes/negro.png" onclick="cambiarImagen(this,'Negro')" />
+                    <img src="imagenes/vino.png" onclick="cambiarImagen(this,'Vino')" />
+                    <img src="imagenes/turquesa.png" onclick="cambiarImagen(this,'Turquesa')" />
+                </div>
             </div>
-            
-            <div id="map"></div>
-            
-            <div class="map-controls">
-                <button id="cancel-btn" class="map-btn cancel-btn">Cancelar</button>
-                <button id="confirm-btn" class="map-btn confirm-btn">Confirmar Ubicación</button>
+
+            <!-- DATOS -->
+            <div class="details">
+                <div class="title">Pack de 3 Camisetas</div>
+                <div class="price">$19<span class="cents">.99</span></div>
+                <div class="offer">🚚 Envío GRATIS a domicilio</div>
+                <div class="offer">💵 Pagas al RECIBIR</div>
+                <div class="pedido">Realiza tú Pedido</div>
+
+                <label>Talla</label>
+                <div class="tallas">
+                    <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'S')">Pequeña</button>
+                    <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'M')">Mediana</button>
+                    <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'L')">Grande</button>
+                </div>
+                <input type="hidden" id="talla" value="">
+
+                <label>Colores del pack</label>
+                <div class="colores-pack">
+                    <select id="c1" class="color-select" onchange="cambiarEstiloColor(this)">
+                        <option value="">Color 1</option>
+                        <option value="Blanco" data-color="#ffffff">Blanco</option>
+                        <option value="Negro" data-color="#000000">Negro</option>
+                        <option value="Vino" data-color="#6b1b1b">Vino</option>
+                        <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+                    </select>
+
+                    <select id="c2" class="color-select" onchange="cambiarEstiloColor(this)">
+                        <option value="">Color 2</option>
+                        <option value="Blanco" data-color="#ffffff">Blanco</option>
+                        <option value="Negro" data-color="#000000">Negro</option>
+                        <option value="Vino" data-color="#6b1b1b">Vino</option>
+                        <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+                    </select>
+
+                    <select id="c3" class="color-select" onchange="cambiarEstiloColor(this)">
+                        <option value="">Color 3</option>
+                        <option value="Blanco" data-color="#ffffff">Blanco</option>
+                        <option value="Negro" data-color="#000000">Negro</option>
+                        <option value="Vino" data-color="#6b1b1b">Vino</option>
+                        <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+                    </select>
+                </div>
+
+                <label>Fecha de entrega</label>
+                <input type="date" id="fecha">
+
+                <label>Hora de entrega</label>
+                <input type="time" id="hora">
+
+                <!-- GPS MEJORADO -->
+                <label>Ubicación de entrega</label>
+                <div class="gps-container">
+                    <div id="selected-address" class="selected-address">
+                        <span class="no-address">Haz clic en el botón para seleccionar la ubicación de entrega</span>
+                    </div>
+                    
+                    <button id="select-location-btn" class="select-location-btn">
+                        <span>📍</span>
+                        Seleccionar Ubicación en el Mapa
+                    </button>
+                    
+                    <div id="gps-status" class="status-message info">
+                        Selecciona dónde quieres que se entregue tu pedido
+                    </div>
+                </div>
+                
+                <input type="hidden" id="gps" value="">
+
+                <button onclick="enviar()"> Enviar pedido por WhatsApp</button>
             </div>
         </div>
     </div>
 
+    <!-- Overlay para el mapa -->
+    <div id="overlay" class="overlay"></div>
+    
+    <!-- Mapa para seleccionar ubicación -->
+    <div id="map-container" class="map-container">
+        <div class="map-instructions">
+            <p><strong>Instrucciones:</strong> Haz clic en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. Puedes acercar/alejar con la rueda del mouse o los controles del mapa.</p>
+        </div>
+        
+        <div id="map"></div>
+        
+        <div class="map-controls">
+            <button id="cancel-btn" class="map-btn cancel-btn">Cancelar</button>
+            <button id="confirm-btn" class="map-btn confirm-btn">Confirmar Ubicación</button>
+        </div>
+    </div>
+
     <script>
-        // Variables globales
+        // Variables para el GPS
         let map = null;
         let marker = null;
         let selectedLocation = null;
-        let selectedAddress = "Aún no has seleccionado una ubicación";
+        let selectedAddress = "";
         
-        // Elementos del DOM
+        // Elementos del DOM para el GPS
         const selectedAddressDiv = document.getElementById('selected-address');
         const selectLocationBtn = document.getElementById('select-location-btn');
         const mapContainer = document.getElementById('map-container');
-        const mapElement = document.getElementById('map');
+        const overlay = document.getElementById('overlay');
         const cancelBtn = document.getElementById('cancel-btn');
         const confirmBtn = document.getElementById('confirm-btn');
-        const statusMessage = document.getElementById('status-message');
+        const gpsStatus = document.getElementById('gps-status');
+        const gpsInput = document.getElementById('gps');
         
+        // Función para cambiar imagen
+        function cambiarImagen(img, color) {
+            document.getElementById('mainImg').src = img.src;
+            document.getElementById('c1').value = color;
+        }
+
+        // Función para actualizar imagen principal
+        function actualizarImagenPrincipal() {
+            const s = document.getElementById('c1').options[document.getElementById('c1').selectedIndex].dataset.img;
+            document.getElementById('mainImg').src = s;
+        }
+
         // Inicializar el mapa
         function initMap(centerLat = 4.60971, centerLng = -74.08175) {
             // Centrar el mapa en una ubicación por defecto
@@ -310,12 +580,9 @@
                             .addTo(map)
                             .bindPopup('Tu ubicación actual')
                             .openPopup();
-                            
-                        showMessage('Se ha detectado tu ubicación actual', 'info');
                     },
                     (error) => {
                         console.log("No se pudo obtener la ubicación:", error);
-                        showMessage('No se pudo detectar tu ubicación. Selecciona manualmente en el mapa.', 'info');
                     }
                 );
             }
@@ -380,10 +647,8 @@
         
         // Mostrar el mapa para seleccionar ubicación
         function showMap() {
-            mapContainer.style.display = 'block';
-            setTimeout(() => {
-                mapContainer.classList.add('visible');
-            }, 10);
+            mapContainer.classList.add('visible');
+            overlay.classList.add('visible');
             
             // Si el mapa no ha sido inicializado, inicializarlo
             if (!map) {
@@ -399,15 +664,13 @@
         // Ocultar el mapa
         function hideMap() {
             mapContainer.classList.remove('visible');
-            setTimeout(() => {
-                mapContainer.style.display = 'none';
-            }, 300);
+            overlay.classList.remove('visible');
         }
         
         // Confirmar la ubicación seleccionada
         async function confirmLocation() {
             if (!selectedLocation) {
-                showMessage('Por favor, selecciona una ubicación en el mapa', 'error');
+                showStatusMessage('Por favor, selecciona una ubicación en el mapa', 'error');
                 return;
             }
             
@@ -420,17 +683,14 @@
                 selectedAddressDiv.innerHTML = `<div class="address-text">${address}</div>`;
                 selectedAddressDiv.classList.add('has-address');
                 
+                // Actualizar el input hidden con las coordenadas
+                gpsInput.value = `https://maps.google.com/?q=${selectedLocation.lat},${selectedLocation.lng}`;
+                
                 // Mostrar mensaje de éxito
-                showMessage('¡Ubicación confirmada exitosamente! La dirección ha sido guardada.', 'success');
+                showStatusMessage('✅ Ubicación confirmada exitosamente', 'success');
                 
-                // Ocultar el mapa (regresar a la vista inicial)
+                // Ocultar el mapa
                 hideMap();
-                
-                // Aquí podrías enviar los datos al servidor
-                console.log('Ubicación confirmada:', {
-                    coordenadas: selectedLocation,
-                    dirección: address
-                });
                 
             } catch (error) {
                 // Si no se puede obtener la dirección, usar las coordenadas
@@ -438,7 +698,10 @@
                 selectedAddressDiv.innerHTML = `<div class="address-text">${selectedAddress}</div>`;
                 selectedAddressDiv.classList.add('has-address');
                 
-                showMessage('Ubicación confirmada (no se pudo obtener el nombre de la calle)', 'success');
+                // Actualizar el input hidden con las coordenadas
+                gpsInput.value = `https://maps.google.com/?q=${selectedLocation.lat},${selectedLocation.lng}`;
+                
+                showStatusMessage('✅ Ubicación confirmada', 'success');
                 hideMap();
             }
         }
@@ -446,34 +709,116 @@
         // Cancelar selección de ubicación
         function cancelSelection() {
             hideMap();
-            showMessage('Selección de ubicación cancelada', 'info');
+            showStatusMessage('Selección de ubicación cancelada', 'info');
         }
         
         // Mostrar mensaje de estado
-        function showMessage(message, type) {
-            statusMessage.textContent = message;
-            statusMessage.className = 'status-message';
-            statusMessage.classList.add(type);
+        function showStatusMessage(message, type) {
+            gpsStatus.textContent = message;
+            gpsStatus.className = 'status-message ' + type + ' visible';
             
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                statusMessage.style.display = 'none';
-                statusMessage.classList.remove(type);
-            }, 5000);
+            // Ocultar mensaje después de 5 segundos (excepto errores)
+            if (type !== 'error') {
+                setTimeout(() => {
+                    gpsStatus.classList.remove('visible');
+                }, 5000);
+            }
         }
-        
+
+        // Función para enviar pedido
+        function enviar() {
+            // Validaciones
+            let errores = [];
+
+            if (!document.getElementById('talla').value) {
+                errores.push("la talla");
+            }
+
+            if (!document.getElementById('c1').value || !document.getElementById('c2').value || !document.getElementById('c3').value) {
+                errores.push("los 3 colores del pack");
+            }
+
+            if (!document.getElementById('fecha').value) {
+                errores.push("la fecha de entrega");
+            }
+
+            if (!document.getElementById('hora').value) {
+                errores.push("la hora de entrega");
+            }
+
+            if (!gpsInput.value) {
+                errores.push("seleccionar la ubicación de entrega");
+            }
+
+            // Si hay errores, mostrar mensaje y NO enviar
+            if (errores.length > 0) {
+                alert(
+                    "⚠️ Para poder realizar el pedido te hace falta seleccionar:\n\n" +
+                    "• " + errores.join("\n• ")
+                );
+                return;
+            }
+
+            // Mensaje WhatsApp
+            const msg =
+                `Pedido pack de 3 camisetas manga corta:%0A` +
+                `Talla: ${document.getElementById('talla').value}%0A` +
+                `Colores: ${document.getElementById('c1').value}, ${document.getElementById('c2').value}, ${document.getElementById('c3').value}%0A` +
+                `Entrega: ${document.getElementById('fecha').value} ${document.getElementById('hora').value}%0A` +
+                `Ubicación: ${selectedAddress}%0A` +
+                `Coordenadas: ${gpsInput.value}%0A` +
+                `Precio: $19.99`;
+
+            window.open(`https://wa.me/593987259001?text=${msg}`, '_blank');
+        }
+
+        // Función para seleccionar talla
+        function seleccionarTalla(btn, talla) {
+            document.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('talla').value = talla;
+        }
+
+        // Función para cambiar estilo de color
+        function cambiarEstiloColor(select) {
+            const option = select.options[select.selectedIndex];
+            const color = option.getAttribute('data-color');
+            if (!color) return;
+
+            // Fondo y borde del selector
+            select.style.backgroundColor = color;
+            select.style.border = `2px solid ${color}`;
+
+            // Detectar colores oscuros → texto blanco
+            const coloresOscuros = ['#000000', '#6b1b1b'];
+
+            if (coloresOscuros.includes(color.toLowerCase())) {
+                select.style.color = '#ffffff'; // texto blanco
+            } else {
+                select.style.color = '#000000'; // texto negro
+            }
+
+            // Mantener flecha visible
+            select.style.backgroundImage =
+                "url(\"data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>\")";
+        }
+
         // Inicializar cuando el DOM esté listo
         document.addEventListener('DOMContentLoaded', function() {
-            // Configurar eventos
+            // Configurar eventos para el GPS
             selectLocationBtn.addEventListener('click', showMap);
             cancelBtn.addEventListener('click', cancelSelection);
             confirmBtn.addEventListener('click', confirmLocation);
+            overlay.addEventListener('click', hideMap);
+            
+            // Configurar fecha mínima como hoy
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha').min = today;
             
             // Mostrar mensaje inicial
-            setTimeout(() => {
-                showMessage('Haz clic en "Seleccionar Ubicación en el Mapa" para elegir dónde quieres que se entregue tu pedido', 'info');
-            }, 1000);
+            showStatusMessage('📍 Haz clic en "Seleccionar Ubicación en el Mapa" para elegir dónde quieres que se entregue tu pedido', 'info');
         });
     </script>
 </body>
 </html>
+
