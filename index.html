@@ -202,6 +202,26 @@ body {
             border-color: #4b6cb7;
         }
         
+        /* Contenedor para fecha y hora en misma línea */
+        .fecha-hora-container {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+            width: 100%;
+        }
+        
+        .fecha-hora-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+                .fecha-hora-item label {
+            font-size: 13px;
+            margin-bottom: 3px;
+            color: #666;
+        }
+
+        
         input[type="date"],
         input[type="time"] {
             padding: 12px;
@@ -209,6 +229,7 @@ body {
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s;
+            width: 100%;
         }
         
         input[type="date"]:focus,
@@ -416,6 +437,14 @@ body {
         .overlay.visible {
             display: block;
         }
+        
+        /* Responsive para fecha y hora en móviles */
+        @media (max-width: 300px) {
+            .fecha-hora-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
     </style>
 </head>
 
@@ -487,11 +516,16 @@ body {
                     </select>
                 </div>
 
-                <label>Fecha de entrega</label>
-                <input type="date" id="fecha">
-
-                <label>Hora de entrega</label>
-                <input type="time" id="hora">
+                <!-- FECHA Y HORA EN LA MISMA LÍNEA -->
+                <label>Fecha y hora de entrega</label>
+                <div class="fecha-hora-container">
+                    <div class="fecha-hora-item">
+                        <input type="date" id="fecha">
+                    </div>
+                    <div class="fecha-hora-item">
+                        <input type="time" id="hora">
+                    </div>
+                </div>
 
                 <!-- GPS MEJORADO -->
                 <label>Ubicación de entrega</label>
