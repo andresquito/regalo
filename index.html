@@ -3,554 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar ubicación</title>
+    <title>Seleccionar Ubicación de Entrega</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #f0f0f0;
+            background-color: #f5f7fa;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
         }
         
         .container {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
+        }
+        
+        .location-display {
             background-color: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
         
-        .header {
-            background-color: #128C7E;
-            color: white;
-            padding: 18px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .header h1 {
-            font-size: 20px;
-            font-weight: 500;
-        }
-        
-        .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background-color 0.2s;
-        }
-        
-        .close-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .content {
-            padding: 25px;
-        }
-        
-        .location-card {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 25px;
+        h1 {
+            color: #333;
             margin-bottom: 25px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            font-size: 1.5rem;
         }
         
-        .location-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #34B7F1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            color: white;
-            font-size: 24px;
-        }
-        
-        .location-title {
+        .address-label {
+            font-size: 1.1rem;
             font-weight: 600;
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 8px;
+            color: #444;
+            margin-bottom: 10px;
+            display: block;
         }
         
-        .location-status {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        
-        .street-name {
-            background-color: white;
+        .selected-address {
+            background-color: #f8f9fa;
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            border-left: 4px solid #128C7E;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .street-label {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .street-value {
-            font-size: 18px;
-            color: #333;
-            font-weight: 500;
-            word-break: break-word;
-        }
-        
-        .loading-spinner {
+            padding: 20px;
+            margin-bottom: 25px;
+            min-height: 80px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px 0;
+            font-size: 1rem;
+            color: #333;
+            text-align: center;
+            transition: all 0.3s ease;
         }
         
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #128C7E;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+        .selected-address.has-address {
+            border-color: #4b6cb7;
+            background-color: #f0f7ff;
+            font-weight: 500;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .no-address {
+            color: #999;
+            font-style: italic;
         }
         
-        .action-button {
+        .address-text {
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+        
+        .select-location-btn {
             width: 100%;
             padding: 16px;
-            background-color: #128C7E;
+            background-color: #4b6cb7;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(75, 108, 183, 0.3);
         }
         
-        .action-button:hover {
-            background-color: #0d796c;
+        .select-location-btn:hover {
+            background-color: #3a5999;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(75, 108, 183, 0.4);
         }
         
-        .action-button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
+        .select-location-btn:active {
+            transform: translateY(0);
         }
         
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background-color: #333;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 24px;
-            font-size: 14px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 100;
+        .map-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: fadeIn 0.3s ease;
         }
         
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .error-message {
-            background-color: #ffebee;
-            border-radius: 8px;
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .map-instructions {
+            background-color: #f0f8ff;
             padding: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid #f44336;
-            text-align: left;
-        }
-        
-        .error-title {
-            color: #d32f2f;
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .error-text {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-        
-        .demo-notice {
-            background-color: #e8f5e9;
             border-radius: 8px;
-            padding: 10px 15px;
-            margin-top: 15px;
-            font-size: 13px;
-            color: #2e7d32;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #0c5460;
+            border-left: 4px solid #4b6cb7;
         }
         
-        @media (max-width: 480px) {
-            .container {
-                max-width: 100%;
-            }
-            
-            body {
-                padding: 0;
-                background-color: white;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .location-card {
-                padding: 20px;
-                min-height: 180px;
-            }
+        .map-controls {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .map-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .confirm-btn {
+            background-color: #28a745;
+            color: white;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        .confirm-btn:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+        }
+        
+        .cancel-btn:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(108, 117, 125, 0.4);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .visible {
+            display: block;
+        }
+        
+        .location-icon {
+            font-size: 1.3rem;
+        }
+        
+        .status-message {
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+            display: block;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+            display: block;
+        }
+        
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+            display: block;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Enviar ubicación</h1>
-            <button class="close-btn" id="closeBtn">×</button>
-        </div>
-        
-        <div class="content">
-            <div class="location-card" id="locationCard">
-                <div class="location-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                
-                <div class="location-title" id="locationTitle">Ubicación actual</div>
-                <div class="location-status" id="locationStatus">
-                    Presiona el botón para obtener tu ubicación
-                </div>
-                
-                <div class="loading-spinner" id="loadingSpinner" style="display: none;">
-                    <div class="spinner"></div>
-                    <div>Obteniendo información de ubicación...</div>
-                </div>
-                
-                <div id="streetContainer" style="display: none;">
-                    <div class="street-name">
-                        <div class="street-label">Calle</div>
-                        <div class="street-value" id="streetValue">-</div>
-                    </div>
-                </div>
+        <div class="location-display">
+            <h1>📍 Ubicación de Entrega</h1>
+            
+            <div class="address-label">Dirección donde se entregará tu pedido:</div>
+            <div id="selected-address" class="selected-address">
+                <span class="no-address">Aún no has seleccionado una ubicación</span>
             </div>
             
-            <button class="action-button" id="getLocationBtn">
-                <i class="fas fa-crosshairs"></i>
-                Obtener mi ubicación
+            <button id="select-location-btn" class="select-location-btn">
+                <span class="location-icon">🗺️</span>
+                Seleccionar Ubicación en el Mapa
             </button>
+            
+            <div id="status-message" class="status-message"></div>
+        </div>
+        
+        <div id="map-container" class="map-container">
+            <div class="map-instructions">
+                <p><strong>Instrucciones:</strong> Haz clic en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. Puedes acercar/alejar con la rueda del mouse o los controles del mapa.</p>
+            </div>
+            
+            <div id="map"></div>
+            
+            <div class="map-controls">
+                <button id="cancel-btn" class="map-btn cancel-btn">Cancelar</button>
+                <button id="confirm-btn" class="map-btn confirm-btn">Confirmar Ubicación</button>
+            </div>
         </div>
     </div>
-    
-    <div class="toast" id="toast"></div>
-    
+
     <script>
+        // Variables globales
+        let map = null;
+        let marker = null;
+        let selectedLocation = null;
+        let selectedAddress = "Aún no has seleccionado una ubicación";
+        
         // Elementos del DOM
-        const closeBtn = document.getElementById('closeBtn');
-        const getLocationBtn = document.getElementById('getLocationBtn');
-        const locationTitle = document.getElementById('locationTitle');
-        const locationStatus = document.getElementById('locationStatus');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const streetContainer = document.getElementById('streetContainer');
-        const streetValue = document.getElementById('streetValue');
-        const toast = document.getElementById('toast');
+        const selectedAddressDiv = document.getElementById('selected-address');
+        const selectLocationBtn = document.getElementById('select-location-btn');
+        const mapContainer = document.getElementById('map-container');
+        const mapElement = document.getElementById('map');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const confirmBtn = document.getElementById('confirm-btn');
+        const statusMessage = document.getElementById('status-message');
         
-        // Datos de ejemplo para simulación
-        const sampleStreets = [
-            "Avenida de la Libertad",
-            "Calle Gran Vía",
-            "Paseo de la Castellana",
-            "Calle de Alcalá",
-            "Calle Mayor",
-            "Calle de Serrano",
-            "Paseo del Prado",
-            "Calle de Atocha",
-            "Calle de la Princesa",
-            "Calle de Fuencarral"
-        ];
-        
-        // Función para mostrar notificación
-        function showToast(message, duration = 3000) {
-            toast.textContent = message;
-            toast.classList.add('show');
+        // Inicializar el mapa
+        function initMap(centerLat = 4.60971, centerLng = -74.08175) {
+            // Centrar el mapa en una ubicación por defecto
+            map = L.map('map').setView([centerLat, centerLng], 15);
             
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, duration);
+            // Añadir capa de tiles de OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Cuando se hace clic en el mapa
+            map.on('click', function(e) {
+                setMarker(e.latlng.lat, e.latlng.lng);
+            });
+            
+            // Intentar obtener la ubicación actual del usuario
+            getCurrentLocation();
         }
         
-        // Obtener ubicación y nombre de calle
+        // Obtener ubicación actual del usuario
         function getCurrentLocation() {
             if (navigator.geolocation) {
-                // Actualizar UI
-                locationTitle.textContent = "Buscando ubicación...";
-                locationStatus.textContent = "Esperando datos del GPS...";
-                getLocationBtn.disabled = true;
-                getLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Buscando...';
-                
-                // Mostrar spinner y ocultar calle
-                loadingSpinner.style.display = 'flex';
-                streetContainer.style.display = 'none';
-                
                 navigator.geolocation.getCurrentPosition(
-                    // Éxito
-                    async (position) => {
-                        const userLocation = {
-                            lat: position.coords.latitude,
-                            lon: position.coords.longitude,
-                            accuracy: position.coords.accuracy
-                        };
+                    (position) => {
+                        const userLat = position.coords.latitude;
+                        const userLng = position.coords.longitude;
                         
-                        // Intentar obtener nombre de calle usando reverse geocoding
-                        try {
-                            const streetName = await getStreetNameFromCoordinates(userLocation.lat, userLocation.lon);
-                            updateStreetDisplay(streetName);
-                            
-                            locationTitle.textContent = "Ubicación encontrada";
-                            locationStatus.textContent = "Ubicación obtenida correctamente";
-                            
-                            showToast("Ubicación encontrada");
-                        } catch (error) {
-                            // Si falla, usar datos de ejemplo
-                            console.log("Usando datos de ejemplo:", error);
-                            useSampleStreet(userLocation);
-                        }
+                        // Centrar el mapa en la ubicación del usuario
+                        map.setView([userLat, userLng], 16);
                         
-                        // Restaurar botón
-                        getLocationBtn.disabled = false;
-                        getLocationBtn.innerHTML = '<i class="fas fa-crosshairs"></i> Obtener mi ubicación';
+                        // Colocar un marcador en la ubicación del usuario
+                        const userMarker = L.marker([userLat, userLng])
+                            .addTo(map)
+                            .bindPopup('Tu ubicación actual')
+                            .openPopup();
+                            
+                        showMessage('Se ha detectado tu ubicación actual', 'info');
                     },
-                    // Error
                     (error) => {
-                        console.error("Error al obtener la ubicación:", error);
-                        
-                        let errorMessage = "No se pudo obtener la ubicación";
-                        switch(error.code) {
-                            case error.PERMISSION_DENIED:
-                                errorMessage = "Permiso de ubicación denegado";
-                                showError("Permiso denegado", "Permite el acceso a la ubicación en la configuración de tu navegador.");
-                                break;
-                            case error.POSITION_UNAVAILABLE:
-                                errorMessage = "Información de ubicación no disponible";
-                                showError("Ubicación no disponible", "Verifica que tu GPS esté activado.");
-                                break;
-                            case error.TIMEOUT:
-                                errorMessage = "Tiempo de espera agotado";
-                                showError("Tiempo agotado", "Intenta de nuevo.");
-                                break;
-                        }
-                        
-                        // Usar calle de ejemplo para demostración
-                        useSampleStreet({ lat: 40.4168, lon: -3.7038 });
-                        
-                        // Restaurar botón
-                        getLocationBtn.disabled = false;
-                        getLocationBtn.innerHTML = '<i class="fas fa-crosshairs"></i> Obtener mi ubicación';
-                    },
-                    // Opciones
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 0
+                        console.log("No se pudo obtener la ubicación:", error);
+                        showMessage('No se pudo detectar tu ubicación. Selecciona manualmente en el mapa.', 'info');
                     }
                 );
-            } else {
-                // Navegador no soporta geolocalización
-                showError("Geolocalización no soportada", 
-                         "Tu navegador no soporta la funcionalidad de geolocalización.");
             }
         }
         
-        // Intentar obtener nombre de calle usando API de reverse geocoding
-        async function getStreetNameFromCoordinates(lat, lon) {
+        // Colocar o mover el marcador en el mapa
+        function setMarker(lat, lng) {
+            // Eliminar marcador anterior si existe
+            if (marker) {
+                map.removeLayer(marker);
+            }
+            
+            // Crear nuevo marcador
+            marker = L.marker([lat, lng], {
+                draggable: true
+            }).addTo(map);
+            
+            // Actualizar la ubicación seleccionada
+            selectedLocation = { lat, lng };
+            
+            // Obtener la dirección a partir de las coordenadas
+            getAddressFromCoords(lat, lng)
+                .then(address => {
+                    marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
+                })
+                .catch(error => {
+                    console.error("Error al obtener dirección:", error);
+                    marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${lat.toFixed(6)}, ${lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
+                });
+            
+            // Cuando se arrastra el marcador
+            marker.on('dragend', function() {
+                const newLatLng = marker.getLatLng();
+                selectedLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
+                
+                getAddressFromCoords(newLatLng.lat, newLatLng.lng)
+                    .then(address => {
+                        marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
+                    })
+                    .catch(error => {
+                        marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${newLatLng.lat.toFixed(6)}, ${newLatLng.lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
+                    });
+            });
+        }
+        
+        // Obtener dirección a partir de coordenadas
+        async function getAddressFromCoords(lat, lng) {
             try {
-                // Usar Nominatim (OpenStreetMap) - gratuito y sin API key
-                const response = await fetch(
-                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`
-                );
-                
-                if (!response.ok) {
-                    throw new Error("Error en la respuesta de la API");
-                }
-                
+                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`);
                 const data = await response.json();
                 
-                if (data && data.address) {
-                    const addr = data.address;
-                    
-                    // Obtener el nombre de la calle
-                    const street = addr.road || addr.pedestrian || addr.footway || addr.street || 
-                                  addr.residential || "Calle desconocida";
-                    
-                    return street;
+                if (data.display_name) {
+                    return data.display_name;
                 } else {
-                    throw new Error("Datos de dirección no disponibles");
+                    throw new Error("No se pudo obtener la dirección");
                 }
             } catch (error) {
-                console.log("Error en reverse geocoding, usando datos de ejemplo:", error);
+                console.error("Error al obtener dirección:", error);
                 throw error;
             }
         }
         
-        // Usar calle de ejemplo
-        function useSampleStreet(location) {
-            // Seleccionar una calle aleatoria de las muestras
-            const randomIndex = Math.floor(Math.random() * sampleStreets.length);
-            const sampleStreet = sampleStreets[randomIndex];
+        // Mostrar el mapa para seleccionar ubicación
+        function showMap() {
+            mapContainer.style.display = 'block';
+            setTimeout(() => {
+                mapContainer.classList.add('visible');
+            }, 10);
             
-            updateStreetDisplay(sampleStreet);
-            
-            locationTitle.textContent = "Ubicación de demostración";
-            locationStatus.textContent = "Modo offline - datos de ejemplo";
-            
-            // Mostrar aviso de demo
-            const existingNotice = document.querySelector('.demo-notice');
-            if (!existingNotice) {
-                const demoNotice = document.createElement('div');
-                demoNotice.className = 'demo-notice';
-                demoNotice.innerHTML = `
-                    <i class="fas fa-info-circle"></i>
-                    <span>Usando datos de ejemplo para demostración</span>
-                `;
-                document.querySelector('.location-card').appendChild(demoNotice);
+            // Si el mapa no ha sido inicializado, inicializarlo
+            if (!map) {
+                initMap();
+            } else {
+                // Si el mapa ya existe, ajustar su tamaño
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 300);
+            }
+        }
+        
+        // Ocultar el mapa
+        function hideMap() {
+            mapContainer.classList.remove('visible');
+            setTimeout(() => {
+                mapContainer.style.display = 'none';
+            }, 300);
+        }
+        
+        // Confirmar la ubicación seleccionada
+        async function confirmLocation() {
+            if (!selectedLocation) {
+                showMessage('Por favor, selecciona una ubicación en el mapa', 'error');
+                return;
             }
             
-            showToast("Modo demostración activado");
+            try {
+                // Obtener la dirección de la ubicación seleccionada
+                const address = await getAddressFromCoords(selectedLocation.lat, selectedLocation.lng);
+                selectedAddress = address;
+                
+                // Actualizar la visualización de la dirección
+                selectedAddressDiv.innerHTML = `<div class="address-text">${address}</div>`;
+                selectedAddressDiv.classList.add('has-address');
+                
+                // Mostrar mensaje de éxito
+                showMessage('¡Ubicación confirmada exitosamente! La dirección ha sido guardada.', 'success');
+                
+                // Ocultar el mapa (regresar a la vista inicial)
+                hideMap();
+                
+                // Aquí podrías enviar los datos al servidor
+                console.log('Ubicación confirmada:', {
+                    coordenadas: selectedLocation,
+                    dirección: address
+                });
+                
+            } catch (error) {
+                // Si no se puede obtener la dirección, usar las coordenadas
+                selectedAddress = `Ubicación en coordenadas: ${selectedLocation.lat.toFixed(6)}, ${selectedLocation.lng.toFixed(6)}`;
+                selectedAddressDiv.innerHTML = `<div class="address-text">${selectedAddress}</div>`;
+                selectedAddressDiv.classList.add('has-address');
+                
+                showMessage('Ubicación confirmada (no se pudo obtener el nombre de la calle)', 'success');
+                hideMap();
+            }
         }
         
-        // Actualizar la visualización de la calle
-        function updateStreetDisplay(streetName) {
-            streetValue.textContent = streetName;
-            
-            // Ocultar spinner y mostrar calle
-            loadingSpinner.style.display = 'none';
-            streetContainer.style.display = 'block';
+        // Cancelar selección de ubicación
+        function cancelSelection() {
+            hideMap();
+            showMessage('Selección de ubicación cancelada', 'info');
         }
         
-        // Mostrar mensaje de error
-        function showError(title, message) {
-            locationTitle.textContent = title;
-            locationStatus.textContent = message;
+        // Mostrar mensaje de estado
+        function showMessage(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = 'status-message';
+            statusMessage.classList.add(type);
             
-            // Ocultar spinner
-            loadingSpinner.style.display = 'none';
-            
-            // Mostrar calle con mensaje de error
-            streetValue.textContent = "No disponible";
-            streetContainer.style.display = 'block';
-            
-            // Mostrar mensaje de error específico
-            const errorHtml = `
-                <div class="error-message">
-                    <div class="error-title">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        ${title}
-                    </div>
-                    <div class="error-text">${message}</div>
-                </div>
-            `;
-            
-            // Insertar antes del botón
-            const content = document.querySelector('.content');
-            const button = document.getElementById('getLocationBtn');
-            content.insertAdjacentHTML('beforeend', errorHtml);
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+                statusMessage.classList.remove(type);
+            }, 5000);
         }
         
-        // Limpiar mensajes de error anteriores
-        function clearPreviousErrors() {
-            const errors = document.querySelectorAll('.error-message');
-            errors.forEach(error => error.remove());
-        }
-        
-        // Event Listeners
-        closeBtn.addEventListener('click', () => {
-            showToast("Ventana cerrada");
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar eventos
+            selectLocationBtn.addEventListener('click', showMap);
+            cancelBtn.addEventListener('click', cancelSelection);
+            confirmBtn.addEventListener('click', confirmLocation);
             
-            document.body.innerHTML = `
-                <div class="container">
-                    <div class="header">
-                        <h1>Ubicación</h1>
-                        <button class="close-btn" onclick="location.reload()">×</button>
-                    </div>
-                    <div class="content" style="text-align: center; padding: 40px 20px;">
-                        <div style="font-size: 60px; color: #128C7E; margin-bottom: 20px;">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h2 style="color: #333; margin-bottom: 10px;">Aplicación de ubicación</h2>
-                        <p style="color: #666; margin-bottom: 30px;">La ventana se ha cerrado.</p>
-                        <button class="action-button" onclick="location.reload()">
-                            <i class="fas fa-redo"></i>
-                            Volver a abrir
-                        </button>
-                    </div>
-                </div>
-            `;
-        });
-        
-        getLocationBtn.addEventListener('click', () => {
-            clearPreviousErrors();
-            getCurrentLocation();
-        });
-        
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', () => {
             // Mostrar mensaje inicial
-            streetContainer.style.display = 'none';
-            loadingSpinner.style.display = 'none';
+            setTimeout(() => {
+                showMessage('Haz clic en "Seleccionar Ubicación en el Mapa" para elegir dónde quieres que se entregue tu pedido', 'info');
+            }, 1000);
         });
     </script>
 </body>
