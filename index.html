@@ -16,13 +16,20 @@
         
         body {
             background-color: #f5f7fa;
-            padding: 15px;
+            padding: 20px;
             min-height: 100vh;
         }
         
-        .main {
+        .container {
             max-width: 800px;
             margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
@@ -31,7 +38,6 @@
         @media (max-width: 768px) {
             .main {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
         }
         
@@ -189,7 +195,6 @@
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s;
-            width: 100%;
         }
         
         input[type="date"]:focus,
@@ -209,7 +214,6 @@
             cursor: pointer;
             margin-top: 20px;
             transition: all 0.3s;
-            width: 100%;
         }
         
         button[onclick="enviar()"]:hover {
@@ -218,9 +222,32 @@
             box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
         }
         
-        /* GPS simplificado - UN SOLO INDICADOR */
+        /* Estilos para el GPS mejorado */
         .gps-container {
             margin-top: 10px;
+        }
+        
+        .select-location-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #4b6cb7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .select-location-btn:hover {
+            background-color: #3a5999;
+            transform: translateY(-2px);
         }
         
         .selected-address {
@@ -253,86 +280,82 @@
             line-height: 1.4;
         }
         
-        /* Botón único de ubicación */
-        .select-location-btn {
-            width: 100%;
-            padding: 14px;
-            background-color: #4b6cb7;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .select-location-btn:hover {
-            background-color: #3a5999;
-            transform: translateY(-2px);
-        }
-        
-        /* Mapa simplificado - selección con un clic */
         .map-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 1000;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
             display: none;
-            flex-direction: column;
         }
         
         .map-container.visible {
-            display: flex;
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -48%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
         }
         
         #map {
+            height: 350px;
             width: 100%;
-            height: 100%;
-            flex: 1;
-            border: none;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
         }
         
         .map-instructions {
             background-color: #f0f8ff;
-            padding: 15px;
-            font-size: 0.95rem;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
             color: #0c5460;
-            border-bottom: 3px solid #4b6cb7;
-            text-align: center;
+            border-left: 4px solid #4b6cb7;
         }
         
-        /* UN SOLO BOTÓN para confirmar en el mapa */
-        .map-confirm-btn {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #28a745;
-            color: white;
+        .map-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .map-btn {
+            flex: 1;
+            padding: 12px;
             border: none;
-            padding: 16px 30px;
             border-radius: 8px;
-            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: all 0.3s;
         }
         
-        .map-confirm-btn:hover {
+        .confirm-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .confirm-btn:hover {
             background-color: #218838;
-            transform: translateX(-50%) translateY(-2px);
-            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #5a6268;
         }
         
         .status-message {
@@ -364,116 +387,139 @@
             color: #0c5460;
             border-left: 4px solid #17a2b8;
         }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.visible {
+            display: block;
+        }
     </style>
 </head>
 
 <body>
-    <div class="main">
-        <!-- IMÁGENES -->
-        <div class="img-section">
-            <div class="main-img">
-                <img id="mainImg" src="imagenes/blanco.png" alt="Camisetas Pack Premium" />
+    <div class="container">
+        <div class="main">
+            <div class="details">
+                <div class="descripcion">Camiseta de manga corta de color liso y cuello redondo</div>
             </div>
 
-            <div class="thumbs">
-                <img src="imagenes/blanco.png" onclick="cambiarImagen(this,'Blanco')" />
-                <img src="imagenes/negro.png" onclick="cambiarImagen(this,'Negro')" />
-                <img src="imagenes/vino.png" onclick="cambiarImagen(this,'Vino')" />
-                <img src="imagenes/turquesa.png" onclick="cambiarImagen(this,'Turquesa')" />
-            </div>
-        </div>
-
-        <!-- DATOS -->
-        <div class="details">
-            <div class="descripcion">Camiseta de manga corta de color liso y cuello redondo</div>
-            
-            <div class="title">Pack de 3 Camisetas</div>
-            <div class="price">$19<span class="cents">.99</span></div>
-            <div class="offer">🚚 Envío GRATIS a domicilio</div>
-            <div class="offer">💵 Pagas al RECIBIR</div>
-            <div class="pedido">Realiza tú Pedido</div>
-
-            <label>Talla</label>
-            <div class="tallas">
-                <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'S')">Pequeña</button>
-                <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'M')">Mediana</button>
-                <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'L')">Grande</button>
-            </div>
-            <input type="hidden" id="talla" value="">
-
-            <label>Colores del pack</label>
-            <div class="colores-pack">
-                <select id="c1" class="color-select" onchange="cambiarEstiloColor(this)">
-                    <option value="">Color 1</option>
-                    <option value="Blanco" data-color="#ffffff">Blanco</option>
-                    <option value="Negro" data-color="#000000">Negro</option>
-                    <option value="Vino" data-color="#6b1b1b">Vino</option>
-                    <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
-                </select>
-
-                <select id="c2" class="color-select" onchange="cambiarEstiloColor(this)">
-                    <option value="">Color 2</option>
-                    <option value="Blanco" data-color="#ffffff">Blanco</option>
-                    <option value="Negro" data-color="#000000">Negro</option>
-                    <option value="Vino" data-color="#6b1b1b">Vino</option>
-                    <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
-                </select>
-
-                <select id="c3" class="color-select" onchange="cambiarEstiloColor(this)">
-                    <option value="">Color 3</option>
-                    <option value="Blanco" data-color="#ffffff">Blanco</option>
-                    <option value="Negro" data-color="#000000">Negro</option>
-                    <option value="Vino" data-color="#6b1b1b">Vino</option>
-                    <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
-                </select>
-            </div>
-
-            <label>Fecha de entrega</label>
-            <input type="date" id="fecha">
-
-            <label>Hora de entrega</label>
-            <input type="time" id="hora">
-
-            <!-- GPS SIMPLIFICADO - UN SOLO INDICADOR -->
-            <label>Ubicación de entrega</label>
-            <div class="gps-container">
-                <div id="selected-address" class="selected-address">
-                    <span class="no-address">Haz clic en el botón para seleccionar la ubicación de entrega</span>
+            <!-- IMÁGENES -->
+            <div class="img-section">
+                <div class="main-img">
+                    <img id="mainImg" src="imagenes/blanco.png" alt="Camisetas Pack Premium" />
                 </div>
-                
-                <!-- UN SOLO BOTÓN para GPS -->
-                <button id="select-location-btn" class="select-location-btn">
-                    <span>📍</span>
-                    Seleccionar Ubicación en el Mapa
-                </button>
-                
-                <div id="gps-status" class="status-message info">
-                    Selecciona dónde quieres que se entregue tu pedido
+
+                <div class="thumbs">
+                    <img src="imagenes/blanco.png" onclick="cambiarImagen(this,'Blanco')" />
+                    <img src="imagenes/negro.png" onclick="cambiarImagen(this,'Negro')" />
+                    <img src="imagenes/vino.png" onclick="cambiarImagen(this,'Vino')" />
+                    <img src="imagenes/turquesa.png" onclick="cambiarImagen(this,'Turquesa')" />
                 </div>
             </div>
-            
-            <input type="hidden" id="gps" value="">
 
-            <button onclick="enviar()"> Enviar pedido por WhatsApp</button>
+            <!-- DATOS -->
+            <div class="details">
+                <div class="title">Pack de 3 Camisetas</div>
+                <div class="price">$19<span class="cents">.99</span></div>
+                <div class="offer">🚚 Envío GRATIS a domicilio</div>
+                <div class="offer">💵 Pagas al RECIBIR</div>
+                <div class="pedido">Realiza tú Pedido</div>
+
+                <label>Talla</label>
+                <div class="tallas">
+                    <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'S')">Pequeña</button>
+                    <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'M')">Mediana</button>
+                    <button type="button" class="talla-btn" onclick="seleccionarTalla(this, 'L')">Grande</button>
+                </div>
+                <input type="hidden" id="talla" value="">
+
+                <label>Colores del pack</label>
+                <div class="colores-pack">
+                    <select id="c1" class="color-select" onchange="cambiarEstiloColor(this)">
+                        <option value="">Color 1</option>
+                        <option value="Blanco" data-color="#ffffff">Blanco</option>
+                        <option value="Negro" data-color="#000000">Negro</option>
+                        <option value="Vino" data-color="#6b1b1b">Vino</option>
+                        <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+                    </select>
+
+                    <select id="c2" class="color-select" onchange="cambiarEstiloColor(this)">
+                        <option value="">Color 2</option>
+                        <option value="Blanco" data-color="#ffffff">Blanco</option>
+                        <option value="Negro" data-color="#000000">Negro</option>
+                        <option value="Vino" data-color="#6b1b1b">Vino</option>
+                        <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+                    </select>
+
+                    <select id="c3" class="color-select" onchange="cambiarEstiloColor(this)">
+                        <option value="">Color 3</option>
+                        <option value="Blanco" data-color="#ffffff">Blanco</option>
+                        <option value="Negro" data-color="#000000">Negro</option>
+                        <option value="Vino" data-color="#6b1b1b">Vino</option>
+                        <option value="Turquesa" data-color="#2bbec3">Turquesa</option>
+                    </select>
+                </div>
+
+                <label>Fecha de entrega</label>
+                <input type="date" id="fecha">
+
+                <label>Hora de entrega</label>
+                <input type="time" id="hora">
+
+                <!-- GPS MEJORADO -->
+                <label>Ubicación de entrega</label>
+                <div class="gps-container">
+                    <div id="selected-address" class="selected-address">
+                        <span class="no-address">Haz clic en el botón para seleccionar la ubicación de entrega</span>
+                    </div>
+                    
+                    <button id="select-location-btn" class="select-location-btn">
+                        <span>📍</span>
+                        Seleccionar Ubicación en el Mapa
+                    </button>
+                    
+                    <div id="gps-status" class="status-message info">
+                        Selecciona dónde quieres que se entregue tu pedido
+                    </div>
+                </div>
+                
+                <input type="hidden" id="gps" value="">
+
+                <button onclick="enviar()"> Enviar pedido por WhatsApp</button>
+            </div>
         </div>
     </div>
 
-    <!-- Mapa para seleccionar ubicación - UN SOLO CLIC -->
+    <!-- Overlay para el mapa -->
+    <div id="overlay" class="overlay"></div>
+    
+    <!-- Mapa para seleccionar ubicación -->
     <div id="map-container" class="map-container">
         <div class="map-instructions">
-            <p><strong>Instrucciones:</strong> Haz clic en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. El marcador azul aparecerá automáticamente.</p>
+            <p><strong>Instrucciones:</strong> Haz clic en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. Puedes acercar/alejar con la rueda del mouse o los controles del mapa.</p>
         </div>
         
         <div id="map"></div>
         
-        <!-- UN SOLO BOTÓN para confirmar en el mapa -->
-        <button id="confirm-location-btn" class="map-confirm-btn">Confirmar esta ubicación</button>
+        <div class="map-controls">
+            <button id="cancel-btn" class="map-btn cancel-btn">Cancelar</button>
+            <button id="confirm-btn" class="map-btn confirm-btn">Confirmar Ubicación</button>
+        </div>
     </div>
 
     <script>
         // Variables para el GPS
         let map = null;
-        let marker = null;
+        let marker = null; // SOLO UN INDICADOR AZUL
         let selectedLocation = null;
         let selectedAddress = "";
         
@@ -481,7 +527,9 @@
         const selectedAddressDiv = document.getElementById('selected-address');
         const selectLocationBtn = document.getElementById('select-location-btn');
         const mapContainer = document.getElementById('map-container');
-        const confirmLocationBtn = document.getElementById('confirm-location-btn');
+        const overlay = document.getElementById('overlay');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const confirmBtn = document.getElementById('confirm-btn');
         const gpsStatus = document.getElementById('gps-status');
         const gpsInput = document.getElementById('gps');
         
@@ -507,65 +555,69 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
             
-            // Cuando se hace clic en el mapa - UN SOLO CLIC para seleccionar
+            // Cuando se hace clic en el mapa
             map.on('click', function(e) {
-                // Eliminar marcador anterior si existe (UN SOLO INDICADOR)
+                // SOLO UN INDICADOR AZUL - eliminamos cualquier marcador anterior
                 if (marker) {
                     map.removeLayer(marker);
                 }
                 
-                // Crear NUEVO marcador (indicador azul)
+                // Creamos UN SOLO marcador azul en la ubicación seleccionada
                 marker = L.marker([e.latlng.lat, e.latlng.lng], {
-                    draggable: true, // Permitir arrastrar si se desea
-                    icon: L.icon({
-                        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-                        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-                        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-                        iconSize: [25, 41],
-                        iconAnchor: [12, 41],
-                        popupAnchor: [1, -34],
-                        shadowSize: [41, 41]
-                    })
+                    draggable: true
                 }).addTo(map);
                 
                 // Actualizar la ubicación seleccionada
-                selectedLocation = { 
-                    lat: e.latlng.lat, 
-                    lng: e.latlng.lng 
-                };
+                selectedLocation = { lat: e.latlng.lat, lng: e.latlng.lng };
                 
-                // Mostrar popup informativo
-                marker.bindPopup('Ubicación seleccionada<br>Arrastra para ajustar').openPopup();
-                
-                // Obtener dirección automáticamente
+                // Obtener la dirección a partir de las coordenadas
                 getAddressFromCoords(e.latlng.lat, e.latlng.lng)
                     .then(address => {
-                        marker.setPopupContent(`<b>${address}</b><br>Arrastra para ajustar`);
+                        marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
                     })
                     .catch(error => {
                         console.error("Error al obtener dirección:", error);
+                        marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${e.latlng.lat.toFixed(6)}, ${e.latlng.lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
                     });
                 
-                // Cuando se arrastra el marcador (opcional)
+                // Cuando se arrastra el marcador
                 marker.on('dragend', function() {
                     const newLatLng = marker.getLatLng();
-                    selectedLocation = { 
-                        lat: newLatLng.lat, 
-                        lng: newLatLng.lng 
-                    };
+                    selectedLocation = { lat: newLatLng.lat, lng: newLatLng.lng };
                     
                     getAddressFromCoords(newLatLng.lat, newLatLng.lng)
                         .then(address => {
-                            marker.setPopupContent(`<b>${address}</b><br>Arrastra para ajustar`);
+                            marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
                         })
                         .catch(error => {
-                            marker.setPopupContent('Ubicación seleccionada<br>Arrastra para ajustar');
+                            marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${newLatLng.lat.toFixed(6)}, ${newLatLng.lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
                         });
                 });
             });
             
-            // NO mostrar marcador de ubicación actual automáticamente
-            // Solo UN marcador azul cuando el usuario hace clic
+            // Intentar obtener la ubicación actual del usuario PERO NO MOSTRAR MARCADOR
+            getCurrentLocation();
+        }
+        
+        // Obtener ubicación actual del usuario PERO SIN MOSTRAR MARCADOR
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLat = position.coords.latitude;
+                        const userLng = position.coords.longitude;
+                        
+                        // Centrar el mapa en la ubicación del usuario PERO NO PONER MARCADOR
+                        map.setView([userLat, userLng], 16);
+                        
+                        // NO creamos marcador de ubicación actual
+                        // SOLO el marcador azul cuando el usuario hace clic
+                    },
+                    (error) => {
+                        console.log("No se pudo obtener la ubicación:", error);
+                    }
+                );
+            }
         }
         
         // Obtener dirección a partir de coordenadas
@@ -588,7 +640,7 @@
         // Mostrar el mapa para seleccionar ubicación
         function showMap() {
             mapContainer.classList.add('visible');
-            document.body.style.overflow = 'hidden';
+            overlay.classList.add('visible');
             
             // Si el mapa no ha sido inicializado, inicializarlo
             if (!map) {
@@ -597,17 +649,17 @@
                 // Si el mapa ya existe, ajustar su tamaño
                 setTimeout(() => {
                     map.invalidateSize();
-                }, 100);
+                }, 300);
             }
         }
         
         // Ocultar el mapa
         function hideMap() {
             mapContainer.classList.remove('visible');
-            document.body.style.overflow = 'auto';
+            overlay.classList.remove('visible');
         }
         
-        // Confirmar la ubicación seleccionada - UN SOLO CLIC
+        // Confirmar la ubicación seleccionada
         async function confirmLocation() {
             if (!selectedLocation) {
                 showStatusMessage('Por favor, selecciona una ubicación en el mapa', 'error');
@@ -644,6 +696,12 @@
                 showStatusMessage('✅ Ubicación confirmada', 'success');
                 hideMap();
             }
+        }
+        
+        // Cancelar selección de ubicación
+        function cancelSelection() {
+            hideMap();
+            showStatusMessage('Selección de ubicación cancelada', 'info');
         }
         
         // Mostrar mensaje de estado
@@ -741,7 +799,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Configurar eventos para el GPS
             selectLocationBtn.addEventListener('click', showMap);
-            confirmLocationBtn.addEventListener('click', confirmLocation);
+            cancelBtn.addEventListener('click', cancelSelection);
+            confirmBtn.addEventListener('click', confirmLocation);
+            overlay.addEventListener('click', hideMap);
             
             // Configurar fecha mínima como hoy
             const today = new Date().toISOString().split('T')[0];
