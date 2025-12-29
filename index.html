@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Tienda de Camisetas - Pack Premium</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -11,63 +11,72 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
         }
         
         body {
-            background-color: #f5f7fa;
-            padding: 20px;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.5;
+            width: 100%;
             min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
         }
         
+        /* Contenedor principal sin márgenes ni padding en mobile */
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
         }
         
+        /* Sección principal ocupa toda la pantalla */
         .main {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .img-section {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            width: 100%;
+            padding: 0;
+        }
+        
+        /* Imágenes - ocupan todo el ancho */
+        .img-section {
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            margin: 0;
+            position: relative;
         }
         
         .main-img {
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 350px;
+            width: 100%;
+            height: auto;
+            min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f8f9fa;
+            padding: 10px;
+            margin: 0 auto;
         }
         
         .main-img img {
             max-width: 100%;
-            max-height: 100%;
+            height: auto;
+            max-height: 400px;
             object-fit: contain;
         }
         
+        /* Galería de miniaturas a la derecha */
         .thumbs {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
+            flex-direction: column;
             gap: 10px;
-            justify-content: center;
+            padding: 10px;
         }
         
         .thumbs img {
@@ -76,294 +85,324 @@
             border-radius: 8px;
             border: 2px solid transparent;
             cursor: pointer;
-            transition: all 0.3s;
             object-fit: cover;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
-        .thumbs img:hover {
-            border-color: #4b6cb7;
-            transform: scale(1.05);
+        .thumbs img:hover,
+        .thumbs img.active {
+            border-color: #007AFF;
         }
         
+        /* Detalles del producto - pantalla completa */
         .details {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            width: 100%;
+            padding: 25px 20px;
+            background-color: white;
         }
         
+        /* Descripción arriba como estaba originalmente */
         .descripcion {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 10px;
+            color: #666666;
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding: 0 5px;
+            width: 100%;
+            text-align: left;
         }
         
         .title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #333;
+            font-size: 26px;
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 10px;
         }
         
         .price {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #28a745;
+            font-size: 34px;
+            font-weight: 800;
+            color: #28A745;
+            margin-bottom: 20px;
         }
         
         .cents {
-            font-size: 1.5rem;
+            font-size: 24px;
         }
         
         .offer {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #444;
+            gap: 10px;
+            color: #444444;
             font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding: 8px 0;
         }
         
         .pedido {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #333;
-            margin-top: 10px;
-            padding-top: 15px;
-            border-top: 2px solid #eaeaea;
+            font-size: 22px;
+            font-weight: 700;
+            color: #000000;
+            margin: 25px 0 20px 0;
+            padding-top: 20px;
+            border-top: 2px solid #eeeeee;
         }
         
         label {
+            display: block;
             font-weight: 600;
-            color: #444;
-            margin-top: 10px;
+            color: #000000;
+            margin: 20px 0 10px 0;
+            font-size: 17px;
         }
         
         .tallas {
             display: flex;
-            gap: 10px;
-            margin-top: 5px;
+            gap: 12px;
+            margin: 10px 0 20px 0;
+            width: 100%;
         }
         
         .talla-btn {
             flex: 1;
-            padding: 12px;
-            border: 2px solid #ddd;
+            padding: 18px 10px;
+            border: 2px solid #dddddd;
             background: white;
-            border-radius: 8px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .talla-btn.active {
-            background-color: #4b6cb7;
+            background-color: #007AFF;
             color: white;
-            border-color: #4b6cb7;
+            border-color: #007AFF;
         }
         
-        .talla-btn:hover {
-            border-color: #4b6cb7;
+        .talla-btn:active {
+            transform: scale(0.98);
         }
         
+        /* Colores en una sola línea */
         .colores-pack {
             display: flex;
             gap: 10px;
-            margin-top: 5px;
+            margin: 10px 0 20px 0;
+            width: 100%;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 5px;
         }
         
         .color-select {
-            flex: 1;
-            padding: 12px;
-            border-radius: 8px;
-            border: 2px solid #ddd;
+            min-width: 120px;
+            padding: 15px 10px;
+            border-radius: 12px;
+            border: 2px solid #dddddd;
             font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
             appearance: none;
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 16px;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            flex-shrink: 0;
         }
         
         .color-select:focus {
             outline: none;
-            border-color: #4b6cb7;
+            border-color: #007AFF;
         }
         
         input[type="date"],
         input[type="time"] {
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
+            width: 100%;
+            padding: 18px 15px;
+            border: 2px solid #dddddd;
+            border-radius: 12px;
+            font-size: 16px;
+            margin: 10px 0 20px 0;
+            transition: all 0.2s;
         }
         
         input[type="date"]:focus,
         input[type="time"]:focus {
             outline: none;
-            border-color: #4b6cb7;
+            border-color: #007AFF;
         }
         
+        /* Botón principal de enviar */
         button[onclick="enviar()"] {
-            background-color: #28a745;
+            width: 100%;
+            background-color: #28A745;
             color: white;
             border: none;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 22px;
+            border-radius: 14px;
+            font-size: 20px;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s;
+            margin: 30px 0 20px 0;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        button[onclick="enviar()"]:hover {
+        button[onclick="enviar()"]:active {
             background-color: #218838;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+            transform: scale(0.98);
         }
         
         /* Estilos para el GPS mejorado */
         .gps-container {
-            margin-top: 10px;
+            width: 100%;
+            margin: 20px 0;
         }
         
         .select-location-btn {
             width: 100%;
-            padding: 14px;
-            background-color: #4b6cb7;
+            padding: 20px;
+            background-color: #007AFF;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
+            margin: 15px 0;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        .select-location-btn:hover {
-            background-color: #3a5999;
-            transform: translateY(-2px);
+        .select-location-btn:active {
+            background-color: #0056CC;
+            transform: scale(0.98);
         }
         
         .selected-address {
             background-color: #f8f9fa;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
-            min-height: 60px;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 80px;
             display: flex;
             align-items: center;
-            font-size: 0.95rem;
-            color: #333;
-            transition: all 0.3s;
+            font-size: 16px;
+            color: #333333;
+            transition: all 0.2s;
+            width: 100%;
         }
         
         .selected-address.has-address {
-            border-color: #4b6cb7;
+            border-color: #007AFF;
             background-color: #f0f7ff;
             font-weight: 500;
         }
         
         .no-address {
-            color: #999;
+            color: #999999;
             font-style: italic;
+            text-align: center;
+            width: 100%;
         }
         
         .address-text {
-            color: #2c3e50;
-            line-height: 1.4;
+            color: #000000;
+            line-height: 1.5;
+            font-size: 16px;
+            width: 100%;
         }
         
+        /* Mapa - Pantalla completa */
         .map-container {
-            background-color: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
             z-index: 1000;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
             display: none;
+            flex-direction: column;
         }
         
         .map-container.visible {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -48%); }
-            to { opacity: 1; transform: translate(-50%, -50%); }
+            display: flex;
         }
         
         #map {
-            height: 350px;
             width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 2px solid #e0e0e0;
+            height: 100%;
+            flex: 1;
+            border: none;
         }
         
         .map-instructions {
             background-color: #f0f8ff;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: #0c5460;
-            border-left: 4px solid #4b6cb7;
+            padding: 20px;
+            font-size: 16px;
+            color: #0056CC;
+            border-bottom: 2px solid #007AFF;
         }
         
         .map-controls {
             display: flex;
-            gap: 10px;
+            gap: 15px;
+            padding: 20px;
+            background-color: white;
+            border-top: 1px solid #eeeeee;
         }
         
         .map-btn {
             flex: 1;
-            padding: 12px;
+            padding: 20px;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .confirm-btn {
-            background-color: #28a745;
+            background-color: #28A745;
             color: white;
         }
         
-        .confirm-btn:hover {
+        .confirm-btn:active {
             background-color: #218838;
+            transform: scale(0.98);
         }
         
         .cancel-btn {
-            background-color: #6c757d;
+            background-color: #6C757D;
             color: white;
         }
         
-        .cancel-btn:hover {
-            background-color: #5a6268;
+        .cancel-btn:active {
+            background-color: #545B62;
+            transform: scale(0.98);
         }
         
         .status-message {
-            padding: 10px;
-            border-radius: 6px;
-            margin: 10px 0;
-            font-size: 0.9rem;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 16px;
             display: none;
+            width: 100%;
         }
         
         .status-message.visible {
@@ -373,34 +412,94 @@
         .success {
             background-color: #d4edda;
             color: #155724;
-            border-left: 4px solid #28a745;
+            border-left: 4px solid #28A745;
         }
         
         .error {
             background-color: #f8d7da;
             color: #721c24;
-            border-left: 4px solid #dc3545;
+            border-left: 4px solid #DC3545;
         }
         
         .info {
             background-color: #d1ecf1;
-            color: #0c5460;
-            border-left: 4px solid #17a2b8;
+            color: #0C5460;
+            border-left: 4px solid #17A2B8;
         }
         
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
+        /* Scroll suave en iOS */
+        .colores-pack {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #007AFF #f0f0f0;
         }
         
-        .overlay.visible {
-            display: block;
+        .colores-pack::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .colores-pack::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+        
+        .colores-pack::-webkit-scrollbar-thumb {
+            background: #007AFF;
+            border-radius: 3px;
+        }
+        
+        /* Evitar zoom en inputs en iOS */
+        @media screen and (max-width: 768px) {
+            input[type="date"],
+            input[type="time"],
+            select,
+            textarea {
+                font-size: 16px !important;
+            }
+            
+            /* Ajustar miniaturas para mobile */
+            .thumbs {
+                right: 5px;
+            }
+            
+            .thumbs img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        /* Ajustar altura del mapa para evitar problemas con teclado virtual */
+        @media screen and (max-height: 600px) {
+            .map-instructions {
+                padding: 15px;
+                font-size: 14px;
+            }
+            
+            .map-controls {
+                padding: 15px;
+            }
+            
+            .map-btn {
+                padding: 15px;
+            }
+        }
+        
+        /* Para pantallas muy pequeñas */
+        @media screen and (max-width: 360px) {
+            .thumbs {
+                right: 2px;
+            }
+            
+            .thumbs img {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .color-select {
+                min-width: 100px;
+                padding: 12px 8px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -408,18 +507,15 @@
 <body>
     <div class="container">
         <div class="main">
-            <div class="details">
-                <div class="descripcion">Camiseta de manga corta de color liso y cuello redondo</div>
-            </div>
-
             <!-- IMÁGENES -->
             <div class="img-section">
                 <div class="main-img">
                     <img id="mainImg" src="imagenes/blanco.png" alt="Camisetas Pack Premium" />
                 </div>
 
+                <!-- Galería de miniaturas a la derecha -->
                 <div class="thumbs">
-                    <img src="imagenes/blanco.png" onclick="cambiarImagen(this,'Blanco')" />
+                    <img src="imagenes/blanco.png" onclick="cambiarImagen(this,'Blanco')" class="active" />
                     <img src="imagenes/negro.png" onclick="cambiarImagen(this,'Negro')" />
                     <img src="imagenes/vino.png" onclick="cambiarImagen(this,'Vino')" />
                     <img src="imagenes/turquesa.png" onclick="cambiarImagen(this,'Turquesa')" />
@@ -428,6 +524,9 @@
 
             <!-- DATOS -->
             <div class="details">
+                <!-- Descripción arriba como estaba originalmente -->
+                <div class="descripcion">Camiseta de manga corta de color liso y cuello redondo</div>
+                
                 <div class="title">Pack de 3 Camisetas</div>
                 <div class="price">$19<span class="cents">.99</span></div>
                 <div class="offer">🚚 Envío GRATIS a domicilio</div>
@@ -443,6 +542,7 @@
                 <input type="hidden" id="talla" value="">
 
                 <label>Colores del pack</label>
+                <!-- Colores en una sola línea horizontal -->
                 <div class="colores-pack">
                     <select id="c1" class="color-select" onchange="cambiarEstiloColor(this)">
                         <option value="">Color 1</option>
@@ -499,13 +599,10 @@
         </div>
     </div>
 
-    <!-- Overlay para el mapa -->
-    <div id="overlay" class="overlay"></div>
-    
     <!-- Mapa para seleccionar ubicación -->
     <div id="map-container" class="map-container">
         <div class="map-instructions">
-            <p><strong>Instrucciones:</strong> Haz clic en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. Puedes acercar/alejar con la rueda del mouse o los controles del mapa.</p>
+            <p><strong>Instrucciones:</strong> Toca en el mapa para seleccionar la ubicación exacta donde quieres que se entregue tu pedido. Puedes arrastrar el marcador para ajustar.</p>
         </div>
         
         <div id="map"></div>
@@ -527,7 +624,6 @@
         const selectedAddressDiv = document.getElementById('selected-address');
         const selectLocationBtn = document.getElementById('select-location-btn');
         const mapContainer = document.getElementById('map-container');
-        const overlay = document.getElementById('overlay');
         const cancelBtn = document.getElementById('cancel-btn');
         const confirmBtn = document.getElementById('confirm-btn');
         const gpsStatus = document.getElementById('gps-status');
@@ -535,8 +631,17 @@
         
         // Función para cambiar imagen
         function cambiarImagen(img, color) {
+            // Cambiar imagen principal
             document.getElementById('mainImg').src = img.src;
             document.getElementById('c1').value = color;
+            
+            // Quitar clase active de todas las miniaturas
+            document.querySelectorAll('.thumbs img').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            
+            // Añadir clase active a la miniatura clickeada
+            img.classList.add('active');
         }
 
         // Función para actualizar imagen principal
@@ -552,7 +657,9 @@
             
             // Añadir capa de tiles de OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19,
+                detectRetina: true
             }).addTo(map);
             
             // Cuando se hace clic en el mapa
@@ -583,6 +690,11 @@
                     },
                     (error) => {
                         console.log("No se pudo obtener la ubicación:", error);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 0
                     }
                 );
             }
@@ -597,7 +709,16 @@
             
             // Crear nuevo marcador
             marker = L.marker([lat, lng], {
-                draggable: true
+                draggable: true,
+                icon: L.icon({
+                    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                    iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+                    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                })
             }).addTo(map);
             
             // Actualizar la ubicación seleccionada
@@ -609,7 +730,6 @@
                     marker.bindPopup(`<b>${address}</b><br>Arrastra para ajustar`).openPopup();
                 })
                 .catch(error => {
-                    console.error("Error al obtener dirección:", error);
                     marker.bindPopup(`<b>Ubicación seleccionada</b><br>(${lat.toFixed(6)}, ${lng.toFixed(6)})<br>Arrastra para ajustar`).openPopup();
                 });
             
@@ -648,7 +768,7 @@
         // Mostrar el mapa para seleccionar ubicación
         function showMap() {
             mapContainer.classList.add('visible');
-            overlay.classList.add('visible');
+            document.body.style.overflow = 'hidden';
             
             // Si el mapa no ha sido inicializado, inicializarlo
             if (!map) {
@@ -657,14 +777,14 @@
                 // Si el mapa ya existe, ajustar su tamaño
                 setTimeout(() => {
                     map.invalidateSize();
-                }, 300);
+                }, 100);
             }
         }
         
         // Ocultar el mapa
         function hideMap() {
             mapContainer.classList.remove('visible');
-            overlay.classList.remove('visible');
+            document.body.style.overflow = 'auto';
         }
         
         // Confirmar la ubicación seleccionada
@@ -809,16 +929,23 @@
             selectLocationBtn.addEventListener('click', showMap);
             cancelBtn.addEventListener('click', cancelSelection);
             confirmBtn.addEventListener('click', confirmLocation);
-            overlay.addEventListener('click', hideMap);
             
             // Configurar fecha mínima como hoy
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('fecha').min = today;
             
+            // Prevenir comportamiento por defecto en botones
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                });
+            });
+            
             // Mostrar mensaje inicial
-            showStatusMessage('📍 Haz clic en "Seleccionar Ubicación en el Mapa" para elegir dónde quieres que se entregue tu pedido', 'info');
+            setTimeout(() => {
+                showStatusMessage('📍 Toca en "Seleccionar Ubicación en el Mapa" para elegir dónde quieres que se entregue tu pedido', 'info');
+            }, 1000);
         });
     </script>
 </body>
 </html>
-
