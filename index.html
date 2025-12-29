@@ -98,7 +98,7 @@
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
@@ -149,10 +149,21 @@
             margin-bottom: 15px;
         }
         
+        .options-container {
+            margin-bottom: 15px;
+        }
+        
+        .options-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
         .color-options {
             display: flex;
             gap: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
         }
         
@@ -187,81 +198,59 @@
             text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
-        .color-label {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 5px;
-        }
-        
-        .product-actions {
+        .size-options {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         
-        .select-product {
+        .size-option {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            background: white;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .size-option:hover {
+            background: #f0f0f0;
+        }
+        
+        .size-option.selected {
+            background: #4b6cb7;
+            color: white;
+            border-color: #4b6cb7;
+        }
+        
+        .add-to-cart-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        .checkbox {
-            width: 22px;
-            height: 22px;
-            border: 2px solid #4b6cb7;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
+            margin-top: 10px;
+            width: 100%;
             justify-content: center;
-            transition: all 0.2s;
         }
         
-        .checkbox.checked {
-            background: #4b6cb7;
+        .add-to-cart-btn:hover {
+            background: #218838;
         }
         
-        .checkbox.checked::after {
-            content: "✓";
-            color: white;
-            font-weight: bold;
-        }
-        
-        .select-text {
-            font-weight: 500;
-            color: #555;
-        }
-        
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .quantity-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #f0f0f0;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-weight: bold;
-            color: #555;
-            transition: all 0.2s;
-        }
-        
-        .quantity-btn:hover {
-            background: #e0e0e0;
-        }
-        
-        .quantity {
-            font-weight: 600;
-            min-width: 30px;
-            text-align: center;
+        .add-to-cart-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
         }
         
         .selected-products {
@@ -277,6 +266,24 @@
             color: #333;
             border-bottom: 2px solid #4b6cb7;
             padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .clear-cart-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .clear-cart-btn:hover {
+            background: #c82333;
         }
         
         .selected-list {
@@ -297,33 +304,91 @@
             border-bottom: none;
         }
         
-        .item-name {
-            font-weight: 500;
-            max-width: 60%;
+        .item-info {
+            flex: 1;
         }
         
-        .item-color {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 3px;
+        .item-name {
+            font-weight: 500;
+            margin-bottom: 5px;
         }
         
         .item-details {
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .item-color {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .item-color-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .item-actions {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
+        .item-quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: #555;
+            transition: all 0.2s;
+        }
+        
+        .quantity-btn:hover {
+            background: #e0e0e0;
+        }
+        
         .item-quantity {
-            background: #f0f8ff;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.9rem;
+            font-weight: 600;
+            min-width: 25px;
+            text-align: center;
         }
         
         .item-price {
             font-weight: 600;
             color: #4b6cb7;
+            min-width: 80px;
+            text-align: right;
+        }
+        
+        .remove-item-btn {
+            background: transparent;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+        }
+        
+        .remove-item-btn:hover {
+            color: #c82333;
         }
         
         footer {
@@ -355,8 +420,15 @@
                 font-size: 2rem;
             }
             
-            .item-name {
-                max-width: 50%;
+            .selected-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .item-actions {
+                width: 100%;
+                justify-content: space-between;
             }
         }
         
@@ -367,16 +439,6 @@
             
             .container {
                 padding: 15px;
-            }
-            
-            .product-actions {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-            
-            .item-name {
-                max-width: 40%;
             }
         }
         
@@ -412,13 +474,26 @@
         .color-option:hover .color-tooltip {
             opacity: 1;
         }
+        
+        .cart-count {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
             <h1><i class="fas fa-store"></i> Tienda Online Express</h1>
-            <p>Selecciona los productos que deseas y envía tu pedido por WhatsApp</p>
+            <p>Selecciona talla, color y cantidad para cada producto</p>
         </div>
     </header>
     
@@ -441,7 +516,12 @@
         
         <!-- Productos Seleccionados -->
         <div class="selected-products">
-            <h3><i class="fas fa-shopping-cart"></i> Productos Seleccionados</h3>
+            <h3>
+                <span><i class="fas fa-shopping-cart"></i> Productos Seleccionados</span>
+                <button id="clear-cart-btn" class="clear-cart-btn" style="display: none;">
+                    <i class="fas fa-trash"></i> Vaciar Carrito
+                </button>
+            </h3>
             <div class="selected-list" id="selected-list">
                 <!-- Los productos seleccionados aparecerán aquí -->
                 <div class="empty-cart" id="empty-cart">
@@ -460,6 +540,10 @@
     </footer>
 
     <script>
+        // Tallas disponibles
+        const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+        const shoeSizes = ["36", "37", "38", "39", "40", "41", "42", "43", "44"];
+        
         // Colores disponibles para pantalón jean
         const jeanColors = [
             { name: "Azul", value: "#1e3a8a", code: "azul" },
@@ -473,7 +557,8 @@
             { name: "Blanco", value: "#ffffff", code: "blanco" },
             { name: "Negro", value: "#000000", code: "negro" },
             { name: "Azul", value: "#1e3a8a", code: "azul" },
-            { name: "Rojo", value: "#dc2626", code: "rojo" }
+            { name: "Rojo", value: "#dc2626", code: "rojo" },
+            { name: "Verde", value: "#16a34a", code: "verde" }
         ];
 
         const sockColors = [
@@ -492,7 +577,10 @@
                 image: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                 hasColors: true,
                 colors: jeanColors,
-                defaultColor: "azul"
+                defaultColor: "azul",
+                hasSizes: true,
+                sizes: sizes,
+                defaultSize: "M"
             },
             {
                 id: 2,
@@ -502,7 +590,10 @@
                 image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                 hasColors: true,
                 colors: tshirtColors,
-                defaultColor: "blanco"
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: sizes,
+                defaultSize: "M"
             },
             {
                 id: 3,
@@ -512,7 +603,8 @@
                 image: "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                 hasColors: true,
                 colors: sockColors,
-                defaultColor: "blanco"
+                defaultColor: "blanco",
+                hasSizes: false
             },
             {
                 id: 4,
@@ -520,7 +612,10 @@
                 description: "Zapatos cómodos y versátiles para uso diario, disponibles en varios colores.",
                 price: 49.99,
                 image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                hasColors: false
+                hasColors: false,
+                hasSizes: true,
+                sizes: shoeSizes,
+                defaultSize: "40"
             },
             {
                 id: 5,
@@ -528,7 +623,10 @@
                 description: "Pack de 5 boxers de algodón suave, elásticos y cómodos para todo el día.",
                 price: 22.50,
                 image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                hasColors: false
+                hasColors: false,
+                hasSizes: true,
+                sizes: sizes,
+                defaultSize: "M"
             },
             {
                 id: 6,
@@ -536,7 +634,8 @@
                 description: "Reloj digital resistente al agua con cronómetro y múltiples funciones.",
                 price: 65.25,
                 image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                hasColors: false
+                hasColors: false,
+                hasSizes: false
             },
             {
                 id: 7,
@@ -546,7 +645,8 @@
                 image: "https://images.unsplash.com/photo-1586350977771-b3b3abd50c82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                 hasColors: true,
                 colors: sockColors,
-                defaultColor: "negro"
+                defaultColor: "negro",
+                hasSizes: false
             },
             {
                 id: 8,
@@ -556,7 +656,10 @@
                 image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                 hasColors: true,
                 colors: tshirtColors,
-                defaultColor: "blanco"
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: sizes,
+                defaultSize: "M"
             },
             {
                 id: 9,
@@ -564,7 +667,10 @@
                 description: "Saco elegante color plomo, ideal para ocasiones formales y de oficina.",
                 price: 89.99,
                 image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                hasColors: false
+                hasColors: false,
+                hasSizes: true,
+                sizes: sizes,
+                defaultSize: "M"
             },
             {
                 id: 10,
@@ -572,12 +678,16 @@
                 description: "Pantalón deportivo con cintura elástica, ligero y cómodo para entrenar.",
                 price: 32.50,
                 image: "https://images.unsplash.com/photo-1600688640154-9619e002df30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                hasColors: false
+                hasColors: false,
+                hasSizes: true,
+                sizes: sizes,
+                defaultSize: "M"
             }
         ];
 
         // Estado del carrito
-        let cart = {};
+        let cart = [];
+        let cartItemId = 1;
         
         // Elementos del DOM
         const productsGrid = document.getElementById('products-grid');
@@ -585,6 +695,7 @@
         const emptyCartDiv = document.getElementById('empty-cart');
         const totalPriceElement = document.getElementById('total-price');
         const sendOrderBtn = document.getElementById('send-order-btn');
+        const clearCartBtn = document.getElementById('clear-cart-btn');
         
         // Cargar productos en la página
         function loadProducts() {
@@ -595,15 +706,30 @@
                 let colorOptionsHTML = '';
                 if (product.hasColors && product.colors) {
                     colorOptionsHTML = `
-                        <div class="color-label">Color:</div>
+                        <div class="options-label">Color:</div>
                         <div class="color-options" id="color-options-${product.id}">
                             ${product.colors.map((color, index) => `
-                                <div class="color-option ${index === 0 ? 'selected' : ''}" 
+                                <div class="color-option ${color.code === product.defaultColor ? 'selected' : ''}" 
                                      style="background-color: ${color.value}; border: ${color.value === '#ffffff' ? '1px solid #ddd' : 'none'}"
                                      data-color="${color.code}"
                                      data-color-name="${color.name}"
-                                     onclick="selectColor(${product.id}, '${color.code}', '${color.name}')">
+                                     onclick="selectColorForProduct(${product.id}, '${color.code}', '${color.name}')">
                                     <div class="color-tooltip">${color.name}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+                
+                let sizeOptionsHTML = '';
+                if (product.hasSizes && product.sizes) {
+                    sizeOptionsHTML = `
+                        <div class="options-label">Talla:</div>
+                        <div class="size-options" id="size-options-${product.id}">
+                            ${product.sizes.map(size => `
+                                <div class="size-option ${size === product.defaultSize ? 'selected' : ''}" 
+                                     onclick="selectSizeForProduct(${product.id}, '${size}')">
+                                    ${size}
                                 </div>
                             `).join('')}
                         </div>
@@ -616,18 +742,15 @@
                         <h3 class="product-title">${product.name}</h3>
                         <p class="product-description">${product.description}</p>
                         <div class="product-price">$${product.price.toFixed(2)}</div>
-                        ${colorOptionsHTML}
-                        <div class="product-actions">
-                            <div class="select-product" onclick="toggleProduct(${product.id})">
-                                <div class="checkbox" id="checkbox-${product.id}"></div>
-                                <span class="select-text">Seleccionar</span>
-                            </div>
-                            <div class="quantity-controls" id="quantity-controls-${product.id}" style="display: none;">
-                                <button class="quantity-btn" onclick="decreaseQuantity(${product.id})">-</button>
-                                <span class="quantity" id="quantity-${product.id}">1</span>
-                                <button class="quantity-btn" onclick="increaseQuantity(${product.id})">+</button>
-                            </div>
+                        
+                        <div class="options-container">
+                            ${colorOptionsHTML}
+                            ${sizeOptionsHTML}
                         </div>
+                        
+                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i> Agregar al Carrito
+                        </button>
                     </div>
                 `;
                 productsGrid.appendChild(productCard);
@@ -635,7 +758,7 @@
         }
         
         // Seleccionar color para un producto
-        function selectColor(productId, colorCode, colorName) {
+        function selectColorForProduct(productId, colorCode, colorName) {
             // Actualizar selección visual
             const colorOptions = document.querySelectorAll(`#color-options-${productId} .color-option`);
             colorOptions.forEach(option => {
@@ -646,60 +769,116 @@
             if (selectedOption) {
                 selectedOption.classList.add('selected');
             }
-            
-            // Actualizar en el carrito si el producto está seleccionado
-            if (cart[productId]) {
-                cart[productId].selectedColor = colorCode;
-                cart[productId].selectedColorName = colorName;
-                updateCartDisplay();
-            }
         }
         
-        // Alternar selección de producto
-        function toggleProduct(productId) {
-            const product = products.find(p => p.id === productId);
-            const checkbox = document.getElementById(`checkbox-${productId}`);
-            const quantityControls = document.getElementById(`quantity-controls-${productId}`);
+        // Seleccionar talla para un producto
+        function selectSizeForProduct(productId, size) {
+            // Actualizar selección visual
+            const sizeOptions = document.querySelectorAll(`#size-options-${productId} .size-option`);
+            sizeOptions.forEach(option => {
+                option.classList.remove('selected');
+            });
             
-            if (cart[productId]) {
-                // Remover producto del carrito
-                delete cart[productId];
-                checkbox.classList.remove('checked');
-                quantityControls.style.display = 'none';
-            } else {
-                // Agregar producto al carrito con color por defecto
-                const defaultColor = product.hasColors ? product.defaultColor : null;
-                const defaultColorName = product.hasColors ? 
-                    product.colors.find(c => c.code === product.defaultColor)?.name : null;
-                
-                cart[productId] = {
-                    ...product,
-                    quantity: 1,
-                    selectedColor: defaultColor,
-                    selectedColorName: defaultColorName
+            // Buscar la opción correcta
+            sizeOptions.forEach(option => {
+                if (option.textContent.trim() === size) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+        
+        // Obtener color seleccionado para un producto
+        function getSelectedColor(productId) {
+            const selectedOption = document.querySelector(`#color-options-${productId} .color-option.selected`);
+            if (selectedOption) {
+                return {
+                    code: selectedOption.getAttribute('data-color'),
+                    name: selectedOption.getAttribute('data-color-name'),
+                    value: selectedOption.style.backgroundColor || '#ccc'
                 };
-                checkbox.classList.add('checked');
-                quantityControls.style.display = 'flex';
+            }
+            return null;
+        }
+        
+        // Obtener talla seleccionada para un producto
+        function getSelectedSize(productId) {
+            const selectedOption = document.querySelector(`#size-options-${productId} .size-option.selected`);
+            if (selectedOption) {
+                return selectedOption.textContent;
+            }
+            return null;
+        }
+        
+        // Agregar producto al carrito
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Validar que se haya seleccionado talla si el producto la requiere
+            if (product.hasSizes) {
+                const selectedSize = getSelectedSize(productId);
+                if (!selectedSize) {
+                    alert(`Por favor, selecciona una talla para ${product.name}`);
+                    return;
+                }
             }
             
+            // Validar que se haya seleccionado color si el producto lo requiere
+            if (product.hasColors) {
+                const selectedColor = getSelectedColor(productId);
+                if (!selectedColor) {
+                    alert(`Por favor, selecciona un color para ${product.name}`);
+                    return;
+                }
+            }
+            
+            const selectedColor = product.hasColors ? getSelectedColor(productId) : null;
+            const selectedSize = product.hasSizes ? getSelectedSize(productId) : null;
+            
+            // Crear un ID único para este item del carrito
+            const cartItem = {
+                id: cartItemId++,
+                productId: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+                color: selectedColor,
+                size: selectedSize
+            };
+            
+            cart.push(cartItem);
+            updateCartDisplay();
+            
+            // Mostrar confirmación
+            showNotification(`"${product.name}" agregado al carrito`);
+        }
+        
+        // Eliminar item del carrito
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
             updateCartDisplay();
         }
         
-        // Aumentar cantidad de producto
-        function increaseQuantity(productId) {
-            if (cart[productId]) {
-                cart[productId].quantity++;
-                document.getElementById(`quantity-${productId}`).textContent = cart[productId].quantity;
+        // Actualizar cantidad de un item en el carrito
+        function updateCartItemQuantity(itemId, newQuantity) {
+            if (newQuantity < 1) {
+                removeFromCart(itemId);
+                return;
+            }
+            
+            const item = cart.find(item => item.id === itemId);
+            if (item) {
+                item.quantity = newQuantity;
                 updateCartDisplay();
             }
         }
         
-        // Disminuir cantidad de producto
-        function decreaseQuantity(productId) {
-            if (cart[productId] && cart[productId].quantity > 1) {
-                cart[productId].quantity--;
-                document.getElementById(`quantity-${productId}`).textContent = cart[productId].quantity;
+        // Vaciar carrito
+        function clearCart() {
+            if (cart.length > 0 && confirm("¿Estás seguro de que quieres vaciar el carrito?")) {
+                cart = [];
                 updateCartDisplay();
+                showNotification("Carrito vaciado");
             }
         }
         
@@ -707,9 +886,8 @@
         function updateCartDisplay() {
             // Calcular total
             let total = 0;
-            const cartItems = Object.values(cart);
             
-            cartItems.forEach(item => {
+            cart.forEach(item => {
                 total += item.price * item.quantity;
             });
             
@@ -719,29 +897,47 @@
             // Actualizar lista de productos seleccionados
             selectedList.innerHTML = '';
             
-            if (cartItems.length === 0) {
+            if (cart.length === 0) {
                 selectedList.appendChild(emptyCartDiv.cloneNode(true));
                 sendOrderBtn.disabled = true;
+                clearCartBtn.style.display = 'none';
             } else {
                 emptyCartDiv.style.display = 'none';
+                clearCartBtn.style.display = 'block';
                 
-                cartItems.forEach(item => {
+                cart.forEach(item => {
                     const itemElement = document.createElement('div');
                     itemElement.className = 'selected-item';
                     
-                    let colorInfo = '';
-                    if (item.hasColors && item.selectedColorName) {
-                        colorInfo = `<div class="item-color">Color: ${item.selectedColorName}</div>`;
+                    let detailsHTML = '';
+                    if (item.size) {
+                        detailsHTML += `<span>Talla: ${item.size}</span>`;
+                    }
+                    if (item.color) {
+                        detailsHTML += `<span class="item-color">
+                            <span>Color:</span>
+                            <span class="item-color-swatch" style="background-color: ${item.color.value}; ${item.color.value === '#ffffff' ? 'border: 1px solid #ddd' : ''}"></span>
+                            <span>${item.color.name}</span>
+                        </span>`;
                     }
                     
                     itemElement.innerHTML = `
-                        <div class="item-name">
-                            ${item.name}
-                            ${colorInfo}
+                        <div class="item-info">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-details">
+                                ${detailsHTML}
+                            </div>
                         </div>
-                        <div class="item-details">
-                            <span class="item-quantity">${item.quantity} unidad${item.quantity > 1 ? 'es' : ''}</span>
-                            <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+                        <div class="item-actions">
+                            <div class="item-quantity-controls">
+                                <button class="quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                <span class="item-quantity">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                            </div>
+                            <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                            <button class="remove-item-btn" onclick="removeFromCart(${item.id})">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
                     `;
                     selectedList.appendChild(itemElement);
@@ -755,8 +951,8 @@
                 totalElement.style.paddingTop = '15px';
                 totalElement.innerHTML = `
                     <div class="item-name">TOTAL</div>
-                    <div class="item-details">
-                        <span class="item-price" style="color: #28a745; font-size: 1.2rem;">$${total.toFixed(2)}</span>
+                    <div class="item-actions">
+                        <div class="item-price" style="color: #28a745; font-size: 1.2rem;">$${total.toFixed(2)}</div>
                     </div>
                 `;
                 selectedList.appendChild(totalElement);
@@ -767,10 +963,8 @@
         
         // Enviar pedido por WhatsApp
         function sendOrder() {
-            const cartItems = Object.values(cart);
-            
-            if (cartItems.length === 0) {
-                alert('Por favor, selecciona al menos un producto para enviar el pedido.');
+            if (cart.length === 0) {
+                alert('Por favor, agrega al menos un producto al carrito para enviar el pedido.');
                 return;
             }
             
@@ -780,18 +974,43 @@
             
             let total = 0;
             
-            cartItems.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
+            // Agrupar productos similares para el resumen
+            const productSummary = {};
+            
+            cart.forEach(item => {
+                const key = `${item.name}-${item.size || 'sin-talla'}-${item.color ? item.color.code : 'sin-color'}`;
+                
+                if (!productSummary[key]) {
+                    productSummary[key] = {
+                        name: item.name,
+                        size: item.size,
+                        color: item.color,
+                        quantity: 0,
+                        price: item.price,
+                        total: 0
+                    };
+                }
+                
+                productSummary[key].quantity += item.quantity;
+                productSummary[key].total += item.price * item.quantity;
+            });
+            
+            // Agregar productos al mensaje
+            Object.values(productSummary).forEach(item => {
+                total += item.total;
                 message += `• ${item.name}%0A`;
                 
-                if (item.hasColors && item.selectedColorName) {
-                    message += `  Color: ${item.selectedColorName}%0A`;
+                if (item.size) {
+                    message += `  Talla: ${item.size}%0A`;
+                }
+                
+                if (item.color) {
+                    message += `  Color: ${item.color.name}%0A`;
                 }
                 
                 message += `  Cantidad: ${item.quantity}%0A`;
                 message += `  Precio unitario: $${item.price.toFixed(2)}%0A`;
-                message += `  Subtotal: $${itemTotal.toFixed(2)}%0A%0A`;
+                message += `  Subtotal: $${item.total.toFixed(2)}%0A%0A`;
             });
             
             message += `*TOTAL A PAGAR: $${total.toFixed(2)}*%0A%0A`;
@@ -804,12 +1023,66 @@
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
         
+        // Mostrar notificación
+        function showNotification(message) {
+            // Crear elemento de notificación
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+                max-width: 300px;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+            
+            // Agregar estilos de animación
+            if (!document.getElementById('notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
         // Inicializar la página
         document.addEventListener('DOMContentLoaded', function() {
             loadProducts();
             
-            // Asignar evento al botón de enviar pedido
+            // Asignar eventos a los botones
             sendOrderBtn.addEventListener('click', sendOrder);
+            clearCartBtn.addEventListener('click', clearCart);
         });
     </script>
 </body>
