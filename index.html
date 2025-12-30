@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tienda Online - 10 Productos</title>
+    <title>Tienda Online - 18 Productos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -94,6 +94,65 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+        }
+        
+        /* Estilos para pestañas */
+        .tabs-container {
+            margin-bottom: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            border-radius: 8px 8px 0 0;
+            margin-right: 5px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab:hover {
+            background: #f0f0f0;
+            color: #4b6cb7;
+        }
+        
+        .tab.active {
+            background: #4b6cb7;
+            color: white;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #4b6cb7;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         .products-grid {
@@ -430,6 +489,16 @@
                 width: 100%;
                 justify-content: space-between;
             }
+            
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -509,9 +578,27 @@
             </button>
         </div>
         
-        <!-- Grid de Productos -->
-        <div class="products-grid" id="products-grid">
-            <!-- Los productos se cargan aquí con JavaScript -->
+        <!-- Pestañas -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="changeTab(1)">Hombres</button>
+                <button class="tab" onclick="changeTab(2)">Mujeres</button>
+                <button class="tab" onclick="changeTab(3)">Niños</button>
+            </div>
+            
+            <!-- Pestaña 1 (Productos 1-9) -->
+            <div id="tab-1" class="tab-content active">
+                <div class="products-grid" id="products-grid-1">
+                    <!-- Los productos 1-9 se cargan aquí -->
+                </div>
+            </div>
+            
+            <!-- Pestaña 2 (Productos 10-18) -->
+            <div id="tab-2" class="tab-content">
+                <div class="products-grid" id="products-grid-2">
+                    <!-- Los productos 10-18 se cargan aquí -->
+                </div>
+            </div>
         </div>
         
         <!-- Productos Seleccionados -->
@@ -558,7 +645,8 @@
             { name: "Negro", value: "#000000", code: "negro" },
             { name: "Azul", value: "#1e3a8a", code: "azul" },
             { name: "Rojo", value: "#dc2626", code: "rojo" },
-            { name: "Verde", value: "#16a34a", code: "verde" }
+            { name: "Verde", value: "#16a34a", code: "verde" },
+            { name: "Gris", value: "#6b7280", code: "gris" }
         ];
 
         const sockColors = [
@@ -567,8 +655,23 @@
             { name: "Gris", value: "#6b7280", code: "gris" }
         ];
 
-        // Datos de los productos
+        const jacketColors = [
+            { name: "Negro", value: "#000000", code: "negro" },
+            { name: "Azul Marino", value: "#1e3a8a", code: "azul-marino" },
+            { name: "Verde Oliva", value: "#3f6212", code: "verde-oliva" },
+            { name: "Gris", value: "#6b7280", code: "gris" }
+        ];
+
+        const backpackColors = [
+            { name: "Negro", value: "#000000", code: "negro" },
+            { name: "Azul", value: "#1e3a8a", code: "azul" },
+            { name: "Rojo", value: "#dc2626", code: "rojo" },
+            { name: "Verde", value: "#16a34a", code: "verde" }
+        ];
+
+        // Datos de los productos (18 productos en total)
         const products = [
+            // Productos 1-9 (Pestaña 1)
             {
                 id: 1,
                 name: "Pantalón Jean",
@@ -580,7 +683,8 @@
                 defaultColor: "azul",
                 hasSizes: true,
                 sizes: sizes,
-                defaultSize: "M"
+                defaultSize: "M",
+                tab: 1
             },
             {
                 id: 2,
@@ -593,7 +697,8 @@
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: sizes,
-                defaultSize: "M"
+                defaultSize: "M",
+                tab: 1
             },
             {
                 id: 3,
@@ -604,7 +709,8 @@
                 hasColors: true,
                 colors: sockColors,
                 defaultColor: "blanco",
-                hasSizes: false
+                hasSizes: false,
+                tab: 1
             },
             {
                 id: 4,
@@ -615,7 +721,8 @@
                 hasColors: false,
                 hasSizes: true,
                 sizes: shoeSizes,
-                defaultSize: "40"
+                defaultSize: "40",
+                tab: 1
             },
             {
                 id: 5,
@@ -626,7 +733,8 @@
                 hasColors: false,
                 hasSizes: true,
                 sizes: sizes,
-                defaultSize: "M"
+                defaultSize: "M",
+                tab: 1
             },
             {
                 id: 6,
@@ -635,7 +743,8 @@
                 price: 65.25,
                 image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
                 hasColors: false,
-                hasSizes: false
+                hasSizes: false,
+                tab: 1
             },
             {
                 id: 7,
@@ -646,7 +755,8 @@
                 hasColors: true,
                 colors: sockColors,
                 defaultColor: "negro",
-                hasSizes: false
+                hasSizes: false,
+                tab: 1
             },
             {
                 id: 8,
@@ -659,7 +769,8 @@
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: sizes,
-                defaultSize: "M"
+                defaultSize: "M",
+                tab: 1
             },
             {
                 id: 9,
@@ -670,8 +781,10 @@
                 hasColors: false,
                 hasSizes: true,
                 sizes: sizes,
-                defaultSize: "M"
+                defaultSize: "M",
+                tab: 1
             },
+            // Productos 10-18 (Pestaña 2) - 8 productos nuevos agregados
             {
                 id: 10,
                 name: "Pantalón Deportivo",
@@ -681,7 +794,110 @@
                 hasColors: false,
                 hasSizes: true,
                 sizes: sizes,
-                defaultSize: "M"
+                defaultSize: "M",
+                tab: 1
+            },
+            {
+                id: 11,
+                name: "Chaqueta de Cuero",
+                description: "Chaqueta de cuero genuino, estilo clásico que nunca pasa de moda.",
+                price: 120.99,
+                image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: jacketColors,
+                defaultColor: "negro",
+                hasSizes: true,
+                sizes: sizes,
+                defaultSize: "L",
+                tab: 2
+            },
+            {
+                id: 12,
+                name: "Vestido de Verano",
+                description: "Vestido ligero y fresco, perfecto para días calurosos y ocasiones casuales.",
+                price: 45.75,
+                image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: tshirtColors,
+                defaultColor: "rojo",
+                hasSizes: true,
+                sizes: sizes,
+                defaultSize: "M",
+                tab: 2
+            },
+            {
+                id: 13,
+                name: "Mochila Urbana",
+                description: "Mochila resistente con múltiples compartimientos, ideal para el día a día.",
+                price: 38.50,
+                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: backpackColors,
+                defaultColor: "negro",
+                hasSizes: false,
+                tab: 2
+            },
+            {
+                id: 14,
+                name: "Gorra Deportiva",
+                description: "Gorra ajustable con protección UV, perfecta para actividades al aire libre.",
+                price: 18.25,
+                image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: tshirtColors,
+                defaultColor: "negro",
+                hasSizes: true,
+                sizes: ["Única", "Ajustable"],
+                defaultSize: "Ajustable",
+                tab: 2
+            },
+            {
+                id: 15,
+                name: "Bufanda de Lana",
+                description: "Bufanda tejida en lana suave, abrigadora y elegante para el invierno.",
+                price: 27.99,
+                image: "https://images.unsplash.com/photo-1610553953724-079684b3f6f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: tshirtColors,
+                defaultColor: "gris",
+                hasSizes: false,
+                tab: 2
+            },
+            {
+                id: 16,
+                name: "Gafas de Sol",
+                description: "Gafas de sol con protección UV 400, estilo aviador clásico.",
+                price: 55.00,
+                image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: false,
+                hasSizes: false,
+                tab: 2
+            },
+            {
+                id: 17,
+                name: "Cinturón de Cuero",
+                description: "Cinturón de cuero genuino con hebilla metálica, elegante y duradero.",
+                price: 29.75,
+                image: "https://images.unsplash.com/photo-1596703923338-48f1c07e4f2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: false,
+                hasSizes: true,
+                sizes: ["S", "M", "L", "XL"],
+                defaultSize: "M",
+                tab: 2
+            },
+            {
+                id: 18,
+                name: "Guantes de Invierno",
+                description: "Guantes térmicos para climas fríos, acolchados y resistentes al agua.",
+                price: 21.50,
+                image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                hasColors: true,
+                colors: sockColors,
+                defaultColor: "negro",
+                hasSizes: true,
+                sizes: ["S", "M", "L"],
+                defaultSize: "M",
+                tab: 2
             }
         ];
 
@@ -690,15 +906,37 @@
         let cartItemId = 1;
         
         // Elementos del DOM
-        const productsGrid = document.getElementById('products-grid');
+        const productsGrid1 = document.getElementById('products-grid-1');
+        const productsGrid2 = document.getElementById('products-grid-2');
         const selectedList = document.getElementById('selected-list');
         const emptyCartDiv = document.getElementById('empty-cart');
         const totalPriceElement = document.getElementById('total-price');
         const sendOrderBtn = document.getElementById('send-order-btn');
         const clearCartBtn = document.getElementById('clear-cart-btn');
         
-        // Cargar productos en la página
+        // Cambiar entre pestañas
+        function changeTab(tabNumber) {
+            // Actualizar pestañas activas
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            const activeTab = document.querySelector(`.tab:nth-child(${tabNumber})`);
+            if (activeTab) activeTab.classList.add('active');
+            
+            // Mostrar contenido de la pestaña seleccionada
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            const activeContent = document.getElementById(`tab-${tabNumber}`);
+            if (activeContent) activeContent.classList.add('active');
+        }
+        
+        // Cargar productos en las pestañas correspondientes
         function loadProducts() {
+            // Limpiar grids
+            productsGrid1.innerHTML = '';
+            productsGrid2.innerHTML = '';
+            
             products.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
@@ -753,7 +991,13 @@
                         </button>
                     </div>
                 `;
-                productsGrid.appendChild(productCard);
+                
+                // Agregar a la pestaña correspondiente
+                if (product.tab === 1) {
+                    productsGrid1.appendChild(productCard);
+                } else if (product.tab === 2) {
+                    productsGrid2.appendChild(productCard);
+                }
             });
         }
         
@@ -789,7 +1033,7 @@
         
         // Obtener color seleccionado para un producto
         function getSelectedColor(productId) {
-            const selectedOption = document.querySelector(`#color-options-${productId} .color-option.selected`);
+            const selectedOption = document.querySelector(`#color-options-${product.id} .color-option.selected`);
             if (selectedOption) {
                 return {
                     code: selectedOption.getAttribute('data-color'),
