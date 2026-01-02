@@ -2,72 +2,124 @@
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 const shoeSizes = ["36", "37", "38", "39", "40", "41", "42", "43", "44"];
 
-// Colores disponibles para camisetas
+// Colores disponibles para camisetas CON IMÁGENES ESPECÍFICAS
 const tshirtColors = [
-  { name: "Blanco", value: "#ffffff", code: "blanco" },
-  { name: "Negro", value: "#000000", code: "negro" },
-  { name: "Azul", value: "#1e3a8a", code: "azul" },
-  { name: "Rojo", value: "#dc2626", code: "rojo" },
-  { name: "Verde", value: "#16a34a", code: "verde" },
-  { name: "Gris", value: "#6b7280", code: "gris" },
-  { name: "Azul Marino", value: "#1e40af", code: "azul-marino" },
-  { name: "Beige", value: "#d4a574", code: "beige" },
+  {
+    name: "Blanco",
+    value: "#ffffff",
+    code: "blanco",
+    image: "imagenes/blanco.png",
+  },
+  {
+    name: "Negro",
+    value: "#000000",
+    code: "negro",
+    image: "imagenes/negro.png",
+  },
+  {
+    name: "Turquesa",
+    value: "#19cbd8ff",
+    code: "turquesa",
+    image: "imagenes/turquesa.png",
+  },
+  {
+    name: "Vino",
+    value: "#7e114fff",
+    code: "vino",
+    image: "imagenes/vino.png",
+  },
+  {
+    name: "Verde",
+    value: "#16a34a",
+    code: "verde",
+    image: "imagenes/camisetas/verde.jpg",
+  },
+  {
+    name: "Gris",
+    value: "#6b7280",
+    code: "gris",
+    image: "imagenes/camisetas/gris.jpg",
+  },
 ];
 
 const sockColors = [
-  { name: "Blanco", value: "#ffffff", code: "blanco" },
-  { name: "Negro", value: "#000000", code: "negro" },
-  { name: "Gris", value: "#6b7280", code: "gris" },
+  {
+    name: "Blanco",
+    value: "#ffffff",
+    code: "blanco",
+    image: "imagenes/medias/blanco.jpg",
+  },
+  {
+    name: "Negro",
+    value: "#000000",
+    code: "negro",
+    image: "imagenes/medias/negro.jpg",
+  },
+  {
+    name: "Gris",
+    value: "#6b7280",
+    code: "gris",
+    image: "imagenes/medias/gris.jpg",
+  },
 ];
 
 const jacketColors = [
-  { name: "Negro", value: "#000000", code: "negro" },
-  { name: "Azul Marino", value: "#1e3a8a", code: "azul-marino" },
-  { name: "Verde Oliva", value: "#3f6212", code: "verde-oliva" },
-  { name: "Gris", value: "#6b7280", code: "gris" },
+  {
+    name: "Negro",
+    value: "#000000",
+    code: "negro",
+    image: "imagenes/chaquetas/negro.jpg",
+  },
+  {
+    name: "Azul Marino",
+    value: "#1e3a8a",
+    code: "azul-marino",
+    image: "imagenes/chaquetas/azul.jpg",
+  },
+  {
+    name: "Verde Oliva",
+    value: "#3f6212",
+    code: "verde-oliva",
+    image: "imagenes/chaquetas/verde.jpg",
+  },
+  {
+    name: "Gris",
+    value: "#6b7280",
+    code: "gris",
+    image: "imagenes/chaquetas/gris.jpg",
+  },
 ];
 
 const backpackColors = [
-  { name: "Negro", value: "#000000", code: "negro" },
-  { name: "Azul", value: "#1e3a8a", code: "azul" },
-  { name: "Rojo", value: "#dc2626", code: "rojo" },
-  { name: "Verde", value: "#16a34a", code: "verde" },
+  {
+    name: "Negro",
+    value: "#000000",
+    code: "negro",
+    image: "imagenes/mochilas/negro.jpg",
+  },
+  {
+    name: "Azul",
+    value: "#1e3a8a",
+    code: "azul",
+    image: "imagenes/mochilas/azul.jpg",
+  },
+  {
+    name: "Rojo",
+    value: "#dc2626",
+    code: "rojo",
+    image: "imagenes/mochilas/rojo.jpg",
+  },
+  {
+    name: "Verde",
+    value: "#16a34a",
+    code: "verde",
+    image: "imagenes/mochilas/verde.jpg",
+  },
 ];
 
-// Función para obtener imágenes de ejemplo
-function getImageUrl(productName, colorCode) {
-  // URLs de ejemplo de Unsplash para diferentes colores de camisetas
-  const colorImages = {
-    blanco:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    negro:
-      "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    azul: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    rojo: "https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    verde:
-      "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    gris: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    "azul-marino":
-      "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    beige:
-      "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-  };
-
-  // Para productos específicos, puedes tener imágenes diferentes
-  if (productName.includes("Camiseta")) {
-    return (
-      colorImages[colorCode] ||
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    );
-  }
-
-  // Imagen genérica para otros productos
-  return "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80";
-}
-
-// Datos de los productos (18 productos en total)
+// Datos de los productos con imágenes específicas por color
 const products = [
-  // Productos 1-9 (Pestaña 1) - CAMISETAS CON MÚLTIPLES COLORES
+  // Productos 1-9 (Pestaña 1)
   {
     id: 1,
     name: "Camiseta Básica",
@@ -80,6 +132,8 @@ const products = [
     sizes: sizes,
     defaultSize: "M",
     tab: 1,
+    // Si quieres una imagen específica para el producto (sin considerar color)
+    // image: "imagenes/camisetas/principal.jpg"
   },
   {
     id: 2,
@@ -88,7 +142,7 @@ const products = [
       "Camiseta polo clásica, ideal para ocasiones casuales y deportivas.",
     price: 29.99,
     hasColors: true,
-    colors: tshirtColors.slice(0, 6),
+    colors: tshirtColors.slice(0, 4),
     defaultColor: "azul",
     hasSizes: true,
     sizes: sizes,
@@ -101,7 +155,7 @@ const products = [
     description: "Camiseta de manga larga para climas frescos, suave al tacto.",
     price: 24.99,
     hasColors: true,
-    colors: tshirtColors,
+    colors: tshirtColors.slice(1, 5),
     defaultColor: "negro",
     hasSizes: true,
     sizes: sizes,
@@ -115,21 +169,20 @@ const products = [
       "Camiseta técnica para deporte, con tecnología de secado rápido.",
     price: 34.99,
     hasColors: true,
-    colors: tshirtColors.slice(0, 4),
+    colors: tshirtColors.slice(2, 6),
     defaultColor: "rojo",
     hasSizes: true,
     sizes: sizes,
     defaultSize: "M",
     tab: 1,
   },
-  // Productos sin colores variados
+  // Productos sin colores variados (imagen única)
   {
     id: 5,
     name: "Zapatos Casuales",
     description: "Zapatos cómodos y versátiles para uso diario.",
     price: 49.99,
-    image:
-      "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/zapatos/casuales.jpg",
     hasColors: false,
     hasSizes: true,
     sizes: shoeSizes,
@@ -141,8 +194,7 @@ const products = [
     name: "Pantalón Deportivo",
     description: "Pantalón deportivo con cintura elástica y bolsillos.",
     price: 39.99,
-    image:
-      "https://images.unsplash.com/photo-1600688640154-9619e002df30?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/pantalones/deportivo.jpg",
     hasColors: false,
     hasSizes: true,
     sizes: sizes,
@@ -167,8 +219,7 @@ const products = [
     name: "Gorra Deportiva",
     description: "Gorra ajustable con protección UV.",
     price: 18.25,
-    image:
-      "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/gorras/deportiva.jpg",
     hasColors: false,
     hasSizes: true,
     sizes: ["Única", "Ajustable"],
@@ -180,8 +231,7 @@ const products = [
     name: "Saco Plomo",
     description: "Saco elegante color plomo para ocasiones formales.",
     price: 89.99,
-    image:
-      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/sacos/plomo.jpg",
     hasColors: false,
     hasSizes: true,
     sizes: sizes,
@@ -195,7 +245,7 @@ const products = [
     description: "Camiseta con cuello en V, elegante y moderna.",
     price: 22.99,
     hasColors: true,
-    colors: tshirtColors.slice(1, 5),
+    colors: tshirtColors,
     defaultColor: "gris",
     hasSizes: true,
     sizes: sizes,
@@ -208,7 +258,7 @@ const products = [
     description: "Camiseta con estampado único, 100% algodón orgánico.",
     price: 27.99,
     hasColors: true,
-    colors: tshirtColors,
+    colors: tshirtColors.slice(0, 3),
     defaultColor: "blanco",
     hasSizes: true,
     sizes: sizes,
@@ -220,8 +270,6 @@ const products = [
     name: "Medias Blancas",
     description: "Pack de 3 pares de medias blancas de algodón.",
     price: 8.75,
-    image:
-      "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     hasColors: true,
     colors: sockColors,
     defaultColor: "blanco",
@@ -244,8 +292,7 @@ const products = [
     name: "Boxer Algodón",
     description: "Pack de 5 boxers de algodón suave y elástico.",
     price: 22.5,
-    image:
-      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/boxer/algodon.jpg",
     hasColors: false,
     hasSizes: true,
     sizes: sizes,
@@ -257,8 +304,7 @@ const products = [
     name: "Reloj Deportivo",
     description: "Reloj digital resistente al agua con cronómetro.",
     price: 65.25,
-    image:
-      "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/reloj/deportivo.jpg",
     hasColors: false,
     hasSizes: false,
     tab: 2,
@@ -268,11 +314,10 @@ const products = [
     name: "Bufanda de Lana",
     description: "Bufanda tejida en lana suave para el invierno.",
     price: 27.99,
-    image:
-      "https://images.unsplash.com/photo-1610553953724-079684b3f6f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/bufandas/lana.jpg",
     hasColors: true,
-    colors: tshirtColors.slice(2, 6),
-    defaultColor: "gris",
+    colors: sockColors,
+    defaultColor: "negro",
     hasSizes: false,
     tab: 2,
   },
@@ -281,8 +326,7 @@ const products = [
     name: "Cinturón de Cuero",
     description: "Cinturón de cuero genuino con hebilla metálica.",
     price: 29.75,
-    image:
-      "https://images.unsplash.com/photo-1596703923338-48f1c07e4f2e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/cinturones/cuero.jpg",
     hasColors: false,
     hasSizes: true,
     sizes: ["S", "M", "L", "XL"],
@@ -294,8 +338,7 @@ const products = [
     name: "Guantes de Invierno",
     description: "Guantes térmicos para climas fríos.",
     price: 21.5,
-    image:
-      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "imagenes/guantes/invierno.jpg",
     hasColors: true,
     colors: sockColors,
     defaultColor: "negro",
@@ -321,14 +364,12 @@ const clearCartBtn = document.getElementById("clear-cart-btn");
 
 // Cambiar entre pestañas
 function changeTab(tabNumber) {
-  // Actualizar pestañas activas
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => tab.classList.remove("active"));
 
   const activeTab = document.querySelector(`.tab:nth-child(${tabNumber})`);
   if (activeTab) activeTab.classList.add("active");
 
-  // Mostrar contenido de la pestaña seleccionada
   const tabContents = document.querySelectorAll(".tab-content");
   tabContents.forEach((content) => content.classList.remove("active"));
 
@@ -336,9 +377,37 @@ function changeTab(tabNumber) {
   if (activeContent) activeContent.classList.add("active");
 }
 
+// Función para obtener la imagen de un producto
+function getProductImage(product, colorCode = null) {
+  // Si se especifica un color y el producto tiene colores
+  if (colorCode && product.hasColors && product.colors) {
+    const color = product.colors.find((c) => c.code === colorCode);
+    if (color && color.image) {
+      return color.image;
+    }
+  }
+
+  // Si hay una imagen por defecto en el producto
+  if (product.image) {
+    return product.image;
+  }
+
+  // Si el producto tiene colores, usar la imagen del color por defecto
+  if (product.hasColors && product.colors) {
+    const defaultColor = product.colors.find(
+      (c) => c.code === product.defaultColor
+    );
+    if (defaultColor && defaultColor.image) {
+      return defaultColor.image;
+    }
+  }
+
+  // Imagen de respaldo
+  return "imagenes/default.jpg";
+}
+
 // Cargar productos en las pestañas correspondientes
 function loadProducts() {
-  // Limpiar grids
   productsGrid1.innerHTML = "";
   productsGrid2.innerHTML = "";
 
@@ -346,38 +415,34 @@ function loadProducts() {
     const productCard = document.createElement("div");
     productCard.className = "product-card";
 
-    // Determinar la imagen principal
-    let mainImage =
-      product.image || getImageUrl(product.name, product.defaultColor);
-
-    // Crear objeto de imágenes para productos con colores
-    let colorImages = {};
-    if (product.hasColors && product.colors) {
-      product.colors.forEach((color) => {
-        colorImages[color.code] =
-          product.image || getImageUrl(product.name, color.code);
-      });
-    }
+    // Obtener imagen principal (color por defecto)
+    const mainImage = getProductImage(product, product.defaultColor);
 
     // Generar HTML para miniaturas si el producto tiene colores
     let thumbnailsHTML = "";
-    if (product.hasColors && product.colors) {
+    if (product.hasColors && product.colors && product.colors.length > 0) {
       thumbnailsHTML = `
                 <div class="thumbnails-sidebar" id="thumbnails-${product.id}">
                     ${product.colors
                       .map(
-                        (color, index) => `
-                        <img src="${colorImages[color.code]}" 
-                             alt="${product.name} - ${color.name}"
-                             class="thumbnail ${
-                               color.code === product.defaultColor
-                                 ? "active"
-                                 : ""
-                             }"
-                             data-color="${color.code}"
-                             onclick="changeProductImage(${product.id}, '${
+                        (color) => `
+                        <div class="thumbnail-container">
+                            <img src="${
+                              color.image ||
+                              getProductImage(product, color.code)
+                            }" 
+                                 alt="${product.name} - ${color.name}"
+                                 class="thumbnail ${
+                                   color.code === product.defaultColor
+                                     ? "active"
+                                     : ""
+                                 }"
+                                 data-color="${color.code}"
+                                 onclick="changeProductImage(${product.id}, '${
                           color.code
-                        }', '${colorImages[color.code]}')">
+                        }')">
+                            <div class="thumbnail-label">${color.name}</div>
+                        </div>
                     `
                       )
                       .join("")}
@@ -392,7 +457,7 @@ function loadProducts() {
                 <div class="color-options" id="color-options-${product.id}">
                     ${product.colors
                       .map(
-                        (color, index) => `
+                        (color) => `
                         <div class="color-option ${
                           color.code === product.defaultColor ? "selected" : ""
                         }" 
@@ -401,10 +466,9 @@ function loadProducts() {
                         }"
                              data-color="${color.code}"
                              data-color-name="${color.name}"
-                             data-image="${colorImages[color.code]}"
                              onclick="selectColorForProduct(${product.id}, '${
                           color.code
-                        }', '${color.name}', '${colorImages[color.code]}')">
+                        }', '${color.name}')">
                             <div class="color-tooltip">${color.name}</div>
                         </div>
                     `
@@ -464,7 +528,6 @@ function loadProducts() {
             </div>
         `;
 
-    // Agregar a la pestaña correspondiente
     if (product.tab === 1) {
       productsGrid1.appendChild(productCard);
     } else if (product.tab === 2) {
@@ -473,13 +536,17 @@ function loadProducts() {
   });
 }
 
-// Cambiar imagen del producto cuando se selecciona un color
-function changeProductImage(productId, colorCode, imageUrl) {
+// Cambiar imagen del producto
+function changeProductImage(productId, colorCode) {
+  const product = products.find((p) => p.id === productId);
+  if (!product) return;
+
+  const imageUrl = getProductImage(product, colorCode);
+
   // Cambiar imagen principal
   const mainImage = document.getElementById(`main-image-${productId}`);
   if (mainImage) {
     mainImage.src = imageUrl;
-    mainImage.alt = `Producto ${productId} - Color ${colorCode}`;
   }
 
   // Actualizar miniaturas activas
@@ -493,30 +560,12 @@ function changeProductImage(productId, colorCode, imageUrl) {
     }
   });
 
-  // Actualizar opciones de color visualmente
-  const selectedColorOption = document.querySelector(
-    `#color-options-${productId} .color-option[data-color="${colorCode}"]`
-  );
-  if (selectedColorOption) {
-    // Primero quitar selección de todos
-    const allColorOptions = document.querySelectorAll(
-      `#color-options-${productId} .color-option`
-    );
-    allColorOptions.forEach((option) => option.classList.remove("selected"));
-
-    // Luego seleccionar el correcto
-    selectedColorOption.classList.add("selected");
-  }
+  // Actualizar opciones de color
+  selectColorForProduct(productId, colorCode);
 }
 
 // Seleccionar color para un producto
-function selectColorForProduct(
-  productId,
-  colorCode,
-  colorName,
-  imageUrl = null
-) {
-  // Actualizar selección visual de opciones de color
+function selectColorForProduct(productId, colorCode, colorName = null) {
   const colorOptions = document.querySelectorAll(
     `#color-options-${productId} .color-option`
   );
@@ -531,15 +580,12 @@ function selectColorForProduct(
     selectedOption.classList.add("selected");
   }
 
-  // Si se proporciona una URL de imagen, cambiar la imagen principal y miniaturas
-  if (imageUrl) {
-    changeProductImage(productId, colorCode, imageUrl);
-  }
+  // Cambiar imagen si es necesario
+  changeProductImage(productId, colorCode);
 }
 
 // Seleccionar talla para un producto
 function selectSizeForProduct(productId, size) {
-  // Actualizar selección visual
   const sizeOptions = document.querySelectorAll(
     `#size-options-${productId} .size-option`
   );
@@ -547,7 +593,6 @@ function selectSizeForProduct(productId, size) {
     option.classList.remove("selected");
   });
 
-  // Buscar la opción correcta
   sizeOptions.forEach((option) => {
     if (option.textContent.trim() === size) {
       option.classList.add("selected");
@@ -586,13 +631,16 @@ function addToCart(productId) {
   const product = products.find((p) => p.id === productId);
   if (!product) return;
 
-  // Obtener la imagen actual del producto
-  const mainImage = document.getElementById(`main-image-${productId}`);
-  const currentImage = mainImage
-    ? mainImage.src
-    : product.image || getImageUrl(product.name, product.defaultColor);
+  // Obtener color seleccionado
+  const selectedColor = product.hasColors ? getSelectedColor(productId) : null;
 
-  // Validar que se haya seleccionado talla si el producto la requiere
+  // Obtener imagen actual
+  const currentImage = getProductImage(
+    product,
+    selectedColor ? selectedColor.code : null
+  );
+
+  // Validar talla si es necesario
   if (product.hasSizes) {
     const selectedSize = getSelectedSize(productId);
     if (!selectedSize) {
@@ -601,19 +649,16 @@ function addToCart(productId) {
     }
   }
 
-  // Validar que se haya seleccionado color si el producto lo requiere
+  // Validar color si es necesario
   if (product.hasColors) {
-    const selectedColor = getSelectedColor(productId);
     if (!selectedColor) {
       alert(`Por favor, selecciona un color para ${product.name}`);
       return;
     }
   }
 
-  const selectedColor = product.hasColors ? getSelectedColor(productId) : null;
   const selectedSize = product.hasSizes ? getSelectedSize(productId) : null;
 
-  // Crear un ID único para este item del carrito
   const cartItem = {
     id: cartItemId++,
     productId: product.id,
@@ -627,8 +672,6 @@ function addToCart(productId) {
 
   cart.push(cartItem);
   updateCartDisplay();
-
-  // Mostrar confirmación
   showNotification(`"${product.name}" agregado al carrito`);
 }
 
@@ -666,17 +709,12 @@ function clearCart() {
 
 // Actualizar visualización del carrito
 function updateCartDisplay() {
-  // Calcular total
   let total = 0;
-
   cart.forEach((item) => {
     total += item.price * item.quantity;
   });
 
-  // Actualizar precio total
   totalPriceElement.textContent = total.toFixed(2);
-
-  // Actualizar lista de productos seleccionados
   selectedList.innerHTML = "";
 
   if (cart.length === 0) {
@@ -744,7 +782,6 @@ function updateCartDisplay() {
       selectedList.appendChild(itemElement);
     });
 
-    // Agregar total al final
     const totalElement = document.createElement("div");
     totalElement.className = "selected-item";
     totalElement.style.fontWeight = "bold";
@@ -773,13 +810,10 @@ function sendOrder() {
     return;
   }
 
-  // Construir mensaje para WhatsApp
   let message = `¡Hola! Quiero realizar el siguiente pedido:%0A%0A`;
   message += `*📦 PEDIDO DE TIENDA ONLINE*%0A%0A`;
 
   let total = 0;
-
-  // Agrupar productos similares para el resumen
   const productSummary = {};
 
   cart.forEach((item) => {
@@ -802,7 +836,6 @@ function sendOrder() {
     productSummary[key].total += item.price * item.quantity;
   });
 
-  // Agregar productos al mensaje
   Object.values(productSummary).forEach((item) => {
     total += item.total;
     message += `• ${item.name}%0A`;
@@ -823,16 +856,12 @@ function sendOrder() {
   message += `*TOTAL A PAGAR: $${total.toFixed(2)}*%0A%0A`;
   message += `¡Gracias! Por favor, confírmame la disponibilidad y el tiempo de entrega.`;
 
-  // Número de WhatsApp (cambia este número por el tuyo)
   const phoneNumber = "593987259001";
-
-  // Abrir WhatsApp
   window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
 }
 
 // Mostrar notificación
 function showNotification(message) {
-  // Crear elemento de notificación
   const notification = document.createElement("div");
   notification.style.cssText = `
         position: fixed;
@@ -855,7 +884,6 @@ function showNotification(message) {
 
   document.body.appendChild(notification);
 
-  // Remover después de 3 segundos
   setTimeout(() => {
     notification.style.animation = "slideOut 0.3s ease";
     setTimeout(() => {
@@ -865,7 +893,6 @@ function showNotification(message) {
     }, 300);
   }, 3000);
 
-  // Agregar estilos de animación
   if (!document.getElementById("notification-styles")) {
     const style = document.createElement("style");
     style.id = "notification-styles";
@@ -886,8 +913,7 @@ function showNotification(message) {
 // Inicializar la página
 document.addEventListener("DOMContentLoaded", function () {
   loadProducts();
-
-  // Asignar eventos a los botones
   sendOrderBtn.addEventListener("click", sendOrder);
   clearCartBtn.addEventListener("click", clearCart);
 });
+
