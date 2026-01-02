@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <header>
         <div class="container">
@@ -19,50 +17,7 @@
     <div class="container">
         <!-- Resumen del Carrito -->
         <div class="cart-summary">
-
-
-            <!-- Pestañas -->
-            <div class="tabs-container">
-                <div class="tabs">
-                    <button class="tab active" onclick="changeTab(1)">Ropa de Hombre</button>
-                    <!--<button class="tab" onclick="changeTab(2)">Mujeres</button>
-                <button class="tab" onclick="changeTab(3)">Niños</button> 
-            -->
-                </div>
-
-                <!-- Pestaña 1 (Productos 1-9) -->
-                <div id="tab-1" class="tab-content active">
-                    <div class="products-grid" id="products-grid-1">
-                        <!-- Los productos 1-9 se cargan aquí -->
-                    </div>
-                </div>
-
-                <!-- Pestaña 2 (Productos 10-18) -->
-                <div id="tab-2" class="tab-content">
-                    <div class="products-grid" id="products-grid-2">
-                        <!-- Los productos 10-18 se cargan aquí -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Productos Seleccionados -->
-            <div class="selected-products">
-                <h3>
-                    <span><i class="fas fa-shopping-cart"></i> Productos Seleccionados</span>
-                    <button id="clear-cart-btn" class="clear-cart-btn" style="display: none;">
-                        <i class="fas fa-trash"></i> Vaciar Carrito
-                    </button>
-                </h3>
-                <div class="selected-list" id="selected-list">
-                    <!-- Los productos seleccionados aparecerán aquí -->
-                    <div class="empty-cart" id="empty-cart">
-                        <i class="fas fa-shopping-basket"></i>
-                        <p>No hay productos seleccionados</p>
-                    </div>
-                </div>
-            </div>
-
-            <div>
+            <div class="cart-total">
                 <h2>Total del Pedido</h2>
                 <div class="total-price">$<span id="total-price">0</span></div>
                 <button id="send-order-btn" class="send-order-btn" disabled>
@@ -71,12 +26,53 @@
             </div>
         </div>
 
+        <!-- Pestañas -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="changeTab(1)">Ropa de Hombre</button>
+                <!-- <button class="tab" onclick="changeTab(2)">Mujeres</button>
+                <button class="tab" onclick="changeTab(3)">Niños</button> -->
+            </div>
+
+            <!-- Pestaña 1 (Productos 1-9) -->
+            <div id="tab-1" class="tab-content active">
+                <div class="products-grid" id="products-grid-1">
+                    <!-- Los productos 1-9 se cargan aquí -->
+                </div>
+            </div>
+
+            <!-- Pestaña 2 (Productos 10-18) -->
+            <div id="tab-2" class="tab-content">
+                <div class="products-grid" id="products-grid-2">
+                    <!-- Los productos 10-18 se cargan aquí -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Productos Seleccionados -->
+        <div class="selected-products">
+            <h3>
+                <span><i class="fas fa-shopping-cart"></i> Productos Seleccionados</span>
+                <button id="clear-cart-btn" class="clear-cart-btn" style="display: none;">
+                    <i class="fas fa-trash"></i> Vaciar Carrito
+                </button>
+            </h3>
+            <div class="selected-list" id="selected-list">
+                <!-- Los productos seleccionados aparecerán aquí -->
+                <div class="empty-cart" id="empty-cart">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>No hay productos seleccionados</p>
+                </div>
+            </div>
+        </div>
+
         <footer>
             <div class="container">
                 <p>© 2026 Viste Online</p>
             </div>
         </footer>
-        <script src="funcion.js"></script>
-</body>
+    </div>
 
+    <script src="funcion.js"></script>
+</body>
 </html>
