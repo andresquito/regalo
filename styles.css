@@ -27,15 +27,6 @@ header {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
 
 .cart-summary {
   background: white;
@@ -551,6 +542,7 @@ footer {
   font-size: 0.75rem;
   margin-left: 5px;
 }
+
 
 
 
