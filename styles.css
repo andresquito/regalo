@@ -518,7 +518,7 @@ header h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  
   border-bottom: 1px solid #eee;
   background: #f8f9fa;
   border-radius: 8px;
@@ -934,6 +934,7 @@ footer {
     font-size: 0.95rem;
   }
 }
+
 
 
 
