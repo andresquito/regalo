@@ -15,8 +15,6 @@
     </header>
 
     <div class="container">
-
-
         <!-- Pestañas -->
         <div class="tabs-container">
             <div class="tabs">
@@ -57,10 +55,10 @@
             </div>
         </div>
 
-                <!-- Resumen del Carrito -->
+        <!-- Resumen del Carrito -->
         <div class="cart-summary">
             <div class="cart-total">
-                <h2 >Total del Pedido</h2>
+                <h2>Total del Pedido</h2>
                 <div class="total-price">$<span id="total-price">0</span></div>
                 <h5 style="color: rgb(244, 91, 101);"> Servicio a Domicilio Gratis - Paga al Recibir</h5>
                 <button id="send-order-btn" class="send-order-btn" disabled>
@@ -74,6 +72,30 @@
                 <p>© 2026 Viste Online</p>
             </div>
         </footer>
+    </div>
+
+    <!-- Modal para zoom de imágenes -->
+    <div id="image-zoom-modal" class="image-zoom-modal">
+        <div class="zoom-modal-content">
+            <button class="close-zoom-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="nav-zoom-btn prev-zoom-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-zoom-btn next-zoom-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="zoom-image-container">
+                <img id="zoomed-image" src="" alt="Imagen ampliada">
+                <div class="zoom-color-indicator" id="zoom-color-indicator">
+                    <!-- Aquí se mostrará el color del producto -->
+                </div>
+            </div>
+            <div class="zoom-thumbnails">
+                <!-- Miniaturas para navegación en zoom -->
+            </div>
+        </div>
     </div>
 
     <script src="funcion.js"></script>
