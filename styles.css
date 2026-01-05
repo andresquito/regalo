@@ -169,7 +169,7 @@ header h1 {
 /* GALERÍA DE IMÁGENES - MINIATURAS AL LADO DERECHO */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
   gap: 30px;
   margin-bottom: 40px;
 }
@@ -192,7 +192,7 @@ header h1 {
 
 .product-image-gallery {
   display: flex;
-  height: 320px;
+  height: 420px;
   border-bottom: 1px solid #eee;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
 }
@@ -202,9 +202,70 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 20px;
   background: white;
-  min-width: 0; /* Importante para evitar desbordamiento */
+  min-width: 0;
+  cursor: zoom-in;
+  transition: all 0.3s;
+  position: relative;
+}
+
+/* Estilos para cuando el body tiene zoom activo */
+body.zoom-active {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.main-image-container.zoomed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-image-container.zoomed .product-main-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: zoom-out;
+  object-fit: contain;
+}
+
+/* Botón para cerrar el zoom */
+.close-zoom-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.close-zoom-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.close-zoom-btn.show {
+  display: flex;
 }
 
 .product-main-image {
@@ -213,14 +274,15 @@ header h1 {
   object-fit: contain;
   transition: transform 0.5s ease;
   border-radius: 4px;
+  min-height: 250px;
 }
 
 .product-card:hover .product-main-image {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .thumbnails-sidebar {
-  width: 130px;
+  width: 110px;
   background: rgba(255, 255, 255, 0.95);
   border-left: 1px solid #eee;
   padding: 15px 10px;
@@ -230,7 +292,7 @@ header h1 {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #4b6cb7 #f0f0f0;
-  flex-shrink: 0; /* Importante para mantener el ancho */
+  flex-shrink: 0;
 }
 
 .thumbnails-sidebar::-webkit-scrollbar {
@@ -260,8 +322,8 @@ header h1 {
 }
 
 .thumbnail {
-  width: 85px;
-  height: 85px;
+  width: 75px;
+  height: 75px;
   object-fit: cover;
   border-radius: 6px;
   cursor: pointer;
@@ -470,7 +532,7 @@ header h1 {
 /* PRODUCTOS SELECCIONADOS MEJORADOS */
 .selected-products {
   background: white;
-  padding: 5px
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   margin-top: 20px;
@@ -715,8 +777,12 @@ footer {
 /* RESPONSIVE - MINIATURAS AL LADO DERECHO TAMBIÉN EN MÓVIL */
 @media (max-width: 1024px) {
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 25px;
+  }
+
+  .product-image-gallery {
+    height: 380px;
   }
 }
 
@@ -728,21 +794,25 @@ footer {
 
   /* MANTENER MINIATURAS AL LADO DERECHO EN TABLET */
   .product-image-gallery {
-    height: 280px; /* Reducir altura para tablet */
+    height: 320px;
   }
 
   .main-image-container {
-    padding: 10px;
+    padding: 15px;
+  }
+
+  .product-main-image {
+    min-height: 200px;
   }
 
   .thumbnails-sidebar {
-    width: 100px; /* Reducir ancho en tablet */
-    padding: 10px 8px;
+    width: 90px;
+    padding: 10px 6px;
   }
 
   .thumbnail {
-    width: 70px; /* Reducir tamaño en tablet */
-    height: 70px;
+    width: 65px;
+    height: 65px;
   }
 
   .thumbnail-label {
@@ -812,29 +882,28 @@ footer {
 
   /* MANTENER MINIATURAS AL LADO DERECHO EN MÓVIL */
   .product-image-gallery {
-    height: 250px; /* Altura ajustada para móvil */
-    flex-direction: row; /* MANTENER DISPOSICIÓN HORIZONTAL */
+    height: 280px;
+    flex-direction: row;
   }
 
   .main-image-container {
-    flex: 1;
-    padding: 8px;
-    min-width: 0; /* Permitir que se reduzca */
+    padding: 10px;
   }
 
   .product-main-image {
-    max-height: 95%; /* Ajustar mejor al contenedor */
+    max-height: 95%;
+    min-height: 180px;
   }
 
   .thumbnails-sidebar {
-    width: 90px; /* Ancho reducido para móvil */
-    padding: 8px 6px;
+    width: 80px;
+    padding: 8px 5px;
     gap: 6px;
   }
 
   .thumbnail {
-    width: 60px; /* Miniaturas más pequeñas en móvil */
-    height: 60px;
+    width: 55px;
+    height: 55px;
   }
 
   .thumbnail-label {
@@ -886,16 +955,16 @@ footer {
 @media (max-width: 360px) {
   /* Para pantallas muy pequeñas */
   .product-image-gallery {
-    height: 220px;
+    height: 240px;
   }
 
   .thumbnails-sidebar {
-    width: 80px;
+    width: 70px;
   }
 
   .thumbnail {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
   }
 
   .thumbnail-label {
@@ -904,6 +973,10 @@ footer {
 
   .product-info {
     padding: 15px;
+  }
+
+  .product-main-image {
+    min-height: 160px;
   }
 }
 
@@ -933,7 +1006,16 @@ footer {
     padding: 10px 15px;
     font-size: 0.95rem;
   }
+
+  .close-zoom-btn {
+    width: 40px;
+    height: 40px;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+  }
 }
+
 
 
 
