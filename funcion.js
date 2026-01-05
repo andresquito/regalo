@@ -166,8 +166,6 @@ const products = [
     sizes: ["S", "M", "L"],
     defaultSize: "M",
     tab: 1,
-    // Si quieres una imagen específica para el producto (sin considerar color)
-    // image: "imagenes/camisetas/principal.jpg"
   },
   {
     id: 2,
@@ -438,8 +436,111 @@ const totalPriceElement = document.getElementById("total-price");
 const sendOrderBtn = document.getElementById("send-order-btn");
 const clearCartBtn = document.getElementById("clear-cart-btn");
 
+// Función para manejar el zoom de imágenes
+function setupImageZoom() {
+  // Crear botón de cerrar zoom si no existe
+  let closeBtn = document.querySelector('.close-zoom-btn');
+  if (!closeBtn) {
+    closeBtn = document.createElement('button');
+    closeBtn.className = 'close-zoom-btn';
+    closeBtn.innerHTML = '×';
+    closeBtn.title = 'Cerrar (ESC)';
+    document.body.appendChild(closeBtn);
+    
+    closeBtn.addEventListener('click', closeAllZoom);
+  }
+  
+  // Evento para abrir/cerrar zoom al hacer clic en la imagen
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('product-main-image')) {
+      const container = e.target.closest('.main-image-container');
+      if (!container.classList.contains('zoomed')) {
+        openZoom(container);
+      } else {
+        closeZoom(container);
+      }
+    }
+  });
+
+  // Cerrar zoom con la tecla ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeAllZoom();
+    }
+  });
+
+  // Cerrar zoom al hacer clic fuera de la imagen ampliada
+  document.addEventListener('click', function(e) {
+    if (document.querySelector('.main-image-container.zoomed') && 
+        !e.target.closest('.main-image-container.zoomed') && 
+        !e.target.classList.contains('product-main-image') &&
+        !e.target.classList.contains('close-zoom-btn')) {
+      closeAllZoom();
+    }
+  });
+
+  // Evitar scroll cuando hay zoom activo
+  document.addEventListener('wheel', function(e) {
+    if (document.querySelector('.main-image-container.zoomed')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Evitar touchmove cuando hay zoom activo
+  document.addEventListener('touchmove', function(e) {
+    if (document.querySelector('.main-image-container.zoomed')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+}
+
+// Función para abrir el zoom
+function openZoom(container) {
+  // Cerrar cualquier zoom activo primero
+  closeAllZoom();
+  
+  // Activar zoom en el contenedor
+  container.classList.add('zoomed');
+  document.body.classList.add('zoom-active');
+  
+  // Mostrar botón de cerrar
+  const closeBtn = document.querySelector('.close-zoom-btn');
+  if (closeBtn) {
+    closeBtn.classList.add('show');
+  }
+}
+
+// Función para cerrar el zoom
+function closeZoom(container) {
+  container.classList.remove('zoomed');
+  document.body.classList.remove('zoom-active');
+  
+  // Ocultar botón de cerrar
+  const closeBtn = document.querySelector('.close-zoom-btn');
+  if (closeBtn) {
+    closeBtn.classList.remove('show');
+  }
+}
+
+// Función para cerrar todos los zooms activos
+function closeAllZoom() {
+  document.querySelectorAll('.main-image-container.zoomed').forEach(container => {
+    container.classList.remove('zoomed');
+  });
+  document.body.classList.remove('zoom-active');
+  
+  // Ocultar botón de cerrar
+  const closeBtn = document.querySelector('.close-zoom-btn');
+  if (closeBtn) {
+    closeBtn.classList.remove('show');
+  }
+}
+
 // Cambiar entre pestañas
 function changeTab(tabNumber) {
+  // Cerrar zoom si está activo
+  closeAllZoom();
+  
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => tab.classList.remove("active"));
 
@@ -604,6 +705,9 @@ function loadProducts() {
 
 // Cambiar imagen del producto
 function changeProductImage(productId, colorCode) {
+  // Cerrar zoom si está activo
+  closeAllZoom();
+  
   const product = products.find((p) => p.id === productId);
   if (!product) return;
 
@@ -694,6 +798,9 @@ function getSelectedSize(productId) {
 
 // Agregar producto al carrito
 function addToCart(productId) {
+  // Cerrar zoom si está activo
+  closeAllZoom();
+  
   const product = products.find((p) => p.id === productId);
   if (!product) return;
 
@@ -863,6 +970,9 @@ function updateCartDisplay() {
 
 // Enviar pedido por WhatsApp
 function sendOrder() {
+  // Cerrar zoom si está activo
+  closeAllZoom();
+  
   if (cart.length === 0) {
     alert(
       "Por favor, agrega al menos un producto al carrito para enviar el pedido."
@@ -921,6 +1031,9 @@ function sendOrder() {
 
 // Mostrar notificación
 function showNotification(message) {
+  // Cerrar zoom si está activo
+  closeAllZoom();
+  
   const notification = document.createElement("div");
   notification.style.cssText = `
         position: fixed;
@@ -972,6 +1085,7 @@ function showNotification(message) {
 // Inicializar la página
 document.addEventListener("DOMContentLoaded", function () {
   loadProducts();
+  setupImageZoom();
   sendOrderBtn.addEventListener("click", sendOrder);
   clearCartBtn.addEventListener("click", clearCart);
 });
