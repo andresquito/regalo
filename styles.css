@@ -470,7 +470,7 @@ header h1 {
 /* PRODUCTOS SELECCIONADOS MEJORADOS */
 .selected-products {
   background: white;
-
+  padding: 5px
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   margin-top: 20px;
@@ -934,6 +934,7 @@ footer {
     font-size: 0.95rem;
   }
 }
+
 
 
 
