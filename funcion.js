@@ -427,6 +427,13 @@ const products = [
 let cart = [];
 let cartItemId = 1;
 
+// Estado para el zoom de imágenes
+let currentZoomData = {
+  productId: null,
+  colorIndex: 0,
+  images: []
+};
+
 // Elementos del DOM
 const productsGrid1 = document.getElementById("products-grid-1");
 const productsGrid2 = document.getElementById("products-grid-2");
@@ -436,110 +443,296 @@ const totalPriceElement = document.getElementById("total-price");
 const sendOrderBtn = document.getElementById("send-order-btn");
 const clearCartBtn = document.getElementById("clear-cart-btn");
 
+// Elementos del modal de zoom
+const imageZoomModal = document.getElementById("image-zoom-modal");
+const zoomedImage = document.getElementById("zoomed-image");
+const closeZoomBtn = document.querySelector('.close-zoom-btn');
+const prevZoomBtn = document.querySelector('.prev-zoom-btn');
+const nextZoomBtn = document.querySelector('.next-zoom-btn');
+const zoomThumbnails = document.querySelector('.zoom-thumbnails');
+const zoomColorIndicator = document.getElementById('zoom-color-indicator');
+
+// Variable para almacenar referencia a todos los productos cargados
+let loadedProducts = [];
+
 // Función para manejar el zoom de imágenes
 function setupImageZoom() {
-  // Crear botón de cerrar zoom si no existe
-  let closeBtn = document.querySelector('.close-zoom-btn');
-  if (!closeBtn) {
-    closeBtn = document.createElement('button');
-    closeBtn.className = 'close-zoom-btn';
-    closeBtn.innerHTML = '×';
-    closeBtn.title = 'Cerrar (ESC)';
-    document.body.appendChild(closeBtn);
-    
-    closeBtn.addEventListener('click', closeAllZoom);
-  }
-  
-  // Evento para abrir/cerrar zoom al hacer clic en la imagen
+  // Usar event delegation para manejar clics en imágenes principales
   document.addEventListener('click', function(e) {
+    // Si se hace clic en la imagen principal
     if (e.target.classList.contains('product-main-image')) {
-      const container = e.target.closest('.main-image-container');
-      if (!container.classList.contains('zoomed')) {
-        openZoom(container);
-      } else {
-        closeZoom(container);
+      const mainImage = e.target;
+      const productCard = mainImage.closest('.product-card');
+      
+      // Encontrar el producto basado en el ID del contenedor de la imagen
+      const imageId = mainImage.id;
+      const productId = parseInt(imageId.replace('main-image-', ''));
+      
+      const product = products.find(p => p.id === productId);
+      
+      if (product) {
+        openImageZoom(product, mainImage.src);
+      }
+    }
+    
+    // También manejar clic en el contenedor de la imagen
+    if (e.target.classList.contains('main-image-container')) {
+      const container = e.target;
+      const mainImage = container.querySelector('.product-main-image');
+      if (mainImage) {
+        const imageId = mainImage.id;
+        const productId = parseInt(imageId.replace('main-image-', ''));
+        
+        const product = products.find(p => p.id === productId);
+        
+        if (product) {
+          openImageZoom(product, mainImage.src);
+        }
       }
     }
   });
 
-  // Cerrar zoom con la tecla ESC
+  // Cerrar modal
+  closeZoomBtn.addEventListener('click', closeImageZoom);
+  
+  // Navegación entre imágenes
+  prevZoomBtn.addEventListener('click', showPrevImage);
+  nextZoomBtn.addEventListener('click', showNextImage);
+  
+  // Cerrar con tecla ESC
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeAllZoom();
+    if (e.key === 'Escape' && imageZoomModal.classList.contains('active')) {
+      closeImageZoom();
+    }
+    
+    // Navegación con teclas
+    if (imageZoomModal.classList.contains('active')) {
+      if (e.key === 'ArrowLeft') {
+        showPrevImage();
+      } else if (e.key === 'ArrowRight') {
+        showNextImage();
+      }
     }
   });
-
-  // Cerrar zoom al hacer clic fuera de la imagen ampliada
-  document.addEventListener('click', function(e) {
-    if (document.querySelector('.main-image-container.zoomed') && 
-        !e.target.closest('.main-image-container.zoomed') && 
-        !e.target.classList.contains('product-main-image') &&
-        !e.target.classList.contains('close-zoom-btn')) {
-      closeAllZoom();
+  
+  // Cerrar al hacer clic fuera de la imagen
+  imageZoomModal.addEventListener('click', function(e) {
+    if (e.target === imageZoomModal || e.target.classList.contains('zoom-modal-content')) {
+      closeImageZoom();
     }
   });
-
-  // Evitar scroll cuando hay zoom activo
-  document.addEventListener('wheel', function(e) {
-    if (document.querySelector('.main-image-container.zoomed')) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  // Evitar touchmove cuando hay zoom activo
-  document.addEventListener('touchmove', function(e) {
-    if (document.querySelector('.main-image-container.zoomed')) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-}
-
-// Función para abrir el zoom
-function openZoom(container) {
-  // Cerrar cualquier zoom activo primero
-  closeAllZoom();
   
-  // Activar zoom en el contenedor
-  container.classList.add('zoomed');
-  document.body.classList.add('zoom-active');
+  // Soporte para gestos táctiles (swipe)
+  let touchStartX = 0;
+  let touchEndX = 0;
   
-  // Mostrar botón de cerrar
-  const closeBtn = document.querySelector('.close-zoom-btn');
-  if (closeBtn) {
-    closeBtn.classList.add('show');
+  imageZoomModal.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  
+  imageZoomModal.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // Swipe izquierda - siguiente imagen
+        showNextImage();
+      } else {
+        // Swipe derecha - anterior imagen
+        showPrevImage();
+      }
+    }
   }
 }
 
-// Función para cerrar el zoom
-function closeZoom(container) {
-  container.classList.remove('zoomed');
-  document.body.classList.remove('zoom-active');
+// Abrir modal de zoom
+function openImageZoom(product, currentImageSrc = null) {
+  if (!product) return;
   
-  // Ocultar botón de cerrar
-  const closeBtn = document.querySelector('.close-zoom-btn');
-  if (closeBtn) {
-    closeBtn.classList.remove('show');
+  // Obtener todas las imágenes del producto
+  let images = [];
+  
+  if (product.hasColors && product.colors) {
+    // Si tiene colores, usar todas las imágenes de colores
+    images = product.colors.map(color => ({
+      src: color.image,
+      name: color.name,
+      colorCode: color.code,
+      colorValue: color.value
+    }));
+  } else if (product.image) {
+    // Si no tiene colores pero tiene imagen
+    images = [{
+      src: product.image,
+      name: product.name,
+      colorCode: null,
+      colorValue: null
+    }];
+  } else {
+    // Imagen por defecto
+    images = [{
+      src: "imagenes/default.jpg",
+      name: product.name,
+      colorCode: null,
+      colorValue: null
+    }];
+  }
+  
+  // Encontrar el índice de la imagen actual
+  let currentIndex = 0;
+  if (currentImageSrc) {
+    const index = images.findIndex(img => img.src === currentImageSrc);
+    if (index !== -1) {
+      currentIndex = index;
+    }
+  }
+  
+  // Guardar datos actuales
+  currentZoomData = {
+    productId: product.id,
+    colorIndex: currentIndex,
+    images: images,
+    productName: product.name
+  };
+  
+  // Mostrar la imagen actual
+  showImageInZoom(currentIndex);
+  
+  // Actualizar miniaturas
+  updateZoomThumbnails();
+  
+  // Mostrar modal
+  imageZoomModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+// Cerrar modal de zoom
+function closeImageZoom() {
+  imageZoomModal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Mostrar imagen específica en el zoom
+function showImageInZoom(index) {
+  if (index < 0 || index >= currentZoomData.images.length) return;
+  
+  currentZoomData.colorIndex = index;
+  const imageData = currentZoomData.images[index];
+  
+  // Actualizar imagen principal
+  zoomedImage.src = imageData.src;
+  zoomedImage.alt = imageData.name;
+  
+  // Actualizar indicador de color
+  updateColorIndicator(imageData);
+  
+  // Actualizar miniaturas activas
+  updateActiveThumbnail();
+}
+
+// Actualizar indicador de color
+function updateColorIndicator(imageData) {
+  if (imageData.colorCode && imageData.colorValue) {
+    // Si tiene color, mostrar el indicador
+    zoomColorIndicator.innerHTML = `
+      <div class="color-indicator-swatch" style="background-color: ${imageData.colorValue}; ${imageData.colorValue === '#ffffff' ? 'border: 1px solid #ddd' : ''}"></div>
+      <div class="color-indicator-text">${imageData.name} - ${currentZoomData.productName}</div>
+    `;
+    zoomColorIndicator.style.display = 'flex';
+  } else if (currentZoomData.productName) {
+    // Si no tiene color pero tiene nombre de producto
+    zoomColorIndicator.innerHTML = `
+      <div class="color-indicator-text">${currentZoomData.productName}</div>
+    `;
+    zoomColorIndicator.style.display = 'flex';
+  } else {
+    // Ocultar si no hay información
+    zoomColorIndicator.style.display = 'none';
   }
 }
 
-// Función para cerrar todos los zooms activos
-function closeAllZoom() {
-  document.querySelectorAll('.main-image-container.zoomed').forEach(container => {
-    container.classList.remove('zoomed');
-  });
-  document.body.classList.remove('zoom-active');
-  
-  // Ocultar botón de cerrar
-  const closeBtn = document.querySelector('.close-zoom-btn');
-  if (closeBtn) {
-    closeBtn.classList.remove('show');
+// Mostrar imagen anterior
+function showPrevImage() {
+  const newIndex = currentZoomData.colorIndex - 1;
+  if (newIndex >= 0) {
+    showImageInZoom(newIndex);
+  } else {
+    // Si es la primera, ir a la última
+    showImageInZoom(currentZoomData.images.length - 1);
   }
+}
+
+// Mostrar siguiente imagen
+function showNextImage() {
+  const newIndex = currentZoomData.colorIndex + 1;
+  if (newIndex < currentZoomData.images.length) {
+    showImageInZoom(newIndex);
+  } else {
+    // Si es la última, ir a la primera
+    showImageInZoom(0);
+  }
+}
+
+// Actualizar miniaturas del zoom
+function updateZoomThumbnails() {
+  zoomThumbnails.innerHTML = '';
+  
+  currentZoomData.images.forEach((image, index) => {
+    const thumbnailContainer = document.createElement('div');
+    thumbnailContainer.className = 'zoom-thumbnail-container';
+    thumbnailContainer.style.position = 'relative';
+    
+    const thumbnail = document.createElement('img');
+    thumbnail.className = `zoom-thumbnail ${index === currentZoomData.colorIndex ? 'active' : ''}`;
+    thumbnail.src = image.src;
+    thumbnail.alt = image.name;
+    thumbnail.title = image.name;
+    
+    // Agregar indicador de color en la miniatura
+    if (image.colorValue) {
+      const colorDot = document.createElement('div');
+      colorDot.className = 'thumbnail-color-dot';
+      colorDot.style.cssText = `
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: ${image.colorValue};
+        border: 1px solid white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        z-index: 1;
+      `;
+      thumbnailContainer.appendChild(colorDot);
+    }
+    
+    thumbnail.addEventListener('click', () => {
+      showImageInZoom(index);
+    });
+    
+    thumbnailContainer.appendChild(thumbnail);
+    zoomThumbnails.appendChild(thumbnailContainer);
+  });
+}
+
+// Actualizar miniatura activa
+function updateActiveThumbnail() {
+  document.querySelectorAll('.zoom-thumbnail').forEach((thumb, index) => {
+    thumb.classList.toggle('active', index === currentZoomData.colorIndex);
+  });
 }
 
 // Cambiar entre pestañas
 function changeTab(tabNumber) {
   // Cerrar zoom si está activo
-  closeAllZoom();
+  closeImageZoom();
   
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => tab.classList.remove("active"));
@@ -613,6 +806,7 @@ function loadProducts() {
                 : ""
               }"
                                  data-color="${color.code}"
+                                 data-product-id="${product.id}"
                                  onclick="changeProductImage(${product.id}, '${color.code
               }')">
                             <div class="thumbnail-label">${color.name}</div>
@@ -672,9 +866,9 @@ function loadProducts() {
 
     productCard.innerHTML = `
             <div class="product-image-gallery">
-                <div class="main-image-container">
+                <div class="main-image-container" data-product-id="${product.id}">
                     <img src="${mainImage}" alt="${product.name
-      }" class="product-main-image" id="main-image-${product.id}">
+      }" class="product-main-image" id="main-image-${product.id}" data-product-id="${product.id}">
                 </div>
                 ${thumbnailsHTML}
             </div>
@@ -701,12 +895,15 @@ function loadProducts() {
       productsGrid2.appendChild(productCard);
     }
   });
+  
+  // Guardar referencia a los productos cargados
+  loadedProducts = [...products];
 }
 
 // Cambiar imagen del producto
 function changeProductImage(productId, colorCode) {
   // Cerrar zoom si está activo
-  closeAllZoom();
+  closeImageZoom();
   
   const product = products.find((p) => p.id === productId);
   if (!product) return;
@@ -799,7 +996,7 @@ function getSelectedSize(productId) {
 // Agregar producto al carrito
 function addToCart(productId) {
   // Cerrar zoom si está activo
-  closeAllZoom();
+  closeImageZoom();
   
   const product = products.find((p) => p.id === productId);
   if (!product) return;
@@ -971,7 +1168,7 @@ function updateCartDisplay() {
 // Enviar pedido por WhatsApp
 function sendOrder() {
   // Cerrar zoom si está activo
-  closeAllZoom();
+  closeImageZoom();
   
   if (cart.length === 0) {
     alert(
@@ -1032,7 +1229,7 @@ function sendOrder() {
 // Mostrar notificación
 function showNotification(message) {
   // Cerrar zoom si está activo
-  closeAllZoom();
+  closeImageZoom();
   
   const notification = document.createElement("div");
   notification.style.cssText = `
