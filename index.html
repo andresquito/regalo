@@ -6,8 +6,384 @@
     <title>Viste Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Contenedor flotante compacto */
+        .floating-offer {
+            position: fixed;
+            top: 90px; /* Justo debajo del encabezado */
+            right: 25px;
+            z-index: 9998;
+            animation: floatEntrance 1s ease-out;
+        }
+        
+        @keyframes floatEntrance {
+            0% {
+                opacity: 0;
+                transform: translateX(50px) translateY(-20px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) translateY(0) scale(1);
+            }
+        }
+        
+        /* Rectángulo naranja compacto */
+        .offer-rectangle {
+            width: 220px;
+            padding: 20px 18px;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FF8C00 0%, #FF6B00 100%);
+            box-shadow: 
+                0 15px 35px rgba(255, 107, 0, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: rectangleFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes rectangleFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(0.5deg);
+            }
+            50% {
+                transform: translateY(-5px) rotate(-0.3deg);
+            }
+            75% {
+                transform: translateY(-8px) rotate(0.2deg);
+            }
+        }
+        
+        /* Efecto de borde brillante */
+        .offer-rectangle::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, 
+                #FF4500, #FF8C00, #FFD700, #FF8C00, #FF4500);
+            border-radius: 20px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+            background-size: 400% 400%;
+            opacity: 0.6;
+        }
+        
+        @keyframes borderGlow {
+            0% {
+                background-position: 0% 50%;
+                opacity: 0.5;
+            }
+            50% {
+                background-position: 100% 50%;
+                opacity: 0.8;
+            }
+            100% {
+                background-position: 0% 50%;
+                opacity: 0.5;
+            }
+        }
+        
+        /* Contenido compacto - DOS líneas */
+        .rectangle-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Menor espacio entre líneas */
+        }
+        
+        /* Fila compacta - cada beneficio en una línea */
+        .benefit-row {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Menor espacio entre ícono y texto */
+            animation: rowEntrance 0.8s ease-out backwards;
+            min-height: 40px; /* Altura mínima reducida */
+        }
+        
+        .benefit-row:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .benefit-row:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        @keyframes rowEntrance {
+            0% {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Icono más pequeño */
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            flex-shrink: 0;
+            animation: iconPulse 2s ease-in-out infinite alternate;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        @keyframes iconPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0.2);
+            }
+            100% {
+                transform: scale(1.05);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+        }
+        
+        .benefit-icon i {
+            font-size: 1.5rem; /* Iconos más pequeños */
+            color: white;
+        }
+        
+        /* Primer ícono - camión */
+        .benefit-row:nth-child(1) .benefit-icon i {
+            color: #4bffb5;
+            text-shadow: 0 0 8px rgba(75, 255, 181, 0.5);
+        }
+        
+        /* Segundo ícono - mano con dinero */
+        .benefit-row:nth-child(2) .benefit-icon i {
+            color: #FFD700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Texto más compacto */
+        .benefit-text {
+            flex: 1;
+        }
+        
+        .benefit-text h3 {
+            margin: 0;
+            color: white;
+            font-size: 1.2rem; /* Texto más pequeño */
+            font-weight: 800;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+        
+        /* Efecto hover compacto */
+        .offer-rectangle:hover {
+            transform: translateY(-6px) scale(1.02) !important;
+            box-shadow: 
+                0 18px 40px rgba(255, 107, 0, 0.6),
+                0 6px 18px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            animation-play-state: paused;
+        }
+        
+        .offer-rectangle:hover::before {
+            animation: borderGlow 1.5s linear infinite;
+            opacity: 0.9;
+        }
+        
+        .offer-rectangle:hover .benefit-icon {
+            animation: iconSpin 0.5s ease-out;
+        }
+        
+        @keyframes iconSpin {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            100% {
+                transform: rotate(360deg) scale(1.1);
+            }
+        }
+        
+        /* Para tablets */
+        @media (max-width: 1024px) {
+            .floating-offer {
+                top: 85px;
+                right: 20px;
+            }
+            
+            .offer-rectangle {
+                width: 200px;
+                padding: 18px 16px;
+            }
+            
+            .benefit-text h3 {
+                font-size: 1.1rem;
+            }
+            
+            .benefit-icon {
+                width: 38px;
+                height: 38px;
+            }
+            
+            .benefit-icon i {
+                font-size: 1.4rem;
+            }
+            
+            .rectangle-content {
+                gap: 10px;
+            }
+        }
+        
+        /* Para móviles */
+        @media (max-width: 768px) {
+            .floating-offer {
+                top: 80px;
+                right: 15px;
+            }
+            
+            .offer-rectangle {
+                width: 180px;
+                padding: 16px 14px;
+                border-radius: 14px;
+            }
+            
+            .benefit-row {
+                gap: 10px;
+                min-height: 36px;
+            }
+            
+            .benefit-text h3 {
+                font-size: 1rem;
+            }
+            
+            .benefit-icon {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .benefit-icon i {
+                font-size: 1.3rem;
+            }
+            
+            .rectangle-content {
+                gap: 8px;
+            }
+            
+            .offer-rectangle::before {
+                border-radius: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .floating-offer {
+                top: 75px;
+                right: 10px;
+            }
+            
+            .offer-rectangle {
+                width: 160px;
+                padding: 14px 12px;
+                border-radius: 12px;
+            }
+            
+            .benefit-row {
+                gap: 8px;
+                min-height: 32px;
+            }
+            
+            .benefit-text h3 {
+                font-size: 0.9rem;
+            }
+            
+            .benefit-icon {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .benefit-icon i {
+                font-size: 1.2rem;
+            }
+            
+            .rectangle-content {
+                gap: 6px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .floating-offer {
+                top: 70px;
+                right: 8px;
+            }
+            
+            .offer-rectangle {
+                width: 140px;
+                padding: 12px 10px;
+                border-radius: 10px;
+            }
+            
+            .benefit-text h3 {
+                font-size: 0.85rem;
+            }
+            
+            .benefit-icon {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .benefit-icon i {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Ajuste durante el scroll */
+        .floating-offer.scroll-up {
+            top: 70px;
+        }
+        
+        .floating-offer.scroll-down {
+            top: 60px;
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
+    <!-- Oferta flotante compacta - DOS líneas -->
+    <div class="floating-offer" id="floatingOffer">
+        <div class="offer-rectangle">
+            <div class="rectangle-content">
+                <!-- Línea 1: Domicilio Gratis + camión -->
+                <div class="benefit-row">
+                    <div class="benefit-icon">
+                        <i class="fas fa-truck-fast"></i>
+                    </div>
+                    <div class="benefit-text">
+                        <h3>Domicilio Gratis</h3>
+                    </div>
+                </div>
+                
+                <!-- Línea 2: Pagas al Recibir + mano -->
+                <div class="benefit-row">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hand-holding-dollar"></i>
+                    </div>
+                    <div class="benefit-text">
+                        <h3>Pagas al Recibir</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <h1><i class="fas fa-store"></i> Viste Online</h1>
@@ -19,8 +395,6 @@
         <div class="tabs-container">
             <div class="tabs">
                 <button class="tab active" onclick="changeTab(1)">Ropa de Hombre</button>
-                <!-- <button class="tab" onclick="changeTab(2)">Mujeres</button>
-                <button class="tab" onclick="changeTab(3)">Niños</button> -->
             </div>
 
             <!-- Pestaña 1 (Productos 1-9) -->
@@ -60,7 +434,7 @@
             <div class="cart-total">
                 <h2>Total del Pedido</h2>
                 <div class="total-price">$<span id="total-price">0</span></div>
-                <h5 style="color: rgb(244, 91, 101);"> Servicio a Domicilio Gratis - Paga al Recibir</h5>
+                
                 <button id="send-order-btn" class="send-order-btn" disabled>
                     <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
                 </button>
@@ -99,5 +473,118 @@
     </div>
 
     <script src="funcion.js"></script>
+    <script>
+        // JavaScript para el rectángulo flotante compacto
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingOffer = document.getElementById('floatingOffer');
+            const rectangle = document.querySelector('.offer-rectangle');
+            let lastScrollTop = 0;
+            
+            // Control de posición durante el scroll
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scroll hacia abajo
+                    floatingOffer.classList.remove('scroll-up');
+                    floatingOffer.classList.add('scroll-down');
+                } else {
+                    // Scroll hacia arriba
+                    floatingOffer.classList.remove('scroll-down');
+                    floatingOffer.classList.add('scroll-up');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+            
+            // Efectos hover
+            rectangle.addEventListener('mouseenter', function() {
+                if (window.innerWidth > 768) {
+                    // Pausar animación de flotación
+                    this.style.animationPlayState = 'paused';
+                }
+            });
+            
+            rectangle.addEventListener('mouseleave', function() {
+                if (window.innerWidth > 768) {
+                    // Reanudar animación de flotación
+                    this.style.animationPlayState = 'running';
+                }
+            });
+            
+            // Efecto al hacer clic
+            rectangle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Efecto de pulso
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+                
+                // Crear efecto de partículas
+                createSparkleEffect(this);
+            });
+            
+            // Función para crear efecto de partículas
+            function createSparkleEffect(element) {
+                const rect = element.getBoundingClientRect();
+                const colors = ['#FFD700', '#FF8C00', '#4bffb5', '#FFFFFF'];
+                
+                for (let i = 0; i < 10; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.style.cssText = `
+                        position: fixed;
+                        width: 6px;
+                        height: 6px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 9997;
+                        top: ${rect.top + rect.height/2}px;
+                        left: ${rect.left + rect.width/2}px;
+                        animation: sparkleFly 0.6s ease-out forwards;
+                    `;
+                    
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        if (sparkle.parentNode) {
+                            sparkle.parentNode.removeChild(sparkle);
+                        }
+                    }, 600);
+                }
+                
+                // Agregar keyframes dinámicamente si no existen
+                if (!document.getElementById('sparkle-fly-animation')) {
+                    const style = document.createElement('style');
+                    style.id = 'sparkle-fly-animation';
+                    style.textContent = `
+                        @keyframes sparkleFly {
+                            0% {
+                                transform: translate(0, 0) scale(1);
+                                opacity: 1;
+                            }
+                            100% {
+                                transform: translate(${Math.random() * 50 - 25}px, ${Math.random() * 50 - 25}px) scale(0);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
+            
+            // Ajustar para dispositivos móviles
+            function adjustForMobile() {
+                if (window.innerWidth <= 768) {
+                    rectangle.style.animation = 'rectangleFloat 4s ease-in-out infinite';
+                }
+            }
+            
+            window.addEventListener('resize', adjustForMobile);
+            adjustForMobile();
+        });
+    </script>
 </body>
 </html>
