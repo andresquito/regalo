@@ -1178,7 +1178,7 @@ function sendOrder() {
   }
 
   let message = `¡Hola! Quiero realizar el siguiente pedido:%0A%0A`;
-  message += `*📦 PEDIDO DE TIENDA ONLINE*%0A%0A`;
+  message += `*📦 PEDIDO DE VISTE ONLINE*%0A%0A`;
 
   let total = 0;
   const productSummary = {};
@@ -1286,3 +1286,4 @@ document.addEventListener("DOMContentLoaded", function () {
   sendOrderBtn.addEventListener("click", sendOrder);
   clearCartBtn.addEventListener("click", clearCart);
 });
+
