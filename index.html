@@ -23,21 +23,22 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
 
         header {
             background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
             color: white;
-            padding: 5px 0;
+            padding: 10px 0;
             text-align: center;
             border-radius: 0 0 15px 15px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -46,88 +47,40 @@
 
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 20px;
+            margin-top: 30px;
+            padding: 15px;
             color: #666;
             border-top: 1px solid #eee;
         }
 
-        /* PESTAÑAS */
-        .tabs-container {
-            margin-bottom: 30px;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #ddd;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .tab {
-            padding: 12px 25px;
-            background: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #666;
-            border-radius: 8px 8px 0 0;
-            margin-right: 5px;
-            transition: all 0.3s;
-            position: relative;
-            min-width: 150px;
+        /* SUBTÍTULO DE CATEGORÍA */
+        .category-subtitle {
             text-align: center;
-        }
-
-        .tab:hover {
-            background: #f0f0f0;
+            margin: 20px 0 30px;
             color: #4b6cb7;
-        }
-
-        .tab.active {
-            background: #4b6cb7;
-            color: white;
-        }
-
-        .tab.active::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 3px solid #4b6cb7;
+            padding-bottom: 10px;
+            display: inline-block;
             width: 100%;
-            height: 2px;
-            background: #4b6cb7;
         }
 
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* PRODUCTOS */
+        /* PRODUCTOS - ESPACIOS REDUCIDOS */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .product-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: all 0.3s;
             display: flex;
             flex-direction: column;
@@ -135,13 +88,13 @@
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
         .product-image-gallery {
             display: flex;
-            height: 420px;
+            height: 380px;
             border-bottom: 1px solid #eee;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
         }
@@ -151,7 +104,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
             background: white;
             min-width: 0;
             cursor: pointer;
@@ -165,22 +118,21 @@
             object-fit: contain;
             transition: transform 0.5s ease;
             border-radius: 4px;
-            min-height: 250px;
-            cursor: zoom-in;
+            min-height: 200px;
         }
 
         .product-card:hover .product-main-image {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .thumbnails-sidebar {
-            width: 110px;
+            width: 100px;
             background: rgba(255, 255, 255, 0.95);
             border-left: 1px solid #eee;
-            padding: 15px 10px;
+            padding: 12px 8px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: #4b6cb7 #f0f0f0;
@@ -188,7 +140,7 @@
         }
 
         .thumbnails-sidebar::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
 
         .thumbnails-sidebar::-webkit-scrollbar-track {
@@ -205,7 +157,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             transition: all 0.2s;
         }
 
@@ -214,31 +166,31 @@
         }
 
         .thumbnail {
-            width: 75px;
-            height: 75px;
+            width: 70px;
+            height: 70px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.2s;
             background: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .thumbnail:hover {
             border-color: #4b6cb7;
             transform: scale(1.05);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
         }
 
         .thumbnail.active {
             border-color: #4b6cb7;
-            box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.3);
+            box-shadow: 0 0 0 2px rgba(75, 108, 183, 0.3);
             transform: scale(1.05);
         }
 
         .thumbnail-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #666;
             text-align: center;
             font-weight: 500;
@@ -249,77 +201,77 @@
         }
 
         .product-info {
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             flex: 1;
         }
 
         .product-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #333;
             line-height: 1.3;
         }
 
         .product-description {
             color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
             line-height: 1.5;
-            min-height: 60px;
+            min-height: 50px;
         }
 
         .product-price {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: #4b6cb7;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .options-container {
-            margin-bottom: 20px;
-            padding: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
             background: #f8f9fa;
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
         .options-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
             font-weight: 500;
         }
 
         .color-options {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
         }
 
         .color-option {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
-            border: 3px solid transparent;
+            border: 2px solid transparent;
             transition: all 0.3s;
             position: relative;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .color-option:hover {
-            transform: scale(1.15);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
         }
 
         .color-option.selected {
             border-color: #4b6cb7;
-            transform: scale(1.15);
-            box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 0 0 2px rgba(75, 108, 183, 0.2);
         }
 
         .color-option.selected::after {
@@ -329,9 +281,9 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
-            text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
         }
 
         .color-tooltip {
@@ -341,16 +293,16 @@
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.9);
             color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
             white-space: nowrap;
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
             z-index: 100;
-            margin-bottom: 10px;
-            min-width: 90px;
+            margin-bottom: 8px;
+            min-width: 80px;
             text-align: center;
             font-weight: 500;
         }
@@ -361,19 +313,19 @@
 
         .size-options {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .size-option {
-            padding: 8px 15px;
+            padding: 6px 12px;
             border: 2px solid #ddd;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             background: white;
-            min-width: 45px;
+            min-width: 40px;
             text-align: center;
             font-weight: 500;
         }
@@ -387,23 +339,23 @@
             background: #4b6cb7;
             color: white;
             border-color: #4b6cb7;
-            box-shadow: 0 2px 5px rgba(75, 108, 183, 0.3);
+            box-shadow: 0 2px 4px rgba(75, 108, 183, 0.3);
         }
 
         .add-to-cart-btn {
             background: linear-gradient(135deg, #28a745 0%, #218838 100%);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: auto;
             width: 100%;
         }
@@ -411,7 +363,7 @@
         .add-to-cart-btn:hover {
             background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
         }
 
         .add-to-cart-btn:disabled {
@@ -426,15 +378,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin-top: 40px;
-            margin-bottom: 40px;
+            gap: 8px;
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
 
         .page-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
             background: white;
             border: 2px solid #4b6cb7;
             color: #4b6cb7;
@@ -449,7 +401,7 @@
         .page-btn:hover {
             background: #4b6cb7;
             color: white;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         .page-btn.active {
@@ -465,7 +417,203 @@
             transform: none;
         }
 
-        /* CARRITO FLOTANTE - MEJORADO PARA MÓVIL */
+        /* MODAL DE NAVEGACIÓN (3 LÍNEAS) */
+        .floating-menu {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(75, 108, 183, 0.4);
+            animation: float 3s ease-in-out infinite;
+            border: 3px solid white;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); box-shadow: 0 10px 30px rgba(75, 108, 183, 0.4); }
+            50% { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(75, 108, 183, 0.6); }
+        }
+
+        .menu-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .menu-icon i {
+            font-size: 24px;
+            color: #4b6cb7;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .menu-content {
+            color: white;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .menu-title {
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, 
+                rgba(75, 108, 183, 0.2) 0%, 
+                rgba(24, 40, 72, 0.2) 100%);
+            border-radius: 60px;
+            z-index: -1;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* MODAL DEL MENÚ */
+        .menu-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            align-items: center;
+            justify-content: flex-start;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .menu-modal-content {
+            background: white;
+            border-radius: 0 20px 20px 0;
+            width: 300px;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: modalSlideInLeft 0.3s ease;
+        }
+
+        @keyframes modalSlideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .menu-modal-header {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 120px;
+        }
+
+        .menu-modal-header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+        }
+
+        .close-menu-modal {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .close-menu-modal:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .menu-modal-body {
+            padding: 20px 0;
+            height: calc(100% - 120px);
+            overflow-y: auto;
+        }
+
+        .menu-categories {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-category {
+            padding: 18px 25px;
+            font-size: 1.1rem;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .menu-category:hover {
+            background: #f8f9fa;
+            color: #4b6cb7;
+            padding-left: 30px;
+        }
+
+        .menu-category.active {
+            background: #4b6cb7;
+            color: white;
+        }
+
+        .menu-category i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* CARRITO FLOTANTE */
         .floating-cart {
             position: fixed;
             top: 100px;
@@ -487,13 +635,6 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            min-width: 70px;
-            min-height: 70px;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); box-shadow: 0 10px 30px rgba(75, 108, 183, 0.4); }
-            50% { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(75, 108, 183, 0.6); }
         }
 
         .cart-icon {
@@ -521,28 +662,27 @@
             right: -5px;
             background: #ff4757;
             color: white;
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
-            border: 2px solid white;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .cart-content {
             color: white;
             font-weight: bold;
             white-space: nowrap;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
         }
 
         .cart-title {
             font-size: 1.1rem;
+            margin-bottom: 3px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -570,17 +710,6 @@
             font-size: 0.9rem;
         }
 
-        /* Para móvil - siempre mostrar precio */
-        .cart-price-mobile {
-            display: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 10px;
-            border-radius: 20px;
-            margin-top: 5px;
-        }
-
         .cart-container::before {
             content: '';
             position: absolute;
@@ -596,12 +725,7 @@
             animation: pulse 2s infinite alternate;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.05); }
-        }
-
-        /* MODAL DEL CARRITO - MEJORADO PARA MÓVIL */
+        /* MODAL DEL CARRITO - MODIFICADO */
         .cart-modal {
             display: none;
             position: fixed;
@@ -626,7 +750,7 @@
             background: white;
             border-radius: 20px;
             width: 90%;
-            max-width: 500px;
+            max-width: 550px;
             max-height: 90vh;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
@@ -652,7 +776,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.3rem;
         }
 
         .close-cart-modal {
@@ -693,7 +816,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.2rem;
         }
 
         .cart-modal-items {
@@ -702,17 +824,16 @@
             margin-bottom: 20px;
         }
 
-        /* ITEMS DEL CARRITO - MEJORADO PARA MÓVIL */
         .cart-modal-item {
-            display: flex;
-            align-items: center;
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 15px;
             padding: 15px;
             border-bottom: 1px solid #eee;
             background: #f8f9fa;
             border-radius: 8px;
             margin-bottom: 10px;
-            position: relative;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
         .cart-modal-item:last-child {
@@ -728,7 +849,6 @@
             flex-shrink: 0;
             border: 1px solid #eee;
             background: white;
-            margin-right: 15px;
         }
 
         .cart-modal-item-image img {
@@ -738,27 +858,33 @@
         }
 
         .cart-modal-item-info {
-            flex: 1;
-            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 0;
         }
 
         .cart-modal-item-name {
             font-weight: 600;
-            margin-bottom: 5px;
             color: #333;
             font-size: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .cart-modal-item-details {
             font-size: 0.85rem;
             color: #666;
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 10px;
+        }
+
+        .item-color {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .item-color-swatch {
@@ -769,23 +895,12 @@
             border: 1px solid #ddd;
         }
 
-        .cart-modal-item-price-mobile {
-            font-weight: 600;
-            color: #4b6cb7;
-            font-size: 1.1rem;
-            margin-left: auto;
-            padding-left: 10px;
-        }
-
         .cart-modal-item-actions {
             display: flex;
             align-items: center;
-            gap: 15px;
-            width: 100%;
-            justify-content: space-between;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
+            gap: 10px;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
         }
 
         .cart-modal-item-quantity {
@@ -796,6 +911,8 @@
             padding: 5px;
             border-radius: 6px;
             border: 1px solid #ddd;
+            min-width: 100px;
+            justify-content: center;
         }
 
         .modal-quantity-btn {
@@ -812,6 +929,7 @@
             color: #555;
             font-size: 1rem;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
 
         .modal-quantity-btn:hover {
@@ -829,82 +947,85 @@
         .cart-modal-item-price {
             font-weight: 600;
             color: #4b6cb7;
+            text-align: right;
             font-size: 1.1rem;
-            display: none; /* Oculto en móvil, se muestra en el nombre */
+            min-width: 70px;
         }
 
         .modal-remove-item-btn {
-            background: #dc3545;
-            color: white;
+            background: transparent;
             border: none;
+            color: #dc3545;
             cursor: pointer;
-            font-size: 1rem;
-            padding: 8px 15px;
+            font-size: 1.2rem;
+            padding: 5px;
             transition: all 0.2s;
-            border-radius: 6px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-weight: 600;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .modal-remove-item-btn:hover {
-            background: #c82333;
-            transform: translateY(-2px);
+            color: #c82333;
+            background: rgba(220, 53, 69, 0.1);
         }
 
-        .modal-remove-item-btn i {
-            font-size: 1rem;
+        /* SECCIÓN OFERTA MODIFICADA */
+        .cart-modal-offer {
+            background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+            padding: 15px 20px;
+            border-top: 2px solid #4b6cb7;
+            border-bottom: 2px solid #4b6cb7;
         }
 
-        /* Sección de beneficios */
-        .cart-modal-benefits {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 20px;
-            border-top: 2px solid #FFD700;
-            border-bottom: 2px solid #FFD700;
-        }
-
-        .cart-modal-benefits h3 {
+        .cart-modal-offer h3 {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 15px;
             color: #333;
             font-size: 1.1rem;
+            justify-content: center;
         }
 
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .offer-grid {
+            display: flex;
+            flex-wrap: wrap;
             gap: 10px;
+            justify-content: center;
         }
 
-        .benefit-item {
+        .offer-item {
             background: white;
-            padding: 12px;
+            padding: 12px 15px;
             border-radius: 8px;
             text-align: center;
             border: 1px solid #dee2e6;
             transition: all 0.3s;
+            flex: 1;
+            min-width: 140px;
         }
 
-        .benefit-item:hover {
+        .offer-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .benefit-item i {
+        .offer-item i {
             color: #28a745;
             font-size: 1.5rem;
             margin-bottom: 8px;
         }
 
-        .benefit-item p {
+        .offer-item p {
             margin: 0;
             font-weight: bold;
             color: #333;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .cart-modal-footer {
@@ -971,7 +1092,7 @@
             color: #ddd;
         }
 
-        /* MODAL DE ZOOM DE IMÁGENES - RESTAURADO */
+        /* MODAL DE ZOOM */
         .image-zoom-modal {
             display: none;
             position: fixed;
@@ -1043,6 +1164,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+            opacity: 1;
+            pointer-events: all;
         }
 
         .nav-zoom-btn:hover {
@@ -1074,6 +1197,7 @@
             object-fit: contain;
             border-radius: 8px;
             animation: zoomFadeIn 0.3s ease;
+            cursor: zoom-out;
         }
 
         @keyframes zoomFadeIn {
@@ -1129,11 +1253,12 @@
             padding: 10px;
             overflow-x: auto;
             max-width: 100%;
+            justify-content: center;
         }
 
         .zoom-thumbnail {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             object-fit: cover;
             border-radius: 6px;
             cursor: pointer;
@@ -1166,93 +1291,263 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-                gap: 20px;
+                gap: 15px;
             }
 
             .product-image-gallery {
-                height: 320px;
+                height: 340px;
             }
 
             .thumbnails-sidebar {
                 width: 90px;
-                padding: 10px 6px;
             }
 
             .thumbnail {
                 width: 65px;
                 height: 65px;
             }
+            
+            .offer-grid {
+                flex-direction: column;
+            }
+            
+            .offer-item {
+                min-width: 100%;
+            }
+        }
 
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                margin-bottom: 15px;
+            }
+
+            header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .category-subtitle {
+                font-size: 1.5rem;
+                margin: 15px 0 25px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 12px;
+            }
+
+            .product-image-gallery {
+                height: 300px;
+            }
+
+            .thumbnails-sidebar {
+                width: 80px;
+                padding: 10px 5px;
+            }
+
+            .thumbnail {
+                width: 55px;
+                height: 55px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .product-title {
+                font-size: 1.1rem;
+            }
+
+            .product-price {
+                font-size: 1.3rem;
+            }
+
+            /* MENÚ FLOTANTE MÓVIL */
+            .floating-menu {
+                top: 20px;
+                left: 10px;
+            }
+
+            .menu-container {
+                padding: 0;
+                width: 60px;
+                height: 60px;
+                border-radius: 20%;
+                justify-content: center;
+            }
+
+            .menu-content {
+                display: none;
+            }
+
+            .menu-icon {
+                width: 60px;
+                height: 60px;
+                border-radius: 20%;
+                box-shadow: none;
+                background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+                border: 3px solid white;
+            }
+
+            .menu-icon i {
+                color: white;
+                font-size: 24px;
+            }
+
+            /* CARRITO FLOTANTE MÓVIL - MEJORADO */
             .floating-cart {
-                top: 80px;
+                top: 20px;
                 right: 10px;
             }
 
             .cart-container {
-                padding: 10px 15px;
-            }
-
-            .cart-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .cart-icon i {
-                font-size: 20px;
+                padding: 0;
+                width: 60px;
+                height: 60px;
+                border-radius: 20%;
+                justify-content: center;
             }
 
             .cart-content {
-                display: flex !important; /* Forzar mostrar en móvil */
-                white-space: normal;
-                font-size: 0.85rem;
+                display: none;
             }
 
-            .cart-title {
-                font-size: 1rem;
+            .cart-icon {
+                width: 60px;
+                height: 60px;
+                border-radius: 20%;
+                box-shadow: none;
+                background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+                border: 3px solid white;
             }
 
-            .cart-items-info {
-                flex-direction: column;
-                gap: 5px;
-                align-items: flex-start;
+            .cart-icon i {
+                color: white;
+                font-size: 24px;
             }
 
-            .cart-price-mobile {
-                display: inline-block;
+            .cart-count {
+                top: -5px;
+                right: -5px;
+                width: 26px;
+                height: 26px;
+                font-size: 14px;
+                font-weight: bold;
+                border: 3px solid white;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
             }
 
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-
-            /* Para móvil - mostrar precio al lado del nombre */
-            .cart-modal-item-name {
-                justify-content: space-between;
-            }
-
-            .cart-modal-item-price {
-                display: inline-block;
-                font-size: 1rem;
+            .cart-modal-item {
+                grid-template-columns: 50px 1fr;
+                grid-template-rows: auto auto;
+                gap: 10px;
             }
 
             .cart-modal-item-actions {
+                grid-column: 1 / -1;
+                grid-row: 2;
                 justify-content: space-between;
+                margin-top: 10px;
             }
 
-            .modal-remove-item-btn {
-                padding: 6px 12px;
-                font-size: 0.9rem;
+            .cart-modal-item-price {
+                min-width: auto;
+            }
+            
+            /* OFERTA EN MÓVIL - DOS EN UNA LÍNEA */
+            .offer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                display: grid;
+            }
+            
+            .offer-item {
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
             }
 
-            /* Modal de zoom para móvil */
-            .zoom-modal-content {
-                width: 95%;
-                height: 95%;
+            .product-image-gallery {
+                height: 280px;
             }
 
+            .thumbnails-sidebar {
+                width: 70px;
+            }
+
+            .thumbnail {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .category-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .floating-menu {
+                top: 15px;
+                left: 8px;
+            }
+
+            .menu-container {
+                width: 55px;
+                height: 55px;
+            }
+
+            .menu-icon {
+                width: 55px;
+                height: 55px;
+            }
+
+            /* CARRITO MÓVIL - MEJORADO */
+            .floating-cart {
+                top: 15px;
+                right: 8px;
+            }
+
+            .cart-container {
+                width: 55px;
+                height: 55px;
+            }
+
+            .cart-icon {
+                width: 55px;
+                height: 55px;
+            }
+
+            .cart-count {
+                width: 24px;
+                height: 24px;
+                font-size: 13px;
+                border: 2px solid white;
+            }
+
+            .cart-modal-item {
+                padding: 10px;
+            }
+
+            .cart-modal-item-actions {
+                flex-wrap: wrap;
+            }
+
+            .cart-modal-item-price {
+                font-size: 1rem;
+            }
+
+            /* ZOOM MÓVIL */
             .nav-zoom-btn {
                 width: 50px;
                 height: 50px;
@@ -1271,124 +1566,81 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 15px;
-            }
-
+        @media (max-width: 360px) {
             .product-image-gallery {
-                height: 280px;
+                height: 250px;
             }
 
             .thumbnails-sidebar {
-                width: 80px;
-                padding: 8px 5px;
+                width: 60px;
+                padding: 8px 4px;
             }
 
             .thumbnail {
-                width: 55px;
-                height: 55px;
+                width: 45px;
+                height: 45px;
             }
-
-            .floating-cart {
-                top: 70px;
-                right: 5px;
+            
+            .category-subtitle {
+                font-size: 1.2rem;
             }
-
-            .cart-container {
-                padding: 8px 12px;
-                flex-direction: row;
-                width: auto;
-                height: auto;
-                min-width: auto;
-                min-height: auto;
-            }
-
-            .cart-content {
-                display: flex !important;
-            }
-
-            .cart-modal-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .cart-modal-item-image {
-                width: 100%;
-                height: 150px;
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-
-            .cart-modal-item-info {
-                width: 100%;
-            }
-
-            .cart-modal-item-actions {
-                flex-wrap: wrap;
-            }
-
-            /* Modal de zoom para móvil pequeño */
-            .nav-zoom-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
-
-            .close-zoom-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 18px;
-            }
-
-            .zoom-thumbnail {
-                width: 50px;
-                height: 50px;
-            }
-        }
-
-        /* Para pantallas muy pequeñas */
-        @media (max-width: 360px) {
-            .cart-container {
-                padding: 6px 10px;
-            }
-
-            .cart-icon {
-                width: 35px;
-                height: 35px;
-            }
-
-            .cart-icon i {
-                font-size: 18px;
-            }
-
-            .cart-content {
-                font-size: 0.8rem;
-            }
-
-            .cart-modal-header h2 {
-                font-size: 1.1rem;
-            }
-
-            .cart-modal-products h3 {
-                font-size: 1rem;
-            }
-
-            .modal-remove-item-btn span {
-                display: none; /* Ocultar texto "Eliminar" en pantallas muy pequeñas */
-            }
-
-            .modal-remove-item-btn i {
-                margin: 0;
+            
+            .menu-modal-content {
+                width: 250px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Menú flotante de 3 líneas -->
+    <div class="floating-menu">
+        <div class="menu-container" id="floating-menu-btn">
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="menu-content">
+                <div class="menu-title">
+                    <i class="fas fa-th-list"></i>
+                    Categorías
+                </div>
+                <div class="menu-items-info">
+                    <div class="menu-info">
+                        <span id="current-category">Ropa de Hombre</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Menú -->
+    <div class="menu-modal" id="menu-modal">
+        <div class="menu-modal-content">
+            <div class="menu-modal-header">
+                <h2><i class="fas fa-store"></i> Viste Online</h2>
+                <button class="close-menu-modal" id="close-menu-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="menu-modal-body">
+                <div class="menu-categories">
+                    <div class="menu-category active" data-category="ropa" onclick="changeCategory('ropa')">
+                        <i class="fas fa-tshirt"></i>
+                        Ropa de Hombre
+                    </div>
+                    <div class="menu-category" data-category="calzado" onclick="changeCategory('calzado')">
+                        <i class="fas fa-shoe-prints"></i>
+                        Calzado
+                    </div>
+                    <div class="menu-category" data-category="accesorios" onclick="changeCategory('accesorios')">
+                        <i class="fas fa-glasses"></i>
+                        Accesorios
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Carrito flotante -->
     <div class="floating-cart">
         <div class="cart-container" id="floating-cart-btn">
@@ -1410,9 +1662,6 @@
                         <i class="fas fa-dollar-sign"></i>
                         <span>$<span id="cart-total-price">0.00</span></span>
                     </div>
-                </div>
-                <div class="cart-price-mobile" id="cart-price-mobile">
-                    Total: $<span>0.00</span>
                 </div>
             </div>
         </div>
@@ -1442,28 +1691,20 @@
                     </div>
                 </div>
                 
-                <!-- Sección de beneficios -->
-                <div class="cart-modal-benefits">
+                <!-- Sección de oferta (antes beneficios) -->
+                <div class="cart-modal-offer">
                     <h3>
-                        <i class="fas fa-star" style="color: #FFD700;"></i>
-                        Beneficios Incluidos
+                        <i class="fas fa-tag" style="color: #333;"></i>
+                        Oferta
                     </h3>
-                    <div class="benefits-grid">
-                        <div class="benefit-item">
+                    <div class="offer-grid">
+                        <div class="offer-item">
                             <i class="fas fa-shipping-fast"></i>
                             <p>Envío Gratis</p>
                         </div>
-                        <div class="benefit-item">
+                        <div class="offer-item">
                             <i class="fas fa-money-bill-wave"></i>
                             <p>Paga al Recibir</p>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <p>Compra Segura</p>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-headset"></i>
-                            <p>Soporte 24/7</p>
                         </div>
                     </div>
                 </div>
@@ -1481,26 +1722,6 @@
         </div>
     </div>
 
-    <!-- Modal para zoom de imágenes -->
-    <div id="image-zoom-modal" class="image-zoom-modal">
-        <div class="zoom-modal-content">
-            <button class="close-zoom-btn">
-                <i class="fas fa-times"></i>
-            </button>
-            <button class="nav-zoom-btn prev-zoom-btn">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="nav-zoom-btn next-zoom-btn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="zoom-image-container">
-                <img id="zoomed-image" src="" alt="Imagen ampliada">
-                <div class="zoom-color-indicator" id="zoom-color-indicator"></div>
-            </div>
-            <div class="zoom-thumbnails"></div>
-        </div>
-    </div>
-
     <header>
         <div class="container">
             <h1><i class="fas fa-store"></i> Viste Online</h1>
@@ -1508,19 +1729,17 @@
     </header>
 
     <div class="container">
-        <!-- Pestañas -->
-        <div class="tabs-container">
-            <div class="tabs">
-                <button class="tab active" onclick="changeTab(1)">Ropa de Hombre</button>
-            </div>
-
-            <!-- Pestaña 1 -->
-            <div id="tab-1" class="tab-content active">
-                <div class="products-grid" id="products-grid-1"></div>
-                
-                <!-- Paginación -->
-                <div class="pagination" id="pagination"></div>
-            </div>
+        <!-- Subtítulo de categoría -->
+        <h2 class="category-subtitle" id="category-subtitle">Ropa de Hombre</h2>
+        
+        <!-- Productos -->
+        <div class="products-grid" id="products-grid">
+            <!-- Los productos se cargarán aquí -->
+        </div>
+        
+        <!-- Paginación -->
+        <div class="pagination" id="pagination">
+            <!-- Los números de página se generarán aquí -->
         </div>
 
         <!-- Footer -->
@@ -1529,6 +1748,30 @@
                 <p>© 2026 Viste Online</p>
             </div>
         </footer>
+    </div>
+
+    <!-- Modal para zoom de imágenes -->
+    <div id="image-zoom-modal" class="image-zoom-modal">
+        <div class="zoom-modal-content">
+            <button class="close-zoom-btn" id="close-zoom-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="nav-zoom-btn prev-zoom-btn" id="prev-zoom-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-zoom-btn next-zoom-btn" id="next-zoom-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="zoom-image-container">
+                <img id="zoomed-image" src="" alt="Imagen ampliada">
+                <div class="zoom-color-indicator" id="zoom-color-indicator">
+                    <!-- Aquí se mostrará el color del producto -->
+                </div>
+            </div>
+            <div class="zoom-thumbnails" id="zoom-thumbnails">
+                <!-- Miniaturas para navegación en zoom -->
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1549,7 +1792,7 @@
                 hasSizes: true,
                 sizes: ["S", "M", "L"],
                 defaultSize: "M",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 2,
@@ -1566,7 +1809,7 @@
                 hasSizes: true,
                 sizes: ["S", "M", "L"],
                 defaultSize: "M",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 3,
@@ -1583,7 +1826,7 @@
                 hasSizes: true,
                 sizes: ["38", "40", "42", "44"],
                 defaultSize: "40",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 4,
@@ -1600,7 +1843,7 @@
                 hasSizes: true,
                 sizes: ["38", "40", "42", "44"],
                 defaultSize: "40",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 5,
@@ -1616,7 +1859,7 @@
                 hasSizes: true,
                 sizes: ["38", "40", "42", "44"],
                 defaultSize: "40",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 6,
@@ -1632,7 +1875,7 @@
                 hasSizes: true,
                 sizes: ["S", "M", "L"],
                 defaultSize: "M",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 7,
@@ -1649,7 +1892,7 @@
                 hasSizes: true,
                 sizes: ["S", "M", "L", "XL"],
                 defaultSize: "M",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 8,
@@ -1666,7 +1909,7 @@
                 hasSizes: true,
                 sizes: ["S", "M", "L", "XL"],
                 defaultSize: "M",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 9,
@@ -1681,7 +1924,7 @@
                 ],
                 defaultColor: "blanco",
                 hasSizes: false,
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 10,
@@ -1695,7 +1938,7 @@
                 ],
                 defaultColor: "negro",
                 hasSizes: false,
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 11,
@@ -1707,7 +1950,7 @@
                 hasSizes: true,
                 sizes: ["S", "M", "L", "XL"],
                 defaultSize: "M",
-                tab: 1,
+                category: "ropa",
             },
             {
                 id: 12,
@@ -1717,25 +1960,126 @@
                 image: "imagenes/reloj/deportivo.jpg",
                 hasColors: false,
                 hasSizes: false,
-                tab: 1,
+                category: "ropa",
             },
+            {
+                id: 13,
+                name: "Camiseta Básica Negra",
+                description: "Camiseta básica negra, 100% algodón.",
+                price: 12.99,
+                hasColors: true,
+                colors: [
+                    { name: "Negro", value: "#000000", code: "negro", image: "imagenes/001/negro.png" },
+                    { name: "Blanco", value: "#ffffff", code: "blanco", image: "imagenes/001/blanco.png" }
+                ],
+                defaultColor: "negro",
+                hasSizes: true,
+                sizes: ["S", "M", "L", "XL"],
+                defaultSize: "M",
+                category: "ropa",
+            },
+            {
+                id: 14,
+                name: "Pantalón Cargo",
+                description: "Pantalón cargo con múltiples bolsillos.",
+                price: 34.99,
+                hasColors: true,
+                colors: [
+                    { name: "Verde", value: "#2e7d32", code: "verde", image: "imagenes/pantalon/verde.jpg" },
+                    { name: "Negro", value: "#000000", code: "negro", image: "imagenes/pantalon/negro.jpg" }
+                ],
+                defaultColor: "verde",
+                hasSizes: true,
+                sizes: ["M", "L", "XL"],
+                defaultSize: "L",
+                category: "ropa",
+            },
+            {
+                id: 15,
+                name: "Chaqueta Deportiva",
+                description: "Chaqueta deportiva con capucha.",
+                price: 45.99,
+                hasColors: true,
+                colors: [
+                    { name: "Azul", value: "#1565c0", code: "azul", image: "imagenes/chaqueta/azul.jpg" },
+                    { name: "Rojo", value: "#c62828", code: "rojo", image: "imagenes/chaqueta/rojo.jpg" }
+                ],
+                defaultColor: "azul",
+                hasSizes: true,
+                sizes: ["S", "M", "L", "XL"],
+                defaultSize: "M",
+                category: "ropa",
+            },
+            {
+                id: 16,
+                name: "Zapatillas Deportivas",
+                description: "Zapatillas deportivas para entrenamiento.",
+                price: 59.99,
+                hasColors: true,
+                colors: [
+                    { name: "Negro", value: "#000000", code: "negro", image: "imagenes/zapatillas/negro.jpg" },
+                    { name: "Blanco", value: "#ffffff", code: "blanco", image: "imagenes/zapatillas/blanco.jpg" }
+                ],
+                defaultColor: "negro",
+                hasSizes: true,
+                sizes: ["40", "42", "44", "46"],
+                defaultSize: "42",
+                category: "calzado",
+            },
+            {
+                id: 17,
+                name: "Gorra Deportiva",
+                description: "Gorra ajustable con diseño moderno.",
+                price: 19.99,
+                hasColors: true,
+                colors: [
+                    { name: "Negro", value: "#000000", code: "negro", image: "imagenes/gorra/negro.jpg" },
+                    { name: "Azul", value: "#0d47a1", code: "azul", image: "imagenes/gorra/azul.jpg" }
+                ],
+                defaultColor: "negro",
+                hasSizes: false,
+                category: "accesorios",
+            },
+            {
+                id: 18,
+                name: "Cinturón de Cuero",
+                description: "Cinturón de cuero genuino.",
+                price: 29.99,
+                hasColors: true,
+                colors: [
+                    { name: "Cafe", value: "#5d4037", code: "cafe", image: "imagenes/cinturon/cafe.jpg" },
+                    { name: "Negro", value: "#000000", code: "negro", image: "imagenes/cinturon/negro.jpg" }
+                ],
+                defaultColor: "cafe",
+                hasSizes: true,
+                sizes: ["S", "M", "L"],
+                defaultSize: "M",
+                category: "accesorios",
+            }
         ];
 
         // ESTADO DE LA APLICACIÓN
         let cart = [];
         let cartItemId = 1;
         let currentPage = 1;
-        const productsPerPage = 5;
+        const productsPerPage = 10;
+        let currentCategory = "ropa";
         
-        // Estado para el zoom de imágenes
-        let currentZoomData = {
-            productId: null,
-            colorIndex: 0,
-            images: []
+        // Mapeo de categorías a nombres mostrados
+        const categoryNames = {
+            "ropa": "Ropa de Hombre",
+            "calzado": "Calzado",
+            "accesorios": "Accesorios"
         };
 
+        // Estado para zoom
+        let currentZoomProductId = null;
+        let currentZoomColorCode = null;
+        let currentZoomIndex = 0;
+        let zoomImages = [];
+
         // ELEMENTOS DEL DOM
-        const productsGrid1 = document.getElementById("products-grid-1");
+        const productsGrid = document.getElementById("products-grid");
         const paginationContainer = document.getElementById("pagination");
         const cartModal = document.getElementById('cart-modal');
         const floatingCartBtn = document.getElementById('floating-cart-btn');
@@ -1743,23 +2087,56 @@
         const cartModalWhatsappBtn = document.getElementById('cart-modal-whatsapp-btn');
         const cartModalItems = document.getElementById('cart-modal-items');
         const cartModalTotal = document.getElementById('cart-modal-total');
-        
-        // Elementos del modal de zoom
-        const imageZoomModal = document.getElementById("image-zoom-modal");
-        const zoomedImage = document.getElementById("zoomed-image");
-        const closeZoomBtn = document.querySelector('.close-zoom-btn');
-        const prevZoomBtn = document.querySelector('.prev-zoom-btn');
-        const nextZoomBtn = document.querySelector('.next-zoom-btn');
-        const zoomThumbnails = document.querySelector('.zoom-thumbnails');
+        const imageZoomModal = document.getElementById('image-zoom-modal');
+        const zoomedImage = document.getElementById('zoomed-image');
         const zoomColorIndicator = document.getElementById('zoom-color-indicator');
+        const zoomThumbnails = document.getElementById('zoom-thumbnails');
+        const closeZoomBtn = document.getElementById('close-zoom-btn');
+        const prevZoomBtn = document.getElementById('prev-zoom-btn');
+        const nextZoomBtn = document.getElementById('next-zoom-btn');
+        const menuModal = document.getElementById('menu-modal');
+        const floatingMenuBtn = document.getElementById('floating-menu-btn');
+        const closeMenuModal = document.getElementById('close-menu-modal');
+        const categorySubtitle = document.getElementById('category-subtitle');
+        const currentCategoryElement = document.getElementById('current-category');
 
         // FUNCIONES PRINCIPALES
-        function loadProductsForPage(page) {
-            productsGrid1.innerHTML = "";
+        function loadProductsForCategory(category, page) {
+            productsGrid.innerHTML = "";
+            
+            // Filtrar productos por categoría
+            const categoryProducts = products.filter(product => product.category === category);
             
             const startIndex = (page - 1) * productsPerPage;
-            const endIndex = Math.min(startIndex + productsPerPage, products.length);
-            const pageProducts = products.slice(startIndex, endIndex);
+            const endIndex = Math.min(startIndex + productsPerPage, categoryProducts.length);
+            const pageProducts = categoryProducts.slice(startIndex, endIndex);
+            
+            // Actualizar subtítulo
+            categorySubtitle.textContent = categoryNames[category];
+            currentCategoryElement.textContent = categoryNames[category];
+            
+            if (pageProducts.length === 0) {
+                let message = "";
+                switch(category) {
+                    case "calzado":
+                        message = "Próximamente tendremos nuestra colección de calzado";
+                        break;
+                    case "accesorios":
+                        message = "Próximamente tendremos nuestra colección de accesorios";
+                        break;
+                    default:
+                        message = "No hay productos disponibles en esta categoría";
+                }
+                
+                productsGrid.innerHTML = `
+                    <div style="text-align: center; padding: 50px; width: 100%;">
+                        <h3>${categoryNames[category]}</h3>
+                        <p>${message}</p>
+                    </div>
+                `;
+                paginationContainer.innerHTML = '';
+                return;
+            }
             
             pageProducts.forEach((product) => {
                 const productCard = document.createElement("div");
@@ -1842,16 +2219,20 @@
                     </div>
                 `;
 
-                productsGrid1.appendChild(productCard);
+                productsGrid.appendChild(productCard);
             });
             
-            // Configurar el zoom para las imágenes recién creadas
-            setupImageZoom();
+            // Actualizar paginación
+            updatePaginationForCategory(categoryProducts.length);
         }
 
-        function updatePagination() {
-            const totalPages = Math.ceil(products.length / productsPerPage);
+        function updatePaginationForCategory(totalProducts) {
+            const totalPages = Math.ceil(totalProducts / productsPerPage);
             paginationContainer.innerHTML = '';
+            
+            if (totalPages <= 1) {
+                return;
+            }
             
             // Botón anterior
             const prevButton = document.createElement('button');
@@ -1887,13 +2268,31 @@
 
         function changePage(page) {
             currentPage = page;
-            loadProductsForPage(currentPage);
-            updatePagination();
+            loadProductsForCategory(currentCategory, currentPage);
             
             window.scrollTo({
                 top: document.querySelector('.products-grid').offsetTop - 100,
                 behavior: 'smooth'
             });
+        }
+
+        function changeCategory(category) {
+            currentCategory = category;
+            currentPage = 1;
+            
+            // Actualizar clases activas en el menú
+            document.querySelectorAll('.menu-category').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-category') === category) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Cargar productos de la categoría seleccionada
+            loadProductsForCategory(currentCategory, currentPage);
+            
+            // Cerrar modal del menú
+            closeMenu();
         }
 
         function getProductImage(product, colorCode = null) {
@@ -1948,6 +2347,9 @@
             const selectedOption = document.querySelector(`#color-options-${productId} .color-option[data-color="${colorCode}"]`);
             if (selectedOption) {
                 selectedOption.classList.add("selected");
+                
+                // Cambiar la imagen principal también
+                changeProductImage(productId, colorCode);
             }
         }
 
@@ -2046,7 +2448,6 @@
             const cartCount = document.getElementById('cart-count');
             const cartItemCount = document.getElementById('cart-item-count');
             const cartTotalPrice = document.getElementById('cart-total-price');
-            const cartPriceMobile = document.getElementById('cart-price-mobile');
             
             let totalItems = 0;
             let totalPrice = 0;
@@ -2059,19 +2460,6 @@
             cartCount.textContent = totalItems;
             cartItemCount.textContent = `${totalItems} producto${totalItems !== 1 ? 's' : ''}`;
             cartTotalPrice.textContent = totalPrice.toFixed(2);
-            
-            // Actualizar precio en móvil
-            if (cartPriceMobile) {
-                cartPriceMobile.querySelector('span').textContent = totalPrice.toFixed(2);
-            }
-            
-            // Mostrar siempre el contenido en móvil
-            if (window.innerWidth <= 768) {
-                const cartContent = document.querySelector('.cart-content');
-                if (cartContent) {
-                    cartContent.style.display = 'flex';
-                }
-            }
         }
 
         function updateCartModal() {
@@ -2112,24 +2500,21 @@
                         <img src="${item.image}" alt="${item.name}">
                     </div>
                     <div class="cart-modal-item-info">
-                        <div class="cart-modal-item-name">
-                            ${item.name}
-                            <span class="cart-modal-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
-                        </div>
+                        <div class="cart-modal-item-name">${item.name}</div>
                         <div class="cart-modal-item-details">
                             ${detailsHTML}
                         </div>
-                        <div class="cart-modal-item-actions">
-                            <div class="cart-modal-item-quantity">
-                                <button class="modal-quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity - 1})">-</button>
-                                <span class="modal-item-quantity">${item.quantity}</span>
-                                <button class="modal-quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity + 1})">+</button>
-                            </div>
-                            <button class="modal-remove-item-btn" onclick="removeFromCart(${item.id})">
-                                <i class="fas fa-times"></i>
-                                <span>Eliminar</span>
-                            </button>
+                    </div>
+                    <div class="cart-modal-item-actions">
+                        <div class="cart-modal-item-quantity">
+                            <button class="modal-quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                            <span class="modal-item-quantity">${item.quantity}</span>
+                            <button class="modal-quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity + 1})">+</button>
                         </div>
+                        <div class="cart-modal-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <button class="modal-remove-item-btn" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                 `;
                 cartModalItems.appendChild(itemElement);
@@ -2231,193 +2616,136 @@
             }, 3000);
         }
 
-        function changeTab(tabNumber) {
-            const tabs = document.querySelectorAll(".tab");
-            tabs.forEach((tab) => tab.classList.remove("active"));
-
-            const activeTab = document.querySelector(`.tab:nth-child(${tabNumber})`);
-            if (activeTab) activeTab.classList.add("active");
-
-            const tabContents = document.querySelectorAll(".tab-content");
-            tabContents.forEach((content) => content.classList.remove("active"));
-
-            const activeContent = document.getElementById(`tab-${tabNumber}`);
-            if (activeContent) activeContent.classList.add("active");
-        }
-
-        // FUNCIONES PARA EL ZOOM DE IMÁGENES
-        function setupImageZoom() {
-            // Configurar evento de clic para las imágenes principales
-            document.querySelectorAll('.main-image-container').forEach(container => {
-                container.addEventListener('click', function(e) {
-                    const productId = this.getAttribute('data-product-id');
-                    openImageZoom(parseInt(productId));
-                });
-            });
-
-            // Configurar botones del modal de zoom
-            closeZoomBtn.addEventListener('click', closeImageZoom);
-            prevZoomBtn.addEventListener('click', showPrevImage);
-            nextZoomBtn.addEventListener('click', showNextImage);
-            
-            // Cerrar con tecla ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && imageZoomModal.classList.contains('active')) {
-                    closeImageZoom();
-                }
-                
-                if (imageZoomModal.classList.contains('active')) {
-                    if (e.key === 'ArrowLeft') {
-                        showPrevImage();
-                    } else if (e.key === 'ArrowRight') {
-                        showNextImage();
-                    }
-                }
-            });
-            
-            // Cerrar al hacer clic fuera
-            imageZoomModal.addEventListener('click', function(e) {
-                if (e.target === imageZoomModal) {
-                    closeImageZoom();
-                }
-            });
-        }
-
-        function openImageZoom(productId, currentImageSrc = null) {
-            const product = products.find(p => p.id === productId);
+        function openImageZoom(productId) {
+            const product = products.find((p) => p.id === productId);
             if (!product) return;
             
-            let images = [];
+            currentZoomProductId = productId;
+            const selectedColor = getSelectedColor(productId);
+            currentZoomColorCode = selectedColor ? selectedColor.code : product.defaultColor;
             
+            // Preparar imágenes para navegación
+            zoomImages = [];
             if (product.hasColors && product.colors) {
-                images = product.colors.map(color => ({
-                    src: color.image,
-                    name: color.name,
-                    colorCode: color.code,
-                    colorValue: color.value
-                }));
+                product.colors.forEach(color => {
+                    zoomImages.push({
+                        image: color.image,
+                        color: color,
+                        code: color.code
+                    });
+                });
             } else if (product.image) {
-                images = [{
-                    src: product.image,
-                    name: product.name,
-                    colorCode: null,
-                    colorValue: null
-                }];
-            } else {
-                images = [{
-                    src: "imagenes/default.jpg",
-                    name: product.name,
-                    colorCode: null,
-                    colorValue: null
-                }];
+                zoomImages.push({
+                    image: product.image,
+                    color: null,
+                    code: null
+                });
             }
             
-            let currentIndex = 0;
-            if (currentImageSrc) {
-                const index = images.findIndex(img => img.src === currentImageSrc);
-                if (index !== -1) {
-                    currentIndex = index;
-                }
-            }
+            // Encontrar índice actual
+            currentZoomIndex = zoomImages.findIndex(img => img.code === currentZoomColorCode);
+            if (currentZoomIndex === -1) currentZoomIndex = 0;
             
-            currentZoomData = {
-                productId: product.id,
-                colorIndex: currentIndex,
-                images: images,
-                productName: product.name
-            };
+            // Mostrar imagen actual
+            showZoomImage(currentZoomIndex);
             
-            showImageInZoom(currentIndex);
-            updateZoomThumbnails();
+            // Mostrar modal
             imageZoomModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeImageZoom() {
-            imageZoomModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function showImageInZoom(index) {
-            if (index < 0 || index >= currentZoomData.images.length) return;
+        function showZoomImage(index) {
+            if (zoomImages.length === 0) return;
             
-            currentZoomData.colorIndex = index;
-            const imageData = currentZoomData.images[index];
-            
-            zoomedImage.src = imageData.src;
-            zoomedImage.alt = imageData.name;
+            currentZoomIndex = index;
+            const zoomImage = zoomImages[currentZoomIndex];
+            zoomedImage.src = zoomImage.image;
             
             // Actualizar indicador de color
-            if (imageData.colorCode && imageData.colorValue) {
+            if (zoomImage.color) {
                 zoomColorIndicator.innerHTML = `
-                    <div class="color-indicator-swatch" style="background-color: ${imageData.colorValue}; ${imageData.colorValue === '#ffffff' ? 'border: 1px solid #ddd' : ''}"></div>
-                    <div class="color-indicator-text">${imageData.name} - ${currentZoomData.productName}</div>
-                `;
-                zoomColorIndicator.style.display = 'flex';
-            } else if (currentZoomData.productName) {
-                zoomColorIndicator.innerHTML = `
-                    <div class="color-indicator-text">${currentZoomData.productName}</div>
+                    <div class="color-indicator-swatch" style="background-color: ${zoomImage.color.value}; ${zoomImage.color.value === "#ffffff" ? "border: 1px solid #ddd" : ""}"></div>
+                    <span class="color-indicator-text">${zoomImage.color.name}</span>
                 `;
                 zoomColorIndicator.style.display = 'flex';
             } else {
                 zoomColorIndicator.style.display = 'none';
             }
             
-            updateActiveThumbnail();
-        }
-
-        function showPrevImage() {
-            const newIndex = currentZoomData.colorIndex - 1;
-            if (newIndex >= 0) {
-                showImageInZoom(newIndex);
-            } else {
-                showImageInZoom(currentZoomData.images.length - 1);
-            }
-        }
-
-        function showNextImage() {
-            const newIndex = currentZoomData.colorIndex + 1;
-            if (newIndex < currentZoomData.images.length) {
-                showImageInZoom(newIndex);
-            } else {
-                showImageInZoom(0);
-            }
-        }
-
-        function updateZoomThumbnails() {
+            // Actualizar miniaturas
             zoomThumbnails.innerHTML = '';
-            
-            currentZoomData.images.forEach((image, index) => {
-                const thumbnailContainer = document.createElement('div');
-                thumbnailContainer.className = 'zoom-thumbnail-container';
-                thumbnailContainer.style.position = 'relative';
-                
+            zoomImages.forEach((img, idx) => {
                 const thumbnail = document.createElement('img');
-                thumbnail.className = `zoom-thumbnail ${index === currentZoomData.colorIndex ? 'active' : ''}`;
-                thumbnail.src = image.src;
-                thumbnail.alt = image.name;
-                thumbnail.title = image.name;
-                
-                thumbnail.addEventListener('click', () => {
-                    showImageInZoom(index);
-                });
-                
-                thumbnailContainer.appendChild(thumbnail);
-                zoomThumbnails.appendChild(thumbnailContainer);
+                thumbnail.src = img.image;
+                thumbnail.alt = img.color ? img.color.name : 'Producto';
+                thumbnail.className = `zoom-thumbnail ${idx === currentZoomIndex ? 'active' : ''}`;
+                thumbnail.onclick = () => showZoomImage(idx);
+                zoomThumbnails.appendChild(thumbnail);
             });
+            
+            // Actualizar también en la vista principal si hay color
+            if (zoomImage.code && currentZoomProductId) {
+                changeProductImage(currentZoomProductId, zoomImage.code);
+            }
         }
 
-        function updateActiveThumbnail() {
-            document.querySelectorAll('.zoom-thumbnail').forEach((thumb, index) => {
-                thumb.classList.toggle('active', index === currentZoomData.colorIndex);
-            });
+        function nextZoomImage() {
+            if (zoomImages.length === 0) return;
+            let nextIndex = currentZoomIndex + 1;
+            if (nextIndex >= zoomImages.length) {
+                nextIndex = 0;
+            }
+            showZoomImage(nextIndex);
+        }
+
+        function prevZoomImage() {
+            if (zoomImages.length === 0) return;
+            let prevIndex = currentZoomIndex - 1;
+            if (prevIndex < 0) {
+                prevIndex = zoomImages.length - 1;
+            }
+            showZoomImage(prevIndex);
+        }
+
+        function closeImageZoom() {
+            imageZoomModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentZoomProductId = null;
+            currentZoomColorCode = null;
+            currentZoomIndex = 0;
+            zoomImages = [];
+        }
+
+        function openMenu() {
+            menuModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            menuModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         // INICIALIZACIÓN
         document.addEventListener("DOMContentLoaded", function () {
-            // Cargar productos
-            loadProductsForPage(1);
-            updatePagination();
+            // Cargar productos iniciales (ropa de hombre)
+            loadProductsForCategory(currentCategory, currentPage);
+            
+            // Configurar modal del menú
+            floatingMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openMenu();
+            });
+            
+            closeMenuModal.addEventListener('click', function() {
+                closeMenu();
+            });
+            
+            menuModal.addEventListener('click', function(e) {
+                if (e.target === menuModal) {
+                    closeMenu();
+                }
+            });
             
             // Configurar modal del carrito
             floatingCartBtn.addEventListener('click', function(e) {
@@ -2441,14 +2769,41 @@
             
             cartModalWhatsappBtn.addEventListener('click', sendOrder);
             
-            // Configurar zoom de imágenes
-            setupImageZoom();
+            // Configurar modal de zoom
+            closeZoomBtn.addEventListener('click', closeImageZoom);
+            prevZoomBtn.addEventListener('click', prevZoomImage);
+            nextZoomBtn.addEventListener('click', nextZoomImage);
+            
+            imageZoomModal.addEventListener('click', function(e) {
+                if (e.target === imageZoomModal) {
+                    closeImageZoom();
+                }
+            });
+            
+            // Cerrar modales con ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (imageZoomModal.classList.contains('active')) {
+                        closeImageZoom();
+                    } else if (cartModal.classList.contains('active')) {
+                        cartModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    } else if (menuModal.classList.contains('active')) {
+                        closeMenu();
+                    }
+                }
+                
+                // Navegación en zoom con flechas
+                if (e.key === 'ArrowLeft' && imageZoomModal.classList.contains('active')) {
+                    prevZoomImage();
+                }
+                if (e.key === 'ArrowRight' && imageZoomModal.classList.contains('active')) {
+                    nextZoomImage();
+                }
+            });
             
             // Inicializar carrito
             updateCartDisplay();
-            
-            // Asegurar que el precio se muestre en móvil
-            updateFloatingCart();
         });
     </script>
 </body>
