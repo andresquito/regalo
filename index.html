@@ -288,6 +288,59 @@
             overflow-y: auto;
         }
 
+        /* Subtítulo "Productos seleccionados" */
+        .cart-subtitle {
+            padding: 15px 20px 10px 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #4b6cb7;
+            margin-bottom: 15px;
+        }
+
+        .cart-subtitle h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-subtitle h3 i {
+            color: #4b6cb7;
+        }
+
+        /* Total de la compra al final de los productos */
+        .cart-total-summary {
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-top: 2px solid #4b6cb7;
+            margin-top: 20px;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 10px;
+        }
+
+        .total-label {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .total-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #182848;
+        }
+
         .modal-footer {
             padding: 20px;
             background: #f8f9fa;
@@ -297,26 +350,37 @@
             align-items: center;
         }
 
-        /* Botón de enviar pedido SIN el total al lado */
+        /* Botón de enviar pedido CON ICONO GRANDE */
         .modal-footer .send-order-btn {
             background: #25d366;
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 18px 35px;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .modal-footer .send-order-btn i {
+            font-size: 1.8rem;
         }
 
         .modal-footer .send-order-btn:hover {
             background: #1da851;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .modal-footer .send-order-btn:active {
+            transform: translateY(-1px);
         }
 
         .modal-footer .send-order-btn:disabled {
@@ -684,9 +748,53 @@
             box-shadow: none;
         }
 
+        /* Sección de envío gratis y pago al recibir EN DOS CUADROS */
+        .shipping-payment-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .shipping-box, .payment-box {
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .shipping-box {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+        }
+
+        .payment-box {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            color: white;
+        }
+
+        .shipping-box:hover, .payment-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .shipping-box h3, .payment-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
         footer {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 30px;
             padding: 20px;
             color: #666;
             border-top: 1px solid #eee;
@@ -938,6 +1046,25 @@
                 width: 18px;
                 height: 18px;
             }
+
+            .shipping-payment-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .shipping-box, .payment-box {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .modal-footer .send-order-btn {
+                padding: 16px 25px;
+                font-size: 1.2rem;
+            }
+
+            .modal-footer .send-order-btn i {
+                font-size: 1.6rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1026,6 +1153,26 @@
                 width: 16px;
                 height: 16px;
             }
+
+            .shipping-box h3, .payment-box h3 {
+                font-size: 1.5rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .total-amount {
+                font-size: 1.5rem;
+            }
+
+            .modal-footer .send-order-btn {
+                padding: 14px 20px;
+                font-size: 1.1rem;
+                gap: 10px;
+            }
+
+            .modal-footer .send-order-btn i {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
@@ -1050,6 +1197,12 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
+            
+            <!-- Subtítulo "Productos seleccionados" -->
+            <div class="cart-subtitle">
+                <h3><i class="fas fa-check-circle"></i> Productos seleccionados</h3>
+            </div>
+            
             <div class="modal-body" id="modalCartItems">
                 <!-- Los productos del carrito aparecerán aquí -->
                 <div style="text-align: center; padding: 40px; color: #888;">
@@ -1058,8 +1211,17 @@
                     <p style="font-size: 0.9rem; margin-top: 10px;">Agrega productos para verlos aquí</p>
                 </div>
             </div>
+            
+            <!-- Total de la compra al final de los productos -->
+            <div class="cart-total-summary" id="cartTotalSummary" style="display: none;">
+                <div class="total-row">
+                    <div class="total-label">Total de la compra:</div>
+                    <div class="total-amount" id="cartTotalAmount">$0.00</div>
+                </div>
+            </div>
+            
             <div class="modal-footer">
-                <!-- SOLO EL BOTÓN DE WHATSAPP, SIN TOTAL AL LADO -->
+                <!-- BOTÓN DE WHATSAPP CON ICONO GRANDE -->
                 <button class="send-order-btn" id="modalSendOrderBtn" disabled>
                     <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
                 </button>
@@ -1093,6 +1255,22 @@
                 <div class="products-grid" id="products-grid-2">
                     <!-- Los productos 10-18 se cargan aquí -->
                 </div>
+            </div>
+        </div>
+
+        <!-- Sección de envío gratis y pago al recibir EN DOS CUADROS -->
+        <div class="shipping-payment-container">
+            <div class="shipping-box">
+                <h3>
+                    <i class="fas fa-shipping-fast"></i>
+                    ENVÍO GRATIS
+                </h3>
+            </div>
+            <div class="payment-box">
+                <h3>
+                    <i class="fas fa-money-bill-wave"></i>
+                    PAGAS AL RECIBIR
+                </h3>
             </div>
         </div>
 
@@ -1604,6 +1782,8 @@
         const closeModalBtn = document.getElementById("closeModalBtn");
         const floatingCart = document.getElementById("floatingCart");
         const cartRectangle = document.querySelector('.cart-rectangle');
+        const cartTotalSummary = document.getElementById('cartTotalSummary');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
 
         // Elementos del modal de zoom
         const imageZoomModal = document.getElementById("image-zoom-modal");
@@ -1707,6 +1887,7 @@
                     </div>
                 `;
                 modalSendOrderBtn.disabled = true;
+                cartTotalSummary.style.display = 'none';
                 return;
             }
             
@@ -1771,6 +1952,10 @@
                 
                 modalCartItems.appendChild(itemElement);
             });
+            
+            // Mostrar el total de la compra al final
+            cartTotalAmount.textContent = `$${total.toFixed(2)}`;
+            cartTotalSummary.style.display = 'block';
             
             // Agregar total en un mensaje oculto para el pedido de WhatsApp
             modalSendOrderBtn.dataset.total = total.toFixed(2);
