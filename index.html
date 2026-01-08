@@ -233,6 +233,8 @@
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             animation: modalSlideIn 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         @keyframes modalSlideIn {
@@ -254,6 +256,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .modal-header h2 {
@@ -283,23 +286,27 @@
         }
 
         .modal-body {
-            padding: 20px;
-            max-height: 60vh;
+            padding: 0 20px;
             overflow-y: auto;
+            flex: 1;
+            min-height: 0;
         }
 
-        /* Subtítulo "Productos seleccionados" */
+        /* Subtítulo "Productos seleccionados" MÁS PEQUEÑO */
         .cart-subtitle {
-            padding: 15px 20px 10px 20px;
-            background: #f8f9fa;
+            padding: 10px 0;
             border-bottom: 2px solid #4b6cb7;
             margin-bottom: 15px;
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .cart-subtitle h3 {
             margin: 0;
             color: #333;
-            font-size: 1.2rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -307,36 +314,32 @@
 
         .cart-subtitle h3 i {
             color: #4b6cb7;
+            font-size: 0.9rem;
         }
 
-        /* Total de la compra al final de los productos */
-        .cart-total-summary {
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-top: 2px solid #4b6cb7;
-            margin-top: 20px;
-            border-radius: 0 0 15px 15px;
+        /* Total de la compra SIMPLE AL FINAL */
+        .cart-total-simple {
+            padding: 15px 0;
+            text-align: right;
+            border-top: 1px solid #eee;
+            margin-top: 10px;
+            flex-shrink: 0;
         }
 
-        .total-row {
+        .total-simple-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            margin-bottom: 10px;
         }
 
-        .total-label {
-            font-size: 1.2rem;
+        .total-simple-label {
+            font-size: 1.1rem;
             color: #333;
             font-weight: 600;
         }
 
-        .total-amount {
-            font-size: 1.8rem;
+        .total-simple-amount {
+            font-size: 1.5rem;
             font-weight: bold;
             color: #182848;
         }
@@ -348,9 +351,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
         }
 
-        /* Botón de enviar pedido CON ICONO GRANDE */
+        /* Botón de enviar pedido CON ICONO GRANDE - FIJO VISIBLE */
         .modal-footer .send-order-btn {
             background: #25d366;
             color: white;
@@ -367,6 +371,8 @@
             width: 100%;
             justify-content: center;
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            position: relative;
+            z-index: 20;
         }
 
         .modal-footer .send-order-btn i {
@@ -748,7 +754,7 @@
             box-shadow: none;
         }
 
-        /* Sección de envío gratis y pago al recibir EN DOS CUADROS */
+        /* Sección de envío gratis y pago al recibir EN DOS CUADROS EN LÍNEA */
         .shipping-payment-container {
             display: flex;
             justify-content: center;
@@ -759,8 +765,8 @@
 
         .shipping-box, .payment-box {
             flex: 1;
-            min-width: 250px;
-            max-width: 400px;
+            min-width: 300px;
+            max-width: 500px;
             padding: 25px;
             border-radius: 15px;
             text-align: center;
@@ -785,7 +791,7 @@
 
         .shipping-box h3, .payment-box h3 {
             font-size: 1.8rem;
-            margin-bottom: 10px;
+            margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1048,13 +1054,18 @@
             }
 
             .shipping-payment-container {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                align-items: stretch;
             }
 
             .shipping-box, .payment-box {
-                width: 100%;
-                max-width: 100%;
+                min-width: 250px;
+                padding: 20px;
+            }
+
+            .shipping-box h3, .payment-box h3 {
+                font-size: 1.5rem;
+                gap: 10px;
             }
 
             .modal-footer .send-order-btn {
@@ -1064,6 +1075,18 @@
 
             .modal-footer .send-order-btn i {
                 font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .shipping-payment-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .shipping-box, .payment-box {
+                width: 100%;
+                max-width: 100%;
             }
         }
 
@@ -1155,13 +1178,11 @@
             }
 
             .shipping-box h3, .payment-box h3 {
-                font-size: 1.5rem;
-                flex-direction: column;
-                gap: 10px;
+                font-size: 1.3rem;
             }
 
-            .total-amount {
-                font-size: 1.5rem;
+            .total-simple-amount {
+                font-size: 1.3rem;
             }
 
             .modal-footer .send-order-btn {
@@ -1198,7 +1219,7 @@
                 </button>
             </div>
             
-            <!-- Subtítulo "Productos seleccionados" -->
+            <!-- Subtítulo "Productos seleccionados" MÁS PEQUEÑO -->
             <div class="cart-subtitle">
                 <h3><i class="fas fa-check-circle"></i> Productos seleccionados</h3>
             </div>
@@ -1212,16 +1233,16 @@
                 </div>
             </div>
             
-            <!-- Total de la compra al final de los productos -->
-            <div class="cart-total-summary" id="cartTotalSummary" style="display: none;">
-                <div class="total-row">
-                    <div class="total-label">Total de la compra:</div>
-                    <div class="total-amount" id="cartTotalAmount">$0.00</div>
+            <!-- Total de la compra SIMPLE AL FINAL -->
+            <div class="cart-total-simple" id="cartTotalSimple" style="display: none; padding: 0 20px;">
+                <div class="total-simple-row">
+                    <div class="total-simple-label">Total de la compra:</div>
+                    <div class="total-simple-amount" id="cartTotalAmount">$0.00</div>
                 </div>
             </div>
             
             <div class="modal-footer">
-                <!-- BOTÓN DE WHATSAPP CON ICONO GRANDE -->
+                <!-- BOTÓN DE WHATSAPP CON ICONO GRANDE - SIEMPRE VISIBLE -->
                 <button class="send-order-btn" id="modalSendOrderBtn" disabled>
                     <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
                 </button>
@@ -1258,7 +1279,7 @@
             </div>
         </div>
 
-        <!-- Sección de envío gratis y pago al recibir EN DOS CUADROS -->
+        <!-- Sección de envío gratis y pago al recibir EN DOS CUADROS EN LÍNEA -->
         <div class="shipping-payment-container">
             <div class="shipping-box">
                 <h3>
@@ -1782,7 +1803,7 @@
         const closeModalBtn = document.getElementById("closeModalBtn");
         const floatingCart = document.getElementById("floatingCart");
         const cartRectangle = document.querySelector('.cart-rectangle');
-        const cartTotalSummary = document.getElementById('cartTotalSummary');
+        const cartTotalSimple = document.getElementById('cartTotalSimple');
         const cartTotalAmount = document.getElementById('cartTotalAmount');
 
         // Elementos del modal de zoom
@@ -1887,7 +1908,7 @@
                     </div>
                 `;
                 modalSendOrderBtn.disabled = true;
-                cartTotalSummary.style.display = 'none';
+                cartTotalSimple.style.display = 'none';
                 return;
             }
             
@@ -1902,49 +1923,49 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    padding: 15px;
+                    padding: 12px 15px;
                     border-bottom: 1px solid #eee;
                     background: #f8f9fa;
                     border-radius: 8px;
-                    margin-bottom: 10px;
+                    margin-bottom: 8px;
                     flex-wrap: wrap;
-                    gap: 10px;
+                    gap: 8px;
                 `;
                 
                 let detailsHTML = '';
                 if (item.size) {
-                    detailsHTML += `<span style="margin-right: 15px; font-size: 0.9rem;">Talla: <strong>${item.size}</strong></span>`;
+                    detailsHTML += `<span style="margin-right: 12px; font-size: 0.85rem;">Talla: <strong>${item.size}</strong></span>`;
                 }
                 if (item.color) {
-                    detailsHTML += `<span class="item-color" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.9rem;">
+                    detailsHTML += `<span class="item-color" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.85rem;">
                         <span>Color:</span>
-                        <span class="item-color-swatch" style="width: 16px; height: 16px; border-radius: 50%; display: inline-block; background-color: ${item.color.value}; ${item.color.value === '#ffffff' ? 'border: 1px solid #ddd' : ''}"></span>
+                        <span class="item-color-swatch" style="width: 14px; height: 14px; border-radius: 50%; display: inline-block; background-color: ${item.color.value}; ${item.color.value === '#ffffff' ? 'border: 1px solid #ddd' : ''}"></span>
                         <span><strong>${item.color.name}</strong></span>
                     </span>`;
                 }
                 
                 itemElement.innerHTML = `
-                    <div style="flex: 1; display: flex; align-items: center; gap: 15px; min-width: 250px;">
-                        <div style="width: 70px; height: 70px; border-radius: 8px; overflow: hidden; flex-shrink: 0; border: 1px solid #eee; background: white; display: flex; align-items: center; justify-content: center;">
+                    <div style="flex: 1; display: flex; align-items: center; gap: 12px; min-width: 200px;">
+                        <div style="width: 60px; height: 60px; border-radius: 6px; overflow: hidden; flex-shrink: 0; border: 1px solid #eee; background: white; display: flex; align-items: center; justify-content: center;">
                             <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="flex: 1;">
-                            <div style="font-weight: 600; margin-bottom: 8px; color: #333; font-size: 1.1rem;">${item.name}</div>
-                            <div style="font-size: 0.9rem; color: #666; display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 5px;">
+                            <div style="font-weight: 600; margin-bottom: 5px; color: #333; font-size: 1rem;">${item.name}</div>
+                            <div style="font-size: 0.85rem; color: #666; display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 3px;">
                                 ${detailsHTML}
                             </div>
-                            <div style="font-weight: 600; color: #4b6cb7; font-size: 1.1rem; margin-top: 5px;">
+                            <div style="font-weight: 600; color: #4b6cb7; font-size: 1rem; margin-top: 3px;">
                                 $${(item.price * item.quantity).toFixed(2)}
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 15px; flex-shrink: 0;">
-                        <div style="display: flex; align-items: center; gap: 10px; background: white; padding: 5px; border-radius: 6px; border: 1px solid #ddd; margin-right: 10px;">
-                            <button class="quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity - 1})" style="width: 32px; height: 32px; border-radius: 6px; background: #f0f0f0; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; color: #555; font-size: 1.1rem; transition: all 0.2s;">-</button>
-                            <span style="font-weight: 600; min-width: 30px; text-align: center; font-size: 1.1rem;">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity + 1})" style="width: 32px; height: 32px; border-radius: 6px; background: #f0f0f0; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; color: #555; font-size: 1.1rem; transition: all 0.2s;">+</button>
+                    <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+                        <div style="display: flex; align-items: center; gap: 8px; background: white; padding: 4px; border-radius: 6px; border: 1px solid #ddd; margin-right: 8px;">
+                            <button class="quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity - 1})" style="width: 28px; height: 28px; border-radius: 6px; background: #f0f0f0; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; color: #555; font-size: 1rem; transition: all 0.2s;">-</button>
+                            <span style="font-weight: 600; min-width: 25px; text-align: center; font-size: 1rem;">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateCartItemQuantity(${item.id}, ${item.quantity + 1})" style="width: 28px; height: 28px; border-radius: 6px; background: #f0f0f0; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; color: #555; font-size: 1rem; transition: all 0.2s;">+</button>
                         </div>
-                        <button onclick="removeFromCart(${item.id})" style="background: transparent; border: none; color: #dc3545; cursor: pointer; font-size: 1.3rem; padding: 8px; transition: all 0.2s; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <button onclick="removeFromCart(${item.id})" style="background: transparent; border: none; color: #dc3545; cursor: pointer; font-size: 1.1rem; padding: 6px; transition: all 0.2s; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -1953,13 +1974,16 @@
                 modalCartItems.appendChild(itemElement);
             });
             
-            // Mostrar el total de la compra al final
+            // Mostrar el total de la compra simple al final
             cartTotalAmount.textContent = `$${total.toFixed(2)}`;
-            cartTotalSummary.style.display = 'block';
+            cartTotalSimple.style.display = 'block';
             
             // Agregar total en un mensaje oculto para el pedido de WhatsApp
             modalSendOrderBtn.dataset.total = total.toFixed(2);
             modalSendOrderBtn.disabled = false;
+            
+            // Asegurar que el botón siempre sea visible
+            modalSendOrderBtn.style.display = 'flex';
         }
 
         // Función para manejar el zoom de imágenes
