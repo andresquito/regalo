@@ -43,7 +43,7 @@
             gap: 10px;
         }
 
-        /* CARRITO FLOTANTE - SOLO EL ICONO */
+        /* CARRITO FLOTANTE - MEJORADO */
         .floating-cart {
             position: fixed;
             top: 120px;
@@ -63,11 +63,11 @@
             }
         }
 
-        /* Rectángulo compacto CON FONDO AZUL PARA CARRITO - SOLO ICONO */
+        /* MEJOR CARRITO DE COMPRA - CON ÍCONO MÁS VISIBLE */
         .cart-rectangle {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
+            width: 75px;
+            height: 75px;
+            border-radius: 18px;
             position: relative;
             overflow: hidden;
             background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
@@ -109,7 +109,7 @@
             bottom: -4px;
             background: linear-gradient(45deg, 
                 #4b6cb7, #3a56a0, #182848, #2a3f7a, #4b6cb7);
-            border-radius: 50%;
+            border-radius: 22px;
             z-index: -1;
             animation: borderGlow 3s linear infinite;
             background-size: 400% 400%;
@@ -131,9 +131,9 @@
             }
         }
 
-        /* Icono del carrito centrado */
+        /* MEJOR ÍCONO DEL CARRITO - MÁS VISIBLE */
         .cart-icon {
-            font-size: 2rem;
+            font-size: 2.3rem;
             color: white;
             animation: cartPulse 2s infinite;
             position: relative;
@@ -149,7 +149,7 @@
             }
         }
 
-        /* Contador de productos */
+        /* CONTADOR DE PRODUCTOS MEJORADO - NÚMEROS COMPLETOS VISIBLES */
         .cart-count {
             position: absolute;
             top: -5px;
@@ -157,16 +157,21 @@
             background: #ff4757;
             color: white;
             font-weight: bold;
-            font-size: 0.8rem;
-            width: 24px;
-            height: 24px;
+            font-size: 0.85rem;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             animation: countBounce 0.5s ease-out;
-            border: 2px solid white;
+            border: 3px solid white;
             z-index: 3;
+            box-shadow: 0 3px 8px rgba(255, 71, 87, 0.4);
+            min-width: 28px;
+            padding: 0 2px;
+            overflow: visible;
+            white-space: nowrap;
         }
 
         @keyframes countBounce {
@@ -981,12 +986,18 @@
             }
 
             .cart-rectangle {
-                width: 65px;
-                height: 65px;
+                width: 70px;
+                height: 70px;
             }
 
             .cart-icon {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+            
+            .cart-count {
+                width: 26px;
+                height: 26px;
+                font-size: 0.8rem;
             }
         }
 
@@ -1028,18 +1039,20 @@
             }
 
             .cart-rectangle {
-                width: 60px;
-                height: 60px;
+                width: 65px;
+                height: 65px;
+                border-radius: 16px;
             }
 
             .cart-icon {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
 
             .cart-count {
-                width: 22px;
-                height: 22px;
+                width: 24px;
+                height: 24px;
                 font-size: 0.75rem;
+                border: 2px solid white;
             }
 
             .zoom-color-indicator {
@@ -1053,19 +1066,31 @@
                 height: 18px;
             }
 
+            /* EN MÓVIL - DOS CUADROS EN LA MISMA LÍNEA AL MISMO NIVEL */
             .shipping-payment-container {
                 flex-direction: row;
                 align-items: stretch;
+                gap: 15px;
             }
 
             .shipping-box, .payment-box {
-                min-width: 250px;
+                flex: 1;
+                min-width: calc(50% - 15px);
+                max-width: calc(50% - 15px);
                 padding: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: auto;
+                min-height: 100px;
             }
 
             .shipping-box h3, .payment-box h3 {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
                 gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
             }
 
             .modal-footer .send-order-btn {
@@ -1079,14 +1104,28 @@
         }
 
         @media (max-width: 640px) {
+            /* EN MÓVIL PEQUEÑO - DOS CUADROS EN LA MISMA LÍNEA */
             .shipping-payment-container {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                align-items: stretch;
+                gap: 12px;
             }
             
             .shipping-box, .payment-box {
-                width: 100%;
-                max-width: 100%;
+                flex: 1;
+                min-width: calc(50% - 12px);
+                max-width: calc(50% - 12px);
+                padding: 15px;
+                min-height: 90px;
+            }
+            
+            .shipping-box h3, .payment-box h3 {
+                font-size: 1.1rem;
+                gap: 8px;
+            }
+            
+            .shipping-box h3 i, .payment-box h3 i {
+                font-size: 1.2rem;
             }
         }
 
@@ -1146,20 +1185,23 @@
             }
 
             .cart-rectangle {
-                width: 55px;
-                height: 55px;
+                width: 60px;
+                height: 60px;
+                border-radius: 14px;
             }
 
             .cart-icon {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
 
             .cart-count {
-                width: 20px;
-                height: 20px;
+                width: 22px;
+                height: 22px;
                 font-size: 0.7rem;
                 top: -3px;
                 right: -3px;
+                border: 2px solid white;
+                min-width: 22px;
             }
 
             .modal-content {
@@ -1177,8 +1219,27 @@
                 height: 16px;
             }
 
+            /* EN MÓVIL MUY PEQUEÑO - DOS CUADROS EN LÍNEA */
+            .shipping-payment-container {
+                flex-direction: row;
+                gap: 10px;
+            }
+            
+            .shipping-box, .payment-box {
+                min-width: calc(50% - 10px);
+                max-width: calc(50% - 10px);
+                padding: 12px;
+                min-height: 85px;
+            }
+            
             .shipping-box h3, .payment-box h3 {
-                font-size: 1.3rem;
+                font-size: 1rem;
+                gap: 6px;
+                flex-direction: column;
+            }
+            
+            .shipping-box h3 i, .payment-box h3 i {
+                font-size: 1.1rem;
             }
 
             .total-simple-amount {
@@ -1195,10 +1256,46 @@
                 font-size: 1.4rem;
             }
         }
+
+        @media (max-width: 380px) {
+            /* PARA DISPOSITIVOS MUY PEQUEÑOS */
+            .shipping-payment-container {
+                gap: 8px;
+            }
+            
+            .shipping-box, .payment-box {
+                padding: 10px 8px;
+                min-height: 80px;
+            }
+            
+            .shipping-box h3, .payment-box h3 {
+                font-size: 0.9rem;
+                gap: 4px;
+            }
+            
+            .shipping-box h3 i, .payment-box h3 i {
+                font-size: 1rem;
+            }
+            
+            .cart-rectangle {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .cart-icon {
+                font-size: 1.5rem;
+            }
+            
+            .cart-count {
+                width: 20px;
+                height: 20px;
+                font-size: 0.65rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Carrito flotante - SOLO EL ICONO -->
+    <!-- Carrito flotante - MEJORADO -->
     <div class="floating-cart" id="floatingCart">
         <div class="cart-rectangle">
             <div class="cart-icon">
