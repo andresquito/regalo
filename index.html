@@ -50,6 +50,7 @@
             right: 25px;
             z-index: 9998;
             animation: floatEntrance 1s ease-out;
+         
         }
 
         @keyframes floatEntrance {
@@ -67,10 +68,10 @@
         .cart-rectangle {
             width: 75px;
             height: 75px;
-            border-radius: 18px;
+            border-radius: 50px;
             position: relative;
             overflow: visible;
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background: green;
             box-shadow: 
                 0 15px 35px rgba(75, 108, 183, 0.4),
                 0 5px 15px rgba(0, 0, 0, 0.1),
@@ -99,7 +100,7 @@
             }
         }
 
-        /* Efecto de borde brillante */
+        /* Efecto de borde brillante 
         .cart-rectangle::before {
             content: '';
             position: absolute;
@@ -107,14 +108,13 @@
             left: -4px;
             right: -4px;
             bottom: -4px;
-            background: linear-gradient(45deg, 
-                #4b6cb7, #3a56a0, #182848, #2a3f7a, #4b6cb7);
-            border-radius: 22px;
+            background: rgb(19, 165, 6);
+            border-radius: 50px;
             z-index: -1;
             animation: borderGlow 3s linear infinite;
             background-size: 400% 400%;
             opacity: 0.6;
-        }
+        }*/
 
         @keyframes borderGlow {
             0% {
@@ -361,7 +361,7 @@
 
         /* Botón de enviar pedido CON ICONO GRANDE - FIJO VISIBLE */
         .modal-footer .send-order-btn {
-            background: #25d366;
+            background: #12af04;
             color: white;
             border: none;
             padding: 18px 35px;
@@ -778,16 +778,24 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s;
         }
-
-        .shipping-box {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            color: white;
-        }
-
-        .payment-box {
-            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
-            color: white;
-        }
+.shipping-box {
+    
+    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
+    border-radius: 16px !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+.payment-box {
+  
+    background: linear-gradient(135deg, rgb(9, 168, 9) 0%, #065f46 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    box-shadow: 0 6px 20px rgba(101, 163, 13, 0.4) !important;
+    border-radius: 16px !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+}
 
         .shipping-box:hover, .payment-box:hover {
             transform: translateY(-5px);
@@ -1043,7 +1051,7 @@
             .cart-rectangle {
                 width: 65px;
                 height: 65px;
-                border-radius: 16px;
+                border-radius: 50px;
             }
 
             .cart-icon {
@@ -1191,7 +1199,7 @@
             .cart-rectangle {
                 width: 60px;
                 height: 60px;
-                border-radius: 14px;
+                border-radius: 50px;
             }
 
             .cart-icon {
@@ -1364,7 +1372,7 @@
         <div class="tabs-container">
             <div class="tabs">
                 <button class="tab active" onclick="changeTab(1)">Ropa de Hombre</button>
-                <button class="tab" onclick="changeTab(2)">Más Productos</button>
+                <button class="tab" onclick="changeTab(2)" style="display: none;">Más Productos</button>
             </div>
 
             <!-- Pestaña 1 (Productos 1-9) -->
@@ -1738,41 +1746,7 @@
                 defaultSize: "M",
                 tab: 1,
             },
-            {
-                id: 7,
-                name: "Zapatos Casuales",
-                description: "Zapatos casuales para hombre, cómodos y elegantes.",
-                price: 34.99,
-                image: "imagenes/zapatos/casual.jpg",
-                hasColors: false,
-                hasSizes: true,
-                sizes: shoeSizes,
-                defaultSize: "40",
-                tab: 1,
-            },
-            {
-                id: 8,
-                name: "Chaqueta Impermeable",
-                description: "Chaqueta impermeable para hombre, ideal para lluvia.",
-                price: 45.99,
-                hasColors: true,
-                colors: jacketColors,
-                defaultColor: "negro",
-                hasSizes: true,
-                sizes: ["S", "M", "L", "XL"],
-                defaultSize: "M",
-                tab: 1,
-            },
-            {
-                id: 9,
-                name: "Gorra Deportiva",
-                description: "Gorra deportiva ajustable, tela transpirable.",
-                price: 14.99,
-                image: "imagenes/gorras/deportiva.jpg",
-                hasColors: false,
-                hasSizes: false,
-                tab: 1,
-            },
+           
             
             // Productos 10-18 (Pestaña 2)
             {
