@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,7 +38,7 @@
         }
 
         header h1 {
-            
+
             font-family: 'Brush Script MT', cursive;
             font-size: 1.8rem;
             color: #f7f2f2;
@@ -86,6 +87,7 @@
                 opacity: 0;
                 transform: translateX(50px) translateY(-20px) scale(0.8);
             }
+
             100% {
                 opacity: 1;
                 transform: translateX(0) translateY(0) scale(1);
@@ -100,7 +102,7 @@
             position: relative;
             overflow: visible;
             background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
-            box-shadow: 
+            box-shadow:
                 0 15px 35px rgba(75, 108, 183, 0.4),
                 0 5px 15px rgba(0, 0, 0, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -114,15 +116,20 @@
         }
 
         @keyframes rectangleFloat {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) rotate(0deg);
             }
+
             25% {
                 transform: translateY(-10px) rotate(0.5deg);
             }
+
             50% {
                 transform: translateY(-5px) rotate(-0.3deg);
             }
+
             75% {
                 transform: translateY(-8px) rotate(0.2deg);
             }
@@ -133,10 +140,12 @@
                 background-position: 0% 50%;
                 opacity: 0.5;
             }
+
             50% {
                 background-position: 100% 50%;
                 opacity: 0.8;
             }
+
             100% {
                 background-position: 0% 50%;
                 opacity: 0.5;
@@ -153,9 +162,12 @@
         }
 
         @keyframes cartPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.1);
             }
@@ -187,15 +199,25 @@
         }
 
         @keyframes countBounce {
-            0% { transform: scale(0.5); opacity: 0; }
-            70% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         /* Efecto hover */
         .cart-rectangle:hover {
             transform: translateY(-6px) scale(1.1) !important;
-            box-shadow: 
+            box-shadow:
                 0 18px 40px rgba(75, 108, 183, 0.6),
                 0 6px 18px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
@@ -210,6 +232,7 @@
             0% {
                 transform: rotate(0deg) scale(1);
             }
+
             100% {
                 transform: rotate(360deg) scale(1.1);
             }
@@ -254,6 +277,7 @@
                 transform: translateY(-50px) scale(0.9);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0) scale(1);
                 opacity: 1;
@@ -422,7 +446,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 10px;
             background: rgb(255, 255, 255);
             padding: 10px 20px;
             border-radius: 10px;
@@ -444,12 +468,12 @@
             font-size: 1.2rem;
             transition: all 0.3s;
             flex-shrink: 0;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         .tab-nav-btn:hover:not(:disabled) {
             transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .tab-nav-btn:disabled {
@@ -492,15 +516,20 @@
             display: none;
         }
 
-        
+
         .tab-content.active {
             display: block;
             animation: fadeIn 0.5s;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         /* Contenedor de tabs en la parte superior (solo para contenido) */
@@ -783,6 +812,7 @@
             border-color: #6e6e6f;
             box-shadow: 0 2px 5px rgba(75, 108, 183, 0.3);
         }
+
         /*Boton agregar al carrito*/
         .add-to-cart-btn {
             background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
@@ -801,7 +831,7 @@
             margin-top: auto;
             width: 100%;
             margin-left: auto;
-            margin-right: auto;         
+            margin-right: auto;
         }
 
         .add-to-cart-btn:hover {
@@ -826,7 +856,8 @@
             flex-wrap: wrap;
         }
 
-        .shipping-box, .payment-box {
+        .shipping-box,
+        .payment-box {
             flex: 1;
             min-width: 300px;
             max-width: 500px;
@@ -855,12 +886,14 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
         }
 
-        .shipping-box:hover, .payment-box:hover {
+        .shipping-box:hover,
+        .payment-box:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .shipping-box h3, .payment-box h3 {
+        .shipping-box h3,
+        .payment-box h3 {
             font-size: 1.8rem;
             margin: 0;
             display: flex;
@@ -987,6 +1020,7 @@
                 opacity: 0;
                 transform: scale(0.9);
             }
+
             to {
                 opacity: 1;
                 transform: scale(1);
@@ -1020,6 +1054,7 @@
                 opacity: 0;
                 transform: translateX(-50%) translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(-50%) translateY(0);
@@ -1059,7 +1094,7 @@
             .cart-icon {
                 font-size: 2rem;
             }
-            
+
             .cart-count {
                 width: 28px;
                 height: 28px;
@@ -1067,7 +1102,7 @@
                 top: -8px;
                 right: -8px;
             }
-            
+
             .page-title {
                 font-size: 2.5rem;
             }
@@ -1145,7 +1180,7 @@
                 text-align: center;
                 padding-left: 0;
             }
-            
+
             .page-title:after {
                 left: 50%;
                 transform: translateX(-50%);
@@ -1154,13 +1189,13 @@
             .tabs-navigation {
                 padding: 8px 15px;
             }
-            
+
             .tab-number {
                 width: 35px;
                 height: 35px;
                 font-size: 0.9rem;
             }
-            
+
             .tab-nav-btn {
                 width: 35px;
                 height: 35px;
@@ -1174,7 +1209,8 @@
                 gap: 15px;
             }
 
-            .shipping-box, .payment-box {
+            .shipping-box,
+            .payment-box {
                 flex: 1;
                 min-width: calc(50% - 15px);
                 max-width: calc(50% - 15px);
@@ -1186,7 +1222,8 @@
                 min-height: 100px;
             }
 
-            .shipping-box h3, .payment-box h3 {
+            .shipping-box h3,
+            .payment-box h3 {
                 font-size: 1.3rem;
                 gap: 10px;
                 flex-wrap: wrap;
@@ -1205,45 +1242,49 @@
         }
 
         @media (max-width: 640px) {
+
             /* EN MÓVIL PEQUEÑO - DOS CUADROS EN LA MISMA LÍNEA */
             .shipping-payment-container {
                 flex-direction: row;
                 align-items: stretch;
                 gap: 12px;
             }
-            
-            .shipping-box, .payment-box {
+
+            .shipping-box,
+            .payment-box {
                 flex: 1;
                 min-width: calc(50% - 12px);
                 max-width: calc(50% - 12px);
                 padding: 15px;
                 min-height: 90px;
             }
-            
-            .shipping-box h3, .payment-box h3 {
+
+            .shipping-box h3,
+            .payment-box h3 {
                 font-size: 1.1rem;
                 gap: 8px;
             }
-            
-            .shipping-box h3 i, .payment-box h3 i {
+
+            .shipping-box h3 i,
+            .payment-box h3 i {
                 font-size: 1.2rem;
             }
-            
+
             .page-title {
                 font-size: 1.8rem;
             }
-            
+
             .tabs-navigation {
                 padding: 6px 12px;
             }
-            
+
             .tab-number {
                 width: 32px;
                 height: 32px;
                 font-size: 0.85rem;
                 margin: 0 3px;
             }
-            
+
             .tab-nav-btn {
                 width: 32px;
                 height: 32px;
@@ -1345,18 +1386,18 @@
                 font-size: 1.6rem;
                 margin: 15px 0;
             }
-            
+
             .tabs-navigation {
                 padding: 5px 10px;
             }
-            
+
             .tab-number {
                 width: 30px;
                 height: 30px;
                 font-size: 0.8rem;
                 margin: 0 2px;
             }
-            
+
             .tab-nav-btn {
                 width: 30px;
                 height: 30px;
@@ -1368,21 +1409,24 @@
                 flex-direction: row;
                 gap: 10px;
             }
-            
-            .shipping-box, .payment-box {
+
+            .shipping-box,
+            .payment-box {
                 min-width: calc(50% - 10px);
                 max-width: calc(50% - 10px);
                 padding: 12px;
                 min-height: 85px;
             }
-            
-            .shipping-box h3, .payment-box h3 {
+
+            .shipping-box h3,
+            .payment-box h3 {
                 font-size: 1rem;
                 gap: 6px;
                 flex-direction: column;
             }
-            
-            .shipping-box h3 i, .payment-box h3 i {
+
+            .shipping-box h3 i,
+            .payment-box h3 i {
                 font-size: 1.1rem;
             }
 
@@ -1402,34 +1446,38 @@
         }
 
         @media (max-width: 380px) {
+
             /* PARA DISPOSITIVOS MUY PEQUEÑOS */
             .shipping-payment-container {
                 gap: 8px;
             }
-            
-            .shipping-box, .payment-box {
+
+            .shipping-box,
+            .payment-box {
                 padding: 10px 8px;
                 min-height: 80px;
             }
-            
-            .shipping-box h3, .payment-box h3 {
+
+            .shipping-box h3,
+            .payment-box h3 {
                 font-size: 0.9rem;
                 gap: 4px;
             }
-            
-            .shipping-box h3 i, .payment-box h3 i {
+
+            .shipping-box h3 i,
+            .payment-box h3 i {
                 font-size: 1rem;
             }
-            
+
             .cart-rectangle {
                 width: 55px;
                 height: 55px;
             }
-            
+
             .cart-icon {
                 font-size: 1.5rem;
             }
-            
+
             .cart-count {
                 width: 22px;
                 height: 22px;
@@ -1437,22 +1485,22 @@
                 top: -5px;
                 right: -5px;
             }
-            
+
             .page-title {
                 font-size: 1.4rem;
             }
-            
+
             .tabs-navigation {
                 padding: 4px 8px;
             }
-            
+
             .tab-number {
                 width: 28px;
                 height: 28px;
                 font-size: 0.75rem;
                 margin: 0 1px;
             }
-            
+
             .tab-nav-btn {
                 width: 28px;
                 height: 28px;
@@ -1461,6 +1509,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Carrito flotante - MEJORADO -->
     <div class="floating-cart" id="floatingCart">
@@ -1482,12 +1531,12 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <!-- Subtítulo "Productos seleccionados" MÁS PEQUEÑO -->
             <div class="cart-subtitle">
                 <h3><i class="fas fa-check-circle"></i> Productos seleccionados</h3>
             </div>
-            
+
             <div class="modal-body" id="modalCartItems">
                 <!-- Los productos del carrito aparecerán aquí -->
                 <div style="text-align: center; padding: 40px; color: #888;">
@@ -1496,7 +1545,7 @@
                     <p style="font-size: 0.9rem; margin-top: 10px;">Agrega productos para verlos aquí</p>
                 </div>
             </div>
-            
+
             <!-- Total de la compra SIMPLE AL FINAL -->
             <div class="cart-total-simple" id="cartTotalSimple" style="display: none; padding: 0 20px;">
                 <div class="total-simple-row">
@@ -1504,7 +1553,7 @@
                     <div class="total-simple-amount" id="cartTotalAmount">$0.00</div>
                 </div>
             </div>
-            
+
             <div class="modal-footer">
                 <!-- BOTÓN DE WHATSAPP CON ICONO GRANDE - SIEMPRE VISIBLE -->
                 <button class="send-order-btn" id="modalSendOrderBtn" disabled>
@@ -1522,7 +1571,7 @@
 
     <div class="container">
         <!-- Título principal -->
-        <h1 class="page-title">Zapatos de Mujer</h1>
+        <h1 class="page-title">Zapatos</h1>
 
         <!-- Contenedor de contenido de tabs en la parte superior -->
         <div class="top-tabs-container" id="tabsContentContainer">
@@ -1745,8 +1794,8 @@
                 image: "imagenes/01.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 1,
             },
             {
@@ -1758,8 +1807,8 @@
                 image: "imagenes/02.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 1,
             },
             {
@@ -1771,8 +1820,8 @@
                 image: "imagenes/03.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 1,
             },
             {
@@ -1784,8 +1833,8 @@
                 image: "imagenes/04.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 1,
             },
             {
@@ -1797,8 +1846,8 @@
                 image: "imagenes/05.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 1,
             },
             {
@@ -1810,8 +1859,8 @@
                 image: "imagenes/06.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 1,
             },
             {
@@ -1823,8 +1872,8 @@
                 image: "imagenes/07.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 1,
             },
             {
@@ -1836,11 +1885,11 @@
                 image: "imagenes/08.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 1,
             },
-            
+
             // Productos 9-16 (Tab 2)
             {
                 id: 9,
@@ -1851,8 +1900,8 @@
                 image: "imagenes/09.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 2,
             },
             {
@@ -1864,8 +1913,8 @@
                 image: "imagenes/10.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 2,
             },
             {
@@ -1877,8 +1926,8 @@
                 image: "imagenes/11.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 2,
             },
             {
@@ -1890,8 +1939,8 @@
                 image: "imagenes/12.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 2,
             },
             {
@@ -1903,8 +1952,8 @@
                 image: "imagenes/13.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 2,
             },
             {
@@ -1916,8 +1965,8 @@
                 image: "imagenes/14.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 2,
             },
             {
@@ -1929,8 +1978,8 @@
                 image: "imagenes/15.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 2,
             },
             {
@@ -1942,11 +1991,11 @@
                 image: "imagenes/16.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 2,
             },
-                
+
             // Productos 17-24 (Tab 3)
             {
                 id: 17,
@@ -1957,8 +2006,8 @@
                 image: "imagenes/17.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 3,
             },
             {
@@ -1970,8 +2019,8 @@
                 image: "imagenes/18.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 3,
             },
             {
@@ -1983,8 +2032,8 @@
                 image: "imagenes/19.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 3,
             },
             {
@@ -1996,8 +2045,8 @@
                 image: "imagenes/20.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 3,
             },
             {
@@ -2009,8 +2058,8 @@
                 image: "imagenes/21.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 3,
             },
             {
@@ -2022,8 +2071,8 @@
                 image: "imagenes/22.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 3,
             },
             {
@@ -2035,8 +2084,8 @@
                 image: "imagenes/23.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 3,
             },
             {
@@ -2048,8 +2097,8 @@
                 image: "imagenes/24.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 3,
             },
             {
@@ -2061,8 +2110,8 @@
                 image: "imagenes/25.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["34", "35", "36", "37", "38", "39", "40"],
+                defaultSize: "36",
                 tab: 4,
             },
         ];
@@ -2111,14 +2160,14 @@
         function generateTabsContent() {
             // Limpiar contenedor
             tabsContentContainer.innerHTML = '';
-            
+
             // Generar contenido para cada tab
             for (let i = 1; i <= totalTabs; i++) {
                 // Crear contenido del tab
                 const tabContent = document.createElement('div');
                 tabContent.id = `tab-content-${i}`;
                 tabContent.className = `tab-content ${i === 1 ? 'active' : ''}`;
-                
+
                 const productsGrid = document.createElement('div');
                 productsGrid.className = 'products-grid';
                 productsGrid.id = `products-grid-${i}`;
@@ -2131,14 +2180,14 @@
         function generateBottomTabs() {
             // Limpiar contenedor
             bottomTabsContainer.innerHTML = '';
-            
+
             // Crear contenedor de navegación
             const tabsNavigation = document.createElement('div');
             tabsNavigation.className = 'tabs-navigation';
-            
+
             // Calcular qué tabs mostrar (solo 2 a la vez)
             updateVisibleTabs();
-            
+
             // Botón de retroceder
             const prevButton = document.createElement('button');
             prevButton.className = 'tab-nav-btn';
@@ -2146,7 +2195,7 @@
             prevButton.onclick = () => navigateTabs('prev');
             prevButton.id = 'prevTabBtn';
             tabsNavigation.appendChild(prevButton);
-            
+
             // Generar los números de tabs visibles
             visibleTabs.forEach(tabNumber => {
                 const tabNumberElement = document.createElement('div');
@@ -2155,7 +2204,7 @@
                 tabNumberElement.onclick = () => changeTab(tabNumber);
                 tabsNavigation.appendChild(tabNumberElement);
             });
-            
+
             // Botón de avanzar
             const nextButton = document.createElement('button');
             nextButton.className = 'tab-nav-btn';
@@ -2163,14 +2212,15 @@
             nextButton.onclick = () => navigateTabs('next');
             nextButton.id = 'nextTabBtn';
             tabsNavigation.appendChild(nextButton);
-            
+
             bottomTabsContainer.appendChild(tabsNavigation);
-            
+
             // Actualizar estado de botones
             updateNavigationButtons();
         }
 
-        // Actualizar qué tabs son visibles (solo 2)
+
+        /* Actualizar qué tabs son visibles (solo 2)
         function updateVisibleTabs() {
             visibleTabs = [];
             
@@ -2195,6 +2245,21 @@
                 visibleTabs = [1];
             }
         }
+            */
+
+        // Actualizar qué tabs son visibles (ahora siempre 4)
+        function updateVisibleTabs() {
+            visibleTabs = [];
+
+            // Mostrar siempre los primeros 4 tabs
+            // Si hay menos de 4 tabs, mostrar todos los disponibles
+            const maxVisible = Math.min(4, totalTabs);
+
+            for (let i = 1; i <= maxVisible; i++) {
+                visibleTabs.push(i);
+            }
+        }
+
 
         // Navegar entre tabs
         function navigateTabs(direction) {
@@ -2212,9 +2277,9 @@
         // Cambiar entre pestañas
         function changeTab(tabNumber) {
             if (tabNumber < 1 || tabNumber > totalTabs) return;
-            
+
             currentTab = tabNumber;
-            
+
             // Actualizar contenido activo
             document.querySelectorAll('.tab-content').forEach((content, index) => {
                 if (index + 1 === tabNumber) {
@@ -2223,7 +2288,15 @@
                     content.classList.remove('active');
                 }
             });
-            
+
+            // DESPLAZAR AL PRINCIPIO DE LA PÁGINA
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Desplazamiento suave
+            });
+
+
+
             // Actualizar navegación inferior
             updateVisibleTabs();
             generateBottomTabs();
@@ -2233,11 +2306,11 @@
         function updateNavigationButtons() {
             const prevBtn = document.getElementById('prevTabBtn');
             const nextBtn = document.getElementById('nextTabBtn');
-            
+
             if (prevBtn) {
                 prevBtn.disabled = currentTab === 1;
             }
-            
+
             if (nextBtn) {
                 nextBtn.disabled = currentTab === totalTabs;
             }
@@ -2247,56 +2320,56 @@
         function setupFloatingCart() {
             // Abrir modal al hacer clic en el carrito flotante
             cartRectangle.addEventListener('click', openCartModal);
-            
+
             // Cerrar modal
             closeModalBtn.addEventListener('click', closeCartModal);
-            
+
             // Cerrar modal al hacer clic fuera
-            cartModal.addEventListener('click', function(e) {
+            cartModal.addEventListener('click', function (e) {
                 if (e.target === cartModal) {
                     closeCartModal();
                 }
             });
-            
+
             // Cerrar con tecla ESC
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape' && cartModal.classList.contains('active')) {
                     closeCartModal();
                 }
             });
-            
+
             // Enviar pedido desde modal
             modalSendOrderBtn.addEventListener('click', sendOrder);
-            
+
             // Efectos hover para el carrito flotante
-            cartRectangle.addEventListener('mouseenter', function() {
+            cartRectangle.addEventListener('mouseenter', function () {
                 if (window.innerWidth > 768) {
                     this.style.animationPlayState = 'paused';
                 }
             });
-            
-            cartRectangle.addEventListener('mouseleave', function() {
+
+            cartRectangle.addEventListener('mouseleave', function () {
                 if (window.innerWidth > 768) {
                     this.style.animationPlayState = 'running';
                 }
             });
-            
+
             // Efecto al hacer clic
-            cartRectangle.addEventListener('click', function(e) {
+            cartRectangle.addEventListener('click', function (e) {
                 e.stopPropagation();
-                
+
                 // Efecto de pulso
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     this.style.transform = '';
                 }, 200);
             });
-            
+
             // Control de posición durante el scroll
             let lastScrollTop = 0;
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', function () {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
+
                 if (scrollTop > lastScrollTop && scrollTop > 100) {
                     // Scroll hacia abajo
                     floatingCart.classList.add('scroll-down');
@@ -2304,7 +2377,7 @@
                     // Scroll hacia arriba
                     floatingCart.classList.remove('scroll-down');
                 }
-                
+
                 lastScrollTop = scrollTop;
             });
         }
@@ -2325,7 +2398,7 @@
         // Actualizar modal del carrito - DISEÑO MEJORADO
         function updateCartModal() {
             modalCartItems.innerHTML = '';
-            
+
             if (cart.length === 0) {
                 modalCartItems.innerHTML = `
                     <div style="text-align: center; padding: 40px; color: #888;">
@@ -2338,12 +2411,12 @@
                 cartTotalSimple.style.display = 'none';
                 return;
             }
-            
+
             let total = 0;
-            
+
             cart.forEach(item => {
                 total += item.price * item.quantity;
-                
+
                 const itemElement = document.createElement('div');
                 itemElement.className = 'selected-item';
                 itemElement.style.cssText = `
@@ -2358,7 +2431,7 @@
                     flex-wrap: wrap;
                     gap: 8px;
                 `;
-                
+
                 let detailsHTML = '';
                 if (item.size) {
                     detailsHTML += `<span style="margin-right: 12px; font-size: 0.85rem;">Talla: <strong>${item.size}</strong></span>`;
@@ -2370,7 +2443,7 @@
                         <span><strong>${item.color.name}</strong></span>
                     </span>`;
                 }
-                
+
                 itemElement.innerHTML = `
                     <div style="flex: 1; display: flex; align-items: center; gap: 12px; min-width: 200px;">
                         <div style="width: 60px; height: 60px; border-radius: 6px; overflow: hidden; flex-shrink: 0; border: 1px solid #eee; background: white; display: flex; align-items: center; justify-content: center;">
@@ -2397,42 +2470,42 @@
                         </button>
                     </div>
                 `;
-                
+
                 modalCartItems.appendChild(itemElement);
             });
-            
+
             // Mostrar el total de la compra simple al final
             cartTotalAmount.textContent = `$${total.toFixed(2)}`;
             cartTotalSimple.style.display = 'block';
-            
+
             // Agregar total en un mensaje oculto para el pedido de WhatsApp
             modalSendOrderBtn.dataset.total = total.toFixed(2);
             modalSendOrderBtn.disabled = false;
-            
+
             // Asegurar que el botón siempre sea visible
             modalSendOrderBtn.style.display = 'flex';
         }
 
         // Función para manejar el zoom de imágenes
         function setupImageZoom() {
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e.target.classList.contains('product-main-image')) {
                     const mainImage = e.target;
                     const productId = parseInt(mainImage.id.replace('main-image-', ''));
                     const product = products.find(p => p.id === productId);
-                    
+
                     if (product) {
                         openImageZoom(product, mainImage.src);
                     }
                 }
-                
+
                 if (e.target.classList.contains('main-image-container')) {
                     const container = e.target;
                     const mainImage = container.querySelector('.product-main-image');
                     if (mainImage) {
                         const productId = parseInt(mainImage.id.replace('main-image-', ''));
                         const product = products.find(p => p.id === productId);
-                        
+
                         if (product) {
                             openImageZoom(product, mainImage.src);
                         }
@@ -2443,12 +2516,12 @@
             closeZoomBtn.addEventListener('click', closeImageZoom);
             prevZoomBtn.addEventListener('click', showPrevImage);
             nextZoomBtn.addEventListener('click', showNextImage);
-            
-            document.addEventListener('keydown', function(e) {
+
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape' && imageZoomModal.classList.contains('active')) {
                     closeImageZoom();
                 }
-                
+
                 if (imageZoomModal.classList.contains('active')) {
                     if (e.key === 'ArrowLeft') {
                         showPrevImage();
@@ -2457,8 +2530,8 @@
                     }
                 }
             });
-            
-            imageZoomModal.addEventListener('click', function(e) {
+
+            imageZoomModal.addEventListener('click', function (e) {
                 if (e.target === imageZoomModal) {
                     closeImageZoom();
                 }
@@ -2468,10 +2541,10 @@
         // Abrir modal de zoom CON INDICADOR DE COLOR
         function openImageZoom(product, currentImageSrc = null) {
             if (!product) return;
-            
+
             let images = [];
             let colorInfo = [];
-            
+
             if (product.hasColors && product.colors) {
                 images = product.colors.map(color => color.image);
                 colorInfo = product.colors.map(color => ({
@@ -2491,7 +2564,7 @@
                     value: null
                 }];
             }
-            
+
             let currentIndex = 0;
             if (currentImageSrc) {
                 const index = images.findIndex(img => img === currentImageSrc);
@@ -2499,7 +2572,7 @@
                     currentIndex = index;
                 }
             }
-            
+
             currentZoomData = {
                 productId: product.id,
                 colorIndex: currentIndex,
@@ -2507,7 +2580,7 @@
                 colorInfo: colorInfo,
                 productName: product.name
             };
-            
+
             showImageInZoom(currentIndex);
             imageZoomModal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -2522,14 +2595,14 @@
         // Mostrar imagen específica en el zoom CON INDICADOR DE COLOR
         function showImageInZoom(index) {
             if (index < 0 || index >= currentZoomData.images.length) return;
-            
+
             currentZoomData.colorIndex = index;
             const imageData = currentZoomData.images[index];
             const colorData = currentZoomData.colorInfo[index];
-            
+
             zoomedImage.src = imageData;
             zoomedImage.alt = currentZoomData.productName;
-            
+
             // Actualizar indicador de color
             if (colorData && colorData.value) {
                 colorSwatch.style.backgroundColor = colorData.value;
@@ -2611,8 +2684,8 @@
                     thumbnailsHTML = `
                         <div class="thumbnails-sidebar" id="thumbnails-${product.id}">
                             ${product.colors
-                                .map(
-                                    (color) => `
+                            .map(
+                                (color) => `
                                 <div class="thumbnail-container">
                                     <img src="${color.image || getProductImage(product, color.code)}" 
                                          alt="${product.name} - ${color.name}"
@@ -2623,8 +2696,8 @@
                                     <div class="thumbnail-label">${color.name}</div>
                                 </div>
                             `
-                                )
-                                .join("")}
+                            )
+                            .join("")}
                         </div>
                     `;
                 }
@@ -2635,8 +2708,8 @@
                         <div class="options-label">Color:</div>
                         <div class="color-options" id="color-options-${product.id}">
                             ${product.colors
-                                .map(
-                                    (color) => `
+                            .map(
+                                (color) => `
                                 <div class="color-option ${color.code === product.defaultColor ? "selected" : ""}" 
                                      style="background-color: ${color.value}; ${color.value === "#ffffff" ? "border: 1px solid #ddd" : ""}"
                                      data-color="${color.code}"
@@ -2645,8 +2718,8 @@
                                     <div class="color-tooltip">${color.name}</div>
                                 </div>
                             `
-                                )
-                                .join("")}
+                            )
+                            .join("")}
                         </div>
                     `;
                 }
@@ -2657,15 +2730,15 @@
                         <div class="options-label">Talla:</div>
                         <div class="size-options" id="size-options-${product.id}">
                             ${product.sizes
-                                .map(
-                                    (size) => `
+                            .map(
+                                (size) => `
                                 <div class="size-option ${size === product.defaultSize ? "selected" : ""}" 
                                      onclick="selectSizeForProduct(${product.id}, '${size}')">
                                     ${size}
                                 </div>
                             `
-                                )
-                                .join("")}
+                            )
+                            .join("")}
                         </div>
                     `;
                 }
@@ -2705,7 +2778,7 @@
         function changeProductImage(productId, colorCode) {
             closeImageZoom();
             closeCartModal();
-            
+
             const product = products.find((p) => p.id === productId);
             if (!product) return;
 
@@ -2793,7 +2866,7 @@
         // Agregar producto al carrito
         function addToCart(productId) {
             closeImageZoom();
-            
+
             const product = products.find((p) => p.id === productId);
             if (!product) return;
 
@@ -2855,7 +2928,7 @@
             // Actualizar contador
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             cartCountElement.textContent = totalItems;
-            
+
             // Animar el contador si hay cambios
             if (totalItems > 0) {
                 cartCountElement.style.animation = 'countBounce 0.5s ease-out';
@@ -2863,7 +2936,7 @@
                     cartCountElement.style.animation = '';
                 }, 500);
             }
-            
+
             // Actualizar modal si está abierto
             if (cartModal.classList.contains('active')) {
                 updateCartModal();
@@ -2874,7 +2947,7 @@
         function sendOrder() {
             closeImageZoom();
             closeCartModal();
-            
+
             if (cart.length === 0) {
                 showNotification("Por favor, agrega al menos un producto al carrito para enviar el pedido.");
                 return;
@@ -2931,7 +3004,7 @@
         // Mostrar notificación
         function showNotification(message) {
             closeImageZoom();
-            
+
             const notification = document.createElement("div");
             notification.style.cssText = `
                 position: fixed;
@@ -2991,4 +3064,5 @@
         });
     </script>
 </body>
+
 </html>
