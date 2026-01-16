@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Viste Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         * {
             margin: 0;
@@ -27,7 +26,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
             color: white;
             padding: 1px 0;
             text-align: center;
@@ -37,39 +36,11 @@
         }
 
         header h1 {
-            
-            font-family: 'Brush Script MT', cursive;
             font-size: 1.8rem;
-            color: #f7f2f2;
-            text-align: left;
-            margin: 10px 0 10px 0;
-            text-align: center;
-            font-weight: normal;
-            font-style: italic;
-            position: relative;
-        }
-
-        /* Título "Zapatos de mujer" */
-        .page-title {
-            font-family: 'Brush Script MT', cursive;
-            font-size: 3rem;
-            color: #000;
-            text-align: left;
-            margin: 20px 0 30px 0;
-            padding-left: 10px;
-            font-weight: normal;
-            font-style: italic;
-            position: relative;
-        }
-
-        .page-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 10px;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         /* CARRITO FLOTANTE - MEJORADO */
@@ -79,6 +50,7 @@
             right: 25px;
             z-index: 9998;
             animation: floatEntrance 1s ease-out;
+         
         }
 
         @keyframes floatEntrance {
@@ -99,7 +71,7 @@
             border-radius: 0px;
             position: relative;
             overflow: visible;
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
             box-shadow: 
                 0 15px 35px rgba(75, 108, 183, 0.4),
                 0 5px 15px rgba(0, 0, 0, 0.1),
@@ -111,6 +83,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            
         }
 
         @keyframes rectangleFloat {
@@ -127,6 +100,22 @@
                 transform: translateY(-8px) rotate(0.2deg);
             }
         }
+
+        /* Efecto de borde brillante 
+        .cart-rectangle::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: rgb(19, 165, 6);
+            border-radius: 50px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+            background-size: 400% 400%;
+            opacity: 0.6;
+        }*/
 
         @keyframes borderGlow {
             0% {
@@ -166,7 +155,7 @@
             position: absolute;
             top: -8px;
             right: -8px;
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            background: #ff4757;
             color: white;
             font-weight: bold;
             font-size: 0.85rem;
@@ -200,6 +189,11 @@
                 0 6px 18px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
             animation-play-state: paused;
+        }
+
+        .cart-rectangle:hover::before {
+            animation: borderGlow 1.5s linear infinite;
+            opacity: 0.9;
         }
 
         .cart-rectangle:hover .cart-icon {
@@ -262,7 +256,7 @@
 
         /* ENCABEZADO DEL MODAL CON LOS MISMOS COLORES DEL HEADER */
         .modal-header {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
             color: white;
             padding: 20px;
             display: flex;
@@ -368,7 +362,7 @@
 
         /* Botón de enviar pedido CON ICONO GRANDE - FIJO VISIBLE */
         .modal-footer .send-order-btn {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            background: #12af04;
             color: white;
             border: none;
             padding: 18px 35px;
@@ -392,7 +386,7 @@
         }
 
         .modal-footer .send-order-btn:hover {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            background: #1da851;
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
@@ -408,84 +402,43 @@
             box-shadow: none;
         }
 
-        /* Estilos para pestañas mejorados - EN LA PARTE INFERIOR */
-        .bottom-tabs-container {
-            margin: 40px 0 30px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            width: 100%;
+        /* Estilos para pestañas */
+        .tabs-container {
+            margin-bottom: 0px;
         }
 
-        .tabs-navigation {
+        .tabs {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 0px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab {
+            padding: 12px 25px;
             background: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e75480;
-        }
-
-        .tab-nav-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
-            color: white;
             border: none;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            flex-shrink: 0;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-
-        .tab-nav-btn:hover:not(:disabled) {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .tab-nav-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .tab-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: white;
-            color: #333;
-            border: 2px solid #e75480;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 600;
+            color: #666;
+            border-radius: 10px 10px 0 0;
+            margin-right: 5px;
             transition: all 0.3s;
-            margin: 0 5px;
+            position: relative;
+            min-width: 150px;
+            text-align: center;
         }
 
-        .tab-number:hover {
-            background: #f8c8dc;
-            color: white;
+        .tab:hover {
+            background: #f0f0f0;
+            color: #4b6cb7;
         }
 
-        .tab-number.active {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+        .tab.active {
+            background: #4b6cb7;
             color: white;
-            border-color: #e75480;
-            transform: scale(1.1);
-            box-shadow: 0 4px 10px rgba(231, 84, 128, 0.4);
         }
 
         .tab-content {
@@ -502,29 +455,25 @@
             to { opacity: 1; }
         }
 
-        /* Contenedor de tabs en la parte superior (solo para contenido) */
-        .top-tabs-container {
-            margin: 20px 0;
-        }
-
         /* GALERÍA DE IMÁGENES */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
             gap: 30px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         .product-card {
-            background: white;
-            border-radius: 10px;
+            background:white;
+            border-radius: 10px; /*Borde de cuadro del producto*/
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s;
             display: flex;
             flex-direction: column;
             height: 100%;
-            border: 2px solid #d8dbe4;
+              border: 2px solid #d8dbe4;    /* Bordes de productos*/
+
         }
 
         .product-card:hover {
@@ -545,11 +494,12 @@
             align-items: center;
             justify-content: center;
             padding: 10px;
-            background: white;
+            background:white;
             min-width: 0;
             cursor: pointer;
             transition: all 0.3s;
             position: relative;
+            
         }
 
         .product-main-image {
@@ -575,7 +525,7 @@
             gap: 10px;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: #ecbbe3 #f0f0f0;
+            scrollbar-color: #4b6cb7 #f0f0f0;
             flex-shrink: 0;
         }
 
@@ -784,7 +734,7 @@
         }
         /*Boton agregar al carrito*/
         .add-to-cart-btn {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
             color: white;
             border: none;
             padding: 12px 20px;
@@ -799,12 +749,13 @@
             gap: 10px;
             margin-top: auto;
             width: 100%;
-            margin-left: auto;
-            margin-right: auto;         
+              margin-left: auto;
+    margin-right: auto;         
+            
         }
 
         .add-to-cart-btn:hover {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
         }
@@ -835,24 +786,24 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s;
         }
-
-        .shipping-box {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
-            color: white !important;
-            font-weight: 800 !important;
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
-            border-radius: 16px !important;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
-        }
-
-        .payment-box {
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
-            color: white !important;
-            font-weight: 800 !important;
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
-            border-radius: 16px !important;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
-        }
+.shipping-box {
+    
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    color: white !important;
+    font-weight: 800 !important;
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
+    border-radius: 16px !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+.payment-box {
+  
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    color: white !important;
+    font-weight: 800 !important;
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
+    border-radius: 16px !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
 
         .shipping-box:hover, .payment-box:hover {
             transform: translateY(-5px);
@@ -1066,10 +1017,6 @@
                 top: -8px;
                 right: -8px;
             }
-            
-            .page-title {
-                font-size: 2.5rem;
-            }
         }
 
         @media (max-width: 768px) {
@@ -1139,33 +1086,6 @@
                 height: 18px;
             }
 
-            .page-title {
-                font-size: 2rem;
-                text-align: center;
-                padding-left: 0;
-            }
-            
-            .page-title:after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            .tabs-navigation {
-                padding: 8px 15px;
-            }
-            
-            .tab-number {
-                width: 35px;
-                height: 35px;
-                font-size: 0.9rem;
-            }
-            
-            .tab-nav-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 1rem;
-            }
-
             /* EN MÓVIL - DOS CUADROS EN LA MISMA LÍNEA AL MISMO NIVEL */
             .shipping-payment-container {
                 flex-direction: row;
@@ -1226,27 +1146,6 @@
             
             .shipping-box h3 i, .payment-box h3 i {
                 font-size: 1.2rem;
-            }
-            
-            .page-title {
-                font-size: 1.8rem;
-            }
-            
-            .tabs-navigation {
-                padding: 6px 12px;
-            }
-            
-            .tab-number {
-                width: 32px;
-                height: 32px;
-                font-size: 0.85rem;
-                margin: 0 3px;
-            }
-            
-            .tab-nav-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 0.9rem;
             }
         }
 
@@ -1340,28 +1239,6 @@
                 height: 16px;
             }
 
-            .page-title {
-                font-size: 1.6rem;
-                margin: 15px 0;
-            }
-            
-            .tabs-navigation {
-                padding: 5px 10px;
-            }
-            
-            .tab-number {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
-                margin: 0 2px;
-            }
-            
-            .tab-nav-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 0.85rem;
-            }
-
             /* EN MÓVIL MUY PEQUEÑO - DOS CUADROS EN LÍNEA */
             .shipping-payment-container {
                 flex-direction: row;
@@ -1436,27 +1313,6 @@
                 top: -5px;
                 right: -5px;
             }
-            
-            .page-title {
-                font-size: 1.4rem;
-            }
-            
-            .tabs-navigation {
-                padding: 4px 8px;
-            }
-            
-            .tab-number {
-                width: 28px;
-                height: 28px;
-                font-size: 0.75rem;
-                margin: 0 1px;
-            }
-            
-            .tab-nav-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 0.8rem;
-            }
         }
     </style>
 </head>
@@ -1496,9 +1352,23 @@
                 </div>
             </div>
             
-            <!-- Total de la compra SIMPLE AL FINAL -->
+            <!-- Total de la compra SIMPLE AL FINAL 
+             <div style="margin-top: 5px; margin-left: 23px; color: #218838; justify-items: left; 
+    gap: 30px; flex-wrap: wrap;">
+                            <h4>🚚 Domicilio Gratis</h4>
+            <h4>💵 Pagas al Recibir</h4>
+
+             </div>
+-->
+             
+
+
+
+
             <div class="cart-total-simple" id="cartTotalSimple" style="display: none; padding: 0 20px;">
+
                 <div class="total-simple-row">
+
                     <div class="total-simple-label">Total de la compra:</div>
                     <div class="total-simple-amount" id="cartTotalAmount">$0.00</div>
                 </div>
@@ -1515,23 +1385,34 @@
 
     <header>
         <div class="container">
-            <h1><i class="fas fa-store"></i> Para Ella Online</h1>
+            <h1><i class="fas fa-store"></i> Viste Online</h1>
         </div>
     </header>
 
     <div class="container">
-        <!-- Título principal -->
-        <h1 class="page-title">Zapatos de mujer</h1>
+        <!-- Pestañas -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="changeTab(1)">Ropa de Hombre</button>
+                <button class="tab" onclick="changeTab(2)" >Zapatos de Mujer</button>
+            </div>
 
-        <!-- Contenedor de contenido de tabs en la parte superior -->
-        <div class="top-tabs-container" id="tabsContentContainer">
-            <!-- El contenido de los tabs se generará dinámicamente -->
+            <!-- Pestaña 1 (Productos 1-9) -->
+            <div id="tab-1" class="tab-content active">
+                <div class="products-grid" id="products-grid-1">
+                    <!-- Los productos 1-9 se cargan aquí -->
+                </div>
+            </div>
+
+            <!-- Pestaña 2 (Productos 10-18) -->
+            <div id="tab-2" class="tab-content">
+                <div class="products-grid" id="products-grid-2">
+                    <!-- Los productos 10-18 se cargan aquí -->
+                </div>
+            </div>
         </div>
 
-        <!-- Tabs de navegación en la parte inferior -->
-        <div class="bottom-tabs-container" id="bottomTabsContainer">
-            <!-- Los tabs se generarán dinámicamente -->
-        </div>
+        
 
         <!-- Sección de envío gratis y pago al recibir EN DOS CUADROS EN LÍNEA -->
         <div class="shipping-payment-container">
@@ -1551,7 +1432,7 @@
 
         <footer>
             <div class="container">
-                <p>© 2026 Para Ella Online</p>
+                <p>© 2026 Viste Online</p>
             </div>
         </footer>
     </div>
@@ -1590,7 +1471,7 @@
                 name: "Blanco",
                 value: "#ffffff",
                 code: "blanco",
-                image: "imagenes/01.png",
+                image: "imagenes/001/blanco.png",
             },
             {
                 name: "Negro",
@@ -1734,335 +1615,271 @@
 
         // Datos de los productos
         const products = [
-            // Productos 1-8 (Tab 1)
+            // Productos 1-9 (Pestaña 1)
             {
                 id: 1,
-                name: "Bella Star AirLift 001",
-                description: "Sneakers crema con plataforma, aire visible, estilo urbano y elegante.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/01.png",
+                name: "Camiseta Manga Corta de Algodón",
+                description: "Camiseta manga corta de algodón, cómoda, lisa con cuello redondo.",
+                price: 7.99,
+                hasColors: true,
+                colors: tshirtColors,
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
+                sizes: ["S", "M", "L"],
                 defaultSize: "M",
                 tab: 1,
             },
             {
                 id: 2,
-                name: "Bella Star AirLift 002",
-                description: "Sneakers blanca con plataforma, aire visible, estilo urbano y elegante.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/02.png",
+                name: "Camiseta Manga Larga de Algodón",
+                description: "Camiseta manga larga de algodón, cómoda, lisa con cuello redondo.",
+                price: 12.99,
+                hasColors: true,
+                colors: mangaLarga,
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
+                sizes: ["S", "M", "L"],
                 defaultSize: "M",
                 tab: 1,
             },
             {
                 id: 3,
-                name: "Bella Spark 003",
-                description: "Sneakers negros con glitter, plataforma blanca, modernos, urbanos y llamativos.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/03.png",
-                defaultColor: "blanco",
+                name: "Jean Clásico",
+                description: "Jean clásico para hombre, corte recto, tela resistente.",
+                price: 19.99,
+                hasColors: true,
+                colors: [
+                    {
+                        name: "Azul",
+                        value: "#2b59e2ff",
+                        code: "azul",
+                        image: "imagenes/003/azul.png",
+                    },
+                    {
+                        name: "Celeste",
+                        value: "#5071d4ff",
+                        code: "celeste",
+                        image: "imagenes/003/celeste.png",
+                    },
+                    {
+                        name: "Negro",
+                        value: "#0f0f10ff",
+                        code: "negro",
+                        image: "imagenes/003/negro.png",
+                    },
+                    {
+                        name: "Plomo",
+                        value: "#4b4d53ff",
+                        code: "plomo",
+                        image: "imagenes/003/plomo.png",
+                    },
+                ],
+                defaultColor: "azul",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["38", "40", "42", "44"],
+                defaultSize: "40",
                 tab: 1,
             },
             {
                 id: 4,
-                name: "Urban Mesh 004",
-                description: "Sneakers beige con negro, diseño moderno, suela chunky, cómodos y versátiles.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/04.png",
-                defaultColor: "blanco",
+                name: "Calentador",
+                description: "Calentador deportivo para hombre, diseño cómodo.",
+                price: 9.99,
+                hasColors: true,
+                colors: [
+                    {
+                        name: "Azul",
+                        value: "#071d5eff",
+                        code: "azul",
+                        image: "imagenes/004/azul.png",
+                    },
+                    {
+                        name: "Negro",
+                        value: "#0f0f10ff",
+                        code: "negro",
+                        image: "imagenes/004/negro.png",
+                    },
+                    {
+                        name: "Plomo",
+                        value: "#4b4d53ff",
+                        code: "plomo",
+                        image: "imagenes/004/plomo.png",
+                    },
+                ],
+                defaultColor: "plomo",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["38", "40", "42", "44"],
+                defaultSize: "40",
                 tab: 1,
             },
             {
                 id: 5,
-                name: "Black Core 005",
-                description: "Sneakers negros chunky, textura mixta, modernos, resistentes, ideales para calle.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/05.png",
-                defaultColor: "blanco",
+                name: "Calentador Adidas",
+                description: "Calentador deportivo adidas para hombre.",
+                price: 9.99,
+                hasColors: true,
+                colors: [
+                    {
+                        name: "Azul",
+                        value: "#0e3bc0ff",
+                        code: "azul",
+                        image: "imagenes/005/azul.png",
+                    },
+                    {
+                        name: "Negro",
+                        value: "#0f0f10ff",
+                        code: "negro",
+                        image: "imagenes/005/negro.png",
+                    },
+                    {
+                        name: "Plomo",
+                        value: "#545050ff",
+                        code: "plomo",
+                        image: "imagenes/005/plomo.png",
+                    },
+                ],
+                defaultColor: "negro",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                sizes: ["38", "40", "42", "44"],
+                defaultSize: "40",
                 tab: 1,
             },
             {
                 id: 6,
-                name: "Zeta Trail  006",
-                description: "Sneakers beige con negro, suela gruesa, modernos, resistentes y urbanos.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/06.png",
-                defaultColor: "blanco",
+                name: "Chompa de Cuerina",
+                description: "Chompa de cuerina para hombre, con diseño moderno.",
+                price: 39.99,
+                hasColors: true,
+                colors: [
+                    {
+                        name: "Cafe",
+                        value: "#7e2105ff",
+                        code: "cafe",
+                        image: "imagenes/006/cafe.png",
+                    },
+                    {
+                        name: "Negro",
+                        value: "#0f0f10ff",
+                        code: "negro",
+                        image: "imagenes/006/negro.png",
+                    },
+                ],
+                defaultColor: "cafe",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
+                sizes: ["S", "M", "L"],
                 defaultSize: "M",
                 tab: 1,
             },
-            {
-                id: 7,
-                name: "Terra Rise 007",
-                description: "Sneakers chunky beige, suela profunda, modernos, cómodos, urbanos y resistentes.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/07.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 1,
-            },
-            {
-                id: 8,
-                name: "Terra Rise 008",
-                description: "Sneakers blancos chunky, textura dinámica, modernos, cómodos, urbanos y versátiles.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/08.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 1,
-            },
+           
             
-            // Productos 9-16 (Tab 2)
-            {
-                id: 9,
-                name: "Shadow Grip 009",
-                description: "Sneakers negros chunky, textura detallada, modernos, urbanos, cómodos y firmes.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/09.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 2,
-            },
+            // Productos 10-18 (Pestaña 2)
             {
                 id: 10,
-                name: "White Ridge 010",
-                description: "Sneakers blancos chunky, diseño profundo, modernos, urbanos, cómodos y resistentes.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/10.png",
-                defaultColor: "blanco",
+                name: "Camiseta V-Neck",
+                description: "Camiseta con cuello en V, elegante y moderna.",
+                price: 22.99,
+                hasColors: true,
+                colors: tshirtColors,
+                defaultColor: "gris",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
+                sizes: sizes,
                 defaultSize: "M",
                 tab: 2,
             },
             {
                 id: 11,
-                name: "Retro Stripe  011",
-                description: "Sneakers blancos con rayas negras, suela goma, urbanos, cómodos, versátiles.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/11.png",
+                name: "Camiseta Estampada",
+                description: "Camiseta con estampado único, 100% algodón orgánico.",
+                price: 27.99,
+                hasColors: true,
+                colors: tshirtColors.slice(0, 3),
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
+                sizes: sizes,
                 defaultSize: "M",
                 tab: 2,
             },
             {
                 id: 12,
-                name: "Silver Stripe 012",
-                description: "Sneakers blancos con rayas plateadas, suela goma, modernos y versátiles.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/12.png",
+                name: "Medias Blancas",
+                description: "Pack de 3 pares de medias blancas de algodón.",
+                price: 8.75,
+                hasColors: true,
+                colors: sockColors,
                 defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                hasSizes: false,
                 tab: 2,
             },
             {
                 id: 13,
-                name: "Gold Line  013",
-                description: "Sneakers blancos con rayas doradas, suela goma, modernos y versátiles.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/13.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                name: "Mochila Urbana",
+                description: "Mochila resistente con múltiples compartimientos.",
+                price: 38.5,
+                hasColors: true,
+                colors: backpackColors,
+                defaultColor: "negro",
+                hasSizes: false,
                 tab: 2,
             },
             {
                 id: 14,
-                name: "Balance Core  014",
-                description: "Sneakers blancos New Balance, suela chunky, modernos, cómodos, urbanos y técnicos.",
-                price: 24.99,
+                name: "Boxer Algodón",
+                description: "Pack de 5 boxers de algodón suave y elástico.",
+                price: 22.5,
+                image: "imagenes/boxer/algodon.jpg",
                 hasColors: false,
-                image: "imagenes/14.png",
-                defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
+                sizes: sizes,
                 defaultSize: "M",
                 tab: 2,
             },
             {
                 id: 15,
-                name: "White Pulse  015",
-                description: "Sneakers blancos deportivos, suela chunky, modernos, cómodos, urbanos y transpirables.",
-                price: 24.99,
+                name: "Reloj Deportivo",
+                description: "Reloj digital resistente al agua con cronómetro.",
+                price: 65.25,
+                image: "imagenes/reloj/deportivo.jpg",
                 hasColors: false,
-                image: "imagenes/15.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
+                hasSizes: false,
                 tab: 2,
             },
             {
                 id: 16,
-                name: "Elia AirStep 016",
-                description: "Sneakers negros con aire visible, modernos, cómodos, urbanos y versátiles.",
-                price: 24.99,
+                name: "Bufanda de Lana",
+                description: "Bufanda tejida en lana suave para el invierno.",
+                price: 27.99,
+                image: "imagenes/bufandas/lana.jpg",
+                hasColors: true,
+                colors: sockColors,
+                defaultColor: "negro",
+                hasSizes: false,
+                tab: 2,
+            },
+            {
+                id: 17,
+                name: "Cinturón de Cuero",
+                description: "Cinturón de cuero genuino con hebilla metálica.",
+                price: 29.75,
+                image: "imagenes/cinturones/cuero.jpg",
                 hasColors: false,
-                image: "imagenes/16.png",
-                defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
+                sizes: ["S", "M", "L", "XL"],
                 defaultSize: "M",
                 tab: 2,
             },
-                
-            // Productos 17-24 (Tab 3)
-            {
-                id: 17,
-                name: "Color Rush 017",
-                description: "Sneakers multicolor chunky, diseño vibrante, modernos, cómodos, urbanos y atrevidos.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/17.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 3,
-            },
             {
                 id: 18,
-                name: "Cream Lift  018",
-                description: "Sneakers crema con rayas negras, plataforma alta, modernos, cómodos y urbanos.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/18.png",
-                defaultColor: "blanco",
+                name: "Guantes de Invierno",
+                description: "Guantes térmicos para climas fríos.",
+                price: 21.5,
+                image: "imagenes/guantes/invierno.jpg",
+                hasColors: true,
+                colors: sockColors,
+                defaultColor: "negro",
                 hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
+                sizes: ["S", "M", "L"],
                 defaultSize: "M",
-                tab: 3,
-            },
-            {
-                id: 19,
-                name: "Noir Spark 019",
-                description: "Sneakers negros con glitter, plataforma beige, modernos, urbanos, cómodos y llamativos.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/19.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 3,
-            },
-            {
-                id: 20,
-                name: "Gum Stripe 020",
-                description: "Sneakers blancos con rayas negras, suela goma, modernos, cómodos y urbanos.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/20.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 3,
-            },
-            {
-                id: 21,
-                name: "Glitter Step 021",
-                description: "Sneakers negros con rayas glitter, plataforma blanca, modernos, urbanos y llamativos.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/21.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 3,
-            },
-            {
-                id: 22,
-                name: "Red Rise 022",
-                description: "Sneakers rojos con rayas blancas, plataforma alta, modernos, urbanos y atrevidos.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/22.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 3,
-            },
-            {
-                id: 23,
-                name: "Black Core 023",
-                description: "Sneakers negros chunky, diseño texturizado, modernos, cómodos, urbanos y versátiles.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/23.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 3,
-            },
-            {
-                id: 24,
-                name: "Mint Flow 024",
-                description: "Sneakers crema y verde, plataforma chunky, modernos, cómodos, urbanos y vibrantes.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/24.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 3,
-            },
-            {
-                id: 25,
-                name: "Golden Sand 025",
-                description: "Sneakers beige y dorado, plataforma chunky, modernos, cómodos, urbanos y elegantes.",
-                price: 24.99,
-                hasColors: false,
-                image: "imagenes/25.png",
-                defaultColor: "blanco",
-                hasSizes: true,
-                sizes: ["34", "35", "36","37", "38", "39","40"],
-                defaultSize: "M",
-                tab: 4,
+                tab: 2,
             },
         ];
 
@@ -2077,15 +1894,9 @@
             images: []
         };
 
-        // Estado para los tabs
-        let currentTab = 1;
-        const productsPerTab = 8;
-        const totalTabs = Math.ceil(products.length / productsPerTab);
-        let visibleTabs = []; // Para almacenar qué tabs son visibles
-
         // Elementos del DOM
-        const tabsContentContainer = document.getElementById("tabsContentContainer");
-        const bottomTabsContainer = document.getElementById("bottomTabsContainer");
+        const productsGrid1 = document.getElementById("products-grid-1");
+        const productsGrid2 = document.getElementById("products-grid-2");
         const cartCountElement = document.getElementById("cartCount");
         const cartModal = document.getElementById("cartModal");
         const modalCartItems = document.getElementById("modalCartItems");
@@ -2105,142 +1916,6 @@
         const zoomColorIndicator = document.getElementById('zoom-color-indicator');
         const colorSwatch = document.getElementById('color-swatch');
         const colorName = document.getElementById('color-name');
-
-        // Función para generar contenido de tabs dinámicamente
-        function generateTabsContent() {
-            // Limpiar contenedor
-            tabsContentContainer.innerHTML = '';
-            
-            // Generar contenido para cada tab
-            for (let i = 1; i <= totalTabs; i++) {
-                // Crear contenido del tab
-                const tabContent = document.createElement('div');
-                tabContent.id = `tab-content-${i}`;
-                tabContent.className = `tab-content ${i === 1 ? 'active' : ''}`;
-                
-                const productsGrid = document.createElement('div');
-                productsGrid.className = 'products-grid';
-                productsGrid.id = `products-grid-${i}`;
-                tabContent.appendChild(productsGrid);
-                tabsContentContainer.appendChild(tabContent);
-            }
-        }
-
-        // Función para generar tabs de navegación en la parte inferior
-        function generateBottomTabs() {
-            // Limpiar contenedor
-            bottomTabsContainer.innerHTML = '';
-            
-            // Crear contenedor de navegación
-            const tabsNavigation = document.createElement('div');
-            tabsNavigation.className = 'tabs-navigation';
-            
-            // Calcular qué tabs mostrar (solo 2 a la vez)
-            updateVisibleTabs();
-            
-            // Botón de retroceder
-            const prevButton = document.createElement('button');
-            prevButton.className = 'tab-nav-btn';
-            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-            prevButton.onclick = () => navigateTabs('prev');
-            prevButton.id = 'prevTabBtn';
-            tabsNavigation.appendChild(prevButton);
-            
-            // Generar los números de tabs visibles
-            visibleTabs.forEach(tabNumber => {
-                const tabNumberElement = document.createElement('div');
-                tabNumberElement.className = `tab-number ${tabNumber === currentTab ? 'active' : ''}`;
-                tabNumberElement.textContent = tabNumber;
-                tabNumberElement.onclick = () => changeTab(tabNumber);
-                tabsNavigation.appendChild(tabNumberElement);
-            });
-            
-            // Botón de avanzar
-            const nextButton = document.createElement('button');
-            nextButton.className = 'tab-nav-btn';
-            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-            nextButton.onclick = () => navigateTabs('next');
-            nextButton.id = 'nextTabBtn';
-            tabsNavigation.appendChild(nextButton);
-            
-            bottomTabsContainer.appendChild(tabsNavigation);
-            
-            // Actualizar estado de botones
-            updateNavigationButtons();
-        }
-
-        // Actualizar qué tabs son visibles (solo 2)
-        function updateVisibleTabs() {
-            visibleTabs = [];
-            
-            // Si estamos en los primeros tabs
-            if (currentTab <= 2) {
-                visibleTabs = [1, 2];
-            } 
-            // Si estamos en los últimos tabs
-            else if (currentTab >= totalTabs - 1) {
-                visibleTabs = [totalTabs - 1, totalTabs];
-            }
-            // En el medio
-            else {
-                visibleTabs = [currentTab - 1, currentTab];
-            }
-            
-            // Asegurarse de que no mostremos tabs fuera de rango
-            visibleTabs = visibleTabs.filter(tab => tab >= 1 && tab <= totalTabs);
-            
-            // Si solo hay 1 tab, mostrarlo solo
-            if (totalTabs === 1) {
-                visibleTabs = [1];
-            }
-        }
-
-        // Navegar entre tabs
-        function navigateTabs(direction) {
-            if (direction === 'prev') {
-                if (currentTab > 1) {
-                    changeTab(currentTab - 1);
-                }
-            } else if (direction === 'next') {
-                if (currentTab < totalTabs) {
-                    changeTab(currentTab + 1);
-                }
-            }
-        }
-
-        // Cambiar entre pestañas
-        function changeTab(tabNumber) {
-            if (tabNumber < 1 || tabNumber > totalTabs) return;
-            
-            currentTab = tabNumber;
-            
-            // Actualizar contenido activo
-            document.querySelectorAll('.tab-content').forEach((content, index) => {
-                if (index + 1 === tabNumber) {
-                    content.classList.add('active');
-                } else {
-                    content.classList.remove('active');
-                }
-            });
-            
-            // Actualizar navegación inferior
-            updateVisibleTabs();
-            generateBottomTabs();
-        }
-
-        // Actualizar botones de navegación
-        function updateNavigationButtons() {
-            const prevBtn = document.getElementById('prevTabBtn');
-            const nextBtn = document.getElementById('nextTabBtn');
-            
-            if (prevBtn) {
-                prevBtn.disabled = currentTab === 1;
-            }
-            
-            if (nextBtn) {
-                nextBtn.disabled = currentTab === totalTabs;
-            }
-        }
 
         // Función para manejar el carrito flotante
         function setupFloatingCart() {
@@ -2564,6 +2239,24 @@
             }
         }
 
+        // Cambiar entre pestañas
+        function changeTab(tabNumber) {
+            closeImageZoom();
+            closeCartModal();
+            
+            const tabs = document.querySelectorAll(".tab");
+            tabs.forEach((tab) => tab.classList.remove("active"));
+
+            const activeTab = document.querySelector(`.tab:nth-child(${tabNumber})`);
+            if (activeTab) activeTab.classList.add("active");
+
+            const tabContents = document.querySelectorAll(".tab-content");
+            tabContents.forEach((content) => content.classList.remove("active"));
+
+            const activeContent = document.getElementById(`tab-${tabNumber}`);
+            if (activeContent) activeContent.classList.add("active");
+        }
+
         // Función para obtener la imagen de un producto
         function getProductImage(product, colorCode = null) {
             if (colorCode && product.hasColors && product.colors) {
@@ -2591,13 +2284,8 @@
 
         // Cargar productos en las pestañas correspondientes
         function loadProducts() {
-            // Primero, limpiar todos los contenedores
-            for (let i = 1; i <= totalTabs; i++) {
-                const productsGrid = document.getElementById(`products-grid-${i}`);
-                if (productsGrid) {
-                    productsGrid.innerHTML = "";
-                }
-            }
+            productsGrid1.innerHTML = "";
+            productsGrid2.innerHTML = "";
 
             products.forEach((product) => {
                 const productCard = document.createElement("div");
@@ -2692,10 +2380,10 @@
                     </div>
                 `;
 
-                // Agregar al grid correspondiente según el tab
-                const productsGrid = document.getElementById(`products-grid-${product.tab}`);
-                if (productsGrid) {
-                    productsGrid.appendChild(productCard);
+                if (product.tab === 1) {
+                    productsGrid1.appendChild(productCard);
+                } else if (product.tab === 2) {
+                    productsGrid2.appendChild(productCard);
                 }
             });
         }
@@ -2806,6 +2494,13 @@
                 const selectedSize = getSelectedSize(productId);
                 if (!selectedSize) {
                     showNotification(`Por favor, selecciona una talla para ${product.name}`);
+                    return;
+                }
+            }
+
+            if (product.hasColors) {
+                if (!selectedColor) {
+                    showNotification(`Por favor, selecciona un color para ${product.name}`);
                     return;
                 }
             }
@@ -2981,8 +2676,6 @@
 
         // Inicializar la página
         document.addEventListener("DOMContentLoaded", function () {
-            generateTabsContent();
-            generateBottomTabs();
             loadProducts();
             setupImageZoom();
             setupFloatingCart();
