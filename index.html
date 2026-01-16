@@ -34,16 +34,37 @@
             border-radius: 0 0 10px 10px;
             margin-bottom: 2px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            
         }
 
         header h1 {
-            
             font-size: 1.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+        }
+
+        /* Título "Zapatos de mujer" */
+        .page-title {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3rem;
+            color: #000;
+            text-align: left;
+            margin: 20px 0 30px 0;
+            padding-left: 10px;
+            font-weight: normal;
+            font-style: italic;
+            position: relative;
+        }
+
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10px;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
         }
 
         /* CARRITO FLOTANTE - MEJORADO */
@@ -53,7 +74,6 @@
             right: 25px;
             z-index: 9998;
             animation: floatEntrance 1s ease-out;
-         
         }
 
         @keyframes floatEntrance {
@@ -86,7 +106,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            
         }
 
         @keyframes rectangleFloat {
@@ -103,22 +122,6 @@
                 transform: translateY(-8px) rotate(0.2deg);
             }
         }
-
-        /* Efecto de borde brillante 
-        .cart-rectangle::before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            background: rgb(19, 165, 6);
-            border-radius: 50px;
-            z-index: -1;
-            animation: borderGlow 3s linear infinite;
-            background-size: 400% 400%;
-            opacity: 0.6;
-        }*/
 
         @keyframes borderGlow {
             0% {
@@ -192,11 +195,6 @@
                 0 6px 18px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
             animation-play-state: paused;
-        }
-
-        .cart-rectangle:hover::before {
-            animation: borderGlow 1.5s linear infinite;
-            opacity: 0.9;
         }
 
         .cart-rectangle:hover .cart-icon {
@@ -365,7 +363,7 @@
 
         /* Botón de enviar pedido CON ICONO GRANDE - FIJO VISIBLE */
         .modal-footer .send-order-btn {
-            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             color: white;
             border: none;
             padding: 18px 35px;
@@ -389,7 +387,7 @@
         }
 
         .modal-footer .send-order-btn:hover {
-            background:linear-gradient(135deg, #28a745 0%, #218838 100%);
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
@@ -405,17 +403,32 @@
             box-shadow: none;
         }
 
-        /* Estilos para pestañas */
+        /* Estilos para pestañas mejorados */
         .tabs-container {
-            margin-bottom: 0px;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .tabs-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .tabs {
             display: flex;
             border-bottom: 2px solid #ddd;
-            margin-bottom: 0px;
             overflow-x: auto;
             white-space: nowrap;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
         }
 
         .tab {
@@ -423,20 +436,21 @@
             background: white;
             border: none;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #666;
             border-radius: 10px 10px 0 0;
             margin-right: 5px;
             transition: all 0.3s;
             position: relative;
-            min-width: 150px;
+            min-width: 50px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .tab:hover {
             background: #f0f0f0;
-            color: #4b6cb7;
+            color: #e75480;
         }
 
         .tab.active {
@@ -458,6 +472,44 @@
             to { opacity: 1; }
         }
 
+        /* Flechas de navegación */
+        .tab-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            z-index: 2;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .tab-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .tab-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .prev-tab-btn {
+            order: 1;
+        }
+
+        .next-tab-btn {
+            order: 3;
+        }
+
         /* GALERÍA DE IMÁGENES */
         .products-grid {
             display: grid;
@@ -467,16 +519,15 @@
         }
 
         .product-card {
-            background:white;
-            border-radius: 10px; /*Borde de cuadro del producto*/
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s;
             display: flex;
             flex-direction: column;
             height: 100%;
-              border: 2px solid #d8dbe4;    /* Bordes de productos*/
-
+            border: 2px solid #d8dbe4;
         }
 
         .product-card:hover {
@@ -497,12 +548,11 @@
             align-items: center;
             justify-content: center;
             padding: 10px;
-            background:white;
+            background: white;
             min-width: 0;
             cursor: pointer;
             transition: all 0.3s;
             position: relative;
-            
         }
 
         .product-main-image {
@@ -737,7 +787,7 @@
         }
         /*Boton agregar al carrito*/
         .add-to-cart-btn {
-            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             color: white;
             border: none;
             padding: 12px 20px;
@@ -752,13 +802,12 @@
             gap: 10px;
             margin-top: auto;
             width: 100%;
-              margin-left: auto;
-    margin-right: auto;         
-            
+            margin-left: auto;
+            margin-right: auto;         
         }
 
         .add-to-cart-btn:hover {
-            background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
         }
@@ -789,24 +838,24 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s;
         }
-.shipping-box {
-    
-    background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
-    color: white !important;
-    font-weight: 800 !important;
-    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
-    border-radius: 16px !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
-}
-.payment-box {
-  
-    background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
-    color: white !important;
-    font-weight: 800 !important;
-    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
-    border-radius: 16px !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
-}
+
+        .shipping-box {
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            color: white !important;
+            font-weight: 800 !important;
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
+            border-radius: 16px !important;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .payment-box {
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            color: white !important;
+            font-weight: 800 !important;
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
+            border-radius: 16px !important;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+        }
 
         .shipping-box:hover, .payment-box:hover {
             transform: translateY(-5px);
@@ -1020,6 +1069,10 @@
                 top: -8px;
                 right: -8px;
             }
+            
+            .page-title {
+                font-size: 2.5rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1089,6 +1142,29 @@
                 height: 18px;
             }
 
+            .page-title {
+                font-size: 2rem;
+                text-align: center;
+                padding-left: 0;
+            }
+            
+            .page-title:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .tab {
+                min-width: 40px;
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .tab-nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
             /* EN MÓVIL - DOS CUADROS EN LA MISMA LÍNEA AL MISMO NIVEL */
             .shipping-payment-container {
                 flex-direction: row;
@@ -1149,6 +1225,10 @@
             
             .shipping-box h3 i, .payment-box h3 i {
                 font-size: 1.2rem;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
             }
         }
 
@@ -1242,6 +1322,27 @@
                 height: 16px;
             }
 
+            .page-title {
+                font-size: 1.6rem;
+                margin: 15px 0;
+            }
+            
+            .tabs-wrapper {
+                margin: 0 -5px;
+            }
+            
+            .tab {
+                padding: 8px 12px;
+                min-width: 35px;
+                font-size: 0.75rem;
+            }
+            
+            .tab-nav-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+
             /* EN MÓVIL MUY PEQUEÑO - DOS CUADROS EN LÍNEA */
             .shipping-payment-container {
                 flex-direction: row;
@@ -1316,6 +1417,10 @@
                 top: -5px;
                 right: -5px;
             }
+            
+            .page-title {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
@@ -1355,23 +1460,9 @@
                 </div>
             </div>
             
-            <!-- Total de la compra SIMPLE AL FINAL 
-             <div style="margin-top: 5px; margin-left: 23px; color: #218838; justify-items: left; 
-    gap: 30px; flex-wrap: wrap;">
-                            <h4>🚚 Domicilio Gratis</h4>
-            <h4>💵 Pagas al Recibir</h4>
-
-             </div>
--->
-             
-
-
-
-
+            <!-- Total de la compra SIMPLE AL FINAL -->
             <div class="cart-total-simple" id="cartTotalSimple" style="display: none; padding: 0 20px;">
-
                 <div class="total-simple-row">
-
                     <div class="total-simple-label">Total de la compra:</div>
                     <div class="total-simple-amount" id="cartTotalAmount">$0.00</div>
                 </div>
@@ -1393,39 +1484,30 @@
     </header>
 
     <div class="container">
-        <!-- Pestañas -->
+        <!-- Título principal -->
+        <h1 class="page-title">Zapatos de mujer</h1>
+
+        <!-- Pestañas de productos -->
         <div class="tabs-container">
-            <div class="tabs">
-                <button class="tab active" onclick="changeTab(1)">1</button>
-                <button class="tab" onclick="changeTab(2)">2</button>
-                <button class="tab" onclick="changeTab(3)">3</button>
-                <button class="tab" onclick="changeTab(4)">4</button>
+            <div class="tabs-wrapper">
+                <button class="tab-nav-btn prev-tab-btn" id="prevTabBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="tabs" id="tabsContainer">
+                    <!-- Los tabs se generarán dinámicamente -->
+                </div>
+                
+                <button class="tab-nav-btn next-tab-btn" id="nextTabBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
 
-            <!-- Pestaña 1 (Productos 1-8) -->
-            <div id="tab-1" class="tab-content active">
-                <div class="products-grid" id="products-grid-1">
-                    <!-- Los productos 1-9 se cargan aquí -->
-                </div>
-            </div>
-
-            <!-- Pestaña 2 (Productos 9-16) -->
-            <div id="tab-2" class="tab-content">
-                <div class="products-grid" id="products-grid-2">
-                    <!-- Los productos 10-18 se cargan aquí -->
-                </div>
-            </div>
-
-            
-            <!-- Pestaña 3 (Productos 17-24) -->
-            <div id="tab-3" class="tab-content">
-                <div class="products-grid" id="products-grid-3">
-                    <!-- Los productos 10-18 se cargan aquí -->
-                </div>
+            <!-- Contenido de los tabs -->
+            <div id="tabsContentContainer">
+                <!-- El contenido de los tabs se generará dinámicamente -->
             </div>
         </div>
-
-        
 
         <!-- Sección de envío gratis y pago al recibir EN DOS CUADROS EN LÍNEA -->
         <div class="shipping-payment-container">
@@ -1628,13 +1710,13 @@
 
         // Datos de los productos
         const products = [
-            // Productos 1-9 (Pestaña 1)
+            // Productos 1-8 (Tab 1)
             {
                 id: 1,
                 name: "Bella Star AirLift 001",
                 description: "Sneakers crema con plataforma, aire visible, estilo urbano y elegante.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/01.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1642,25 +1724,25 @@
                 defaultSize: "M",
                 tab: 1,
             },
-                        {
+            {
                 id: 2,
                 name: "Bella Star AirLift 002",
                 description: "Sneakers blanca con plataforma, aire visible, estilo urbano y elegante.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/01.png",
+                hasColors: false,
+                image: "imagenes/02.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 1,
             },
-                        {
+            {
                 id: 3,
                 name: "Bella Spark 003",
                 description: "Sneakers negros con glitter, plataforma blanca, modernos, urbanos y llamativos.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/03.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1668,12 +1750,12 @@
                 defaultSize: "M",
                 tab: 1,
             },
-                        {
+            {
                 id: 4,
                 name: "Urban Mesh 004",
                 description: "Sneakers beige con negro, diseño moderno, suela chunky, cómodos y versátiles.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/04.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1681,12 +1763,12 @@
                 defaultSize: "M",
                 tab: 1,
             },
-                        {
+            {
                 id: 5,
                 name: "Black Core 005",
                 description: "Sneakers negros chunky, textura mixta, modernos, resistentes, ideales para calle.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/05.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1694,12 +1776,12 @@
                 defaultSize: "M",
                 tab: 1,
             },
-                        {
+            {
                 id: 6,
                 name: "Zeta Trail  006",
                 description: "Sneakers beige con negro, suela gruesa, modernos, resistentes y urbanos.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/06.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1707,12 +1789,12 @@
                 defaultSize: "M",
                 tab: 1,
             },
-                        {
+            {
                 id: 7,
                 name: "Terra Rise 007",
                 description: "Sneakers chunky beige, suela profunda, modernos, cómodos, urbanos y resistentes.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/07.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1720,12 +1802,12 @@
                 defaultSize: "M",
                 tab: 1,
             },
-                        {
+            {
                 id: 8,
                 name: "Terra Rise 008",
                 description: "Sneakers blancos chunky, textura dinámica, modernos, cómodos, urbanos y versátiles.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/08.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1733,43 +1815,14 @@
                 defaultSize: "M",
                 tab: 1,
             },
-            /*
-            {
-                id: 6,
-                name: "Chompa de Cuerina",
-                description: "Chompa de cuerina para hombre, con diseño moderno.",
-                price: 39.99,
-                hasColors: true,
-                colors: [
-                    {
-                        name: "Cafe",
-                        value: "#7e2105ff",
-                        code: "cafe",
-                        image: "imagenes/006/cafe.png",
-                    },
-                    {
-                        name: "Negro",
-                        value: "#0f0f10ff",
-                        code: "negro",
-                        image: "imagenes/006/negro.png",
-                    },
-                ],
-                defaultColor: "cafe",
-                hasSizes: true,
-                sizes: ["S", "M", "L"],
-                defaultSize: "M",
-                tab: 1,
-            },
-           */
             
-            // Productos 9-16 (Pestaña 2)
-
+            // Productos 9-16 (Tab 2)
             {
                 id: 9,
                 name: "Shadow Grip 009",
                 description: "Sneakers negros chunky, textura detallada, modernos, urbanos, cómodos y firmes.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/09.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1777,12 +1830,12 @@
                 defaultSize: "M",
                 tab: 2,
             },
-                        {
+            {
                 id: 10,
                 name: "White Ridge 010",
                 description: "Sneakers blancos chunky, diseño profundo, modernos, urbanos, cómodos y resistentes.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/10.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1790,12 +1843,12 @@
                 defaultSize: "M",
                 tab: 2,
             },
-                        {
+            {
                 id: 11,
                 name: "Retro Stripe  011",
                 description: "Sneakers blancos con rayas negras, suela goma, urbanos, cómodos, versátiles.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/11.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1803,12 +1856,12 @@
                 defaultSize: "M",
                 tab: 2,
             },
-                        {
+            {
                 id: 12,
                 name: "Silver Stripe 012",
                 description: "Sneakers blancos con rayas plateadas, suela goma, modernos y versátiles.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/12.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1816,12 +1869,12 @@
                 defaultSize: "M",
                 tab: 2,
             },
-                        {
+            {
                 id: 13,
                 name: "Gold Line  013",
                 description: "Sneakers blancos con rayas doradas, suela goma, modernos y versátiles.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/13.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1829,12 +1882,12 @@
                 defaultSize: "M",
                 tab: 2,
             },
-                        {
+            {
                 id: 14,
                 name: "Balance Core  014",
                 description: "Sneakers blancos New Balance, suela chunky, modernos, cómodos, urbanos y técnicos.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/14.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1842,12 +1895,12 @@
                 defaultSize: "M",
                 tab: 2,
             },
-                        {
+            {
                 id: 15,
                 name: "White Pulse  015",
                 description: "Sneakers blancos deportivos, suela chunky, modernos, cómodos, urbanos y transpirables.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/15.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1855,12 +1908,12 @@
                 defaultSize: "M",
                 tab: 2,
             },
-                        {
+            {
                 id: 16,
                 name: "Elia AirStep 016",
                 description: "Sneakers negros con aire visible, modernos, cómodos, urbanos y versátiles.",
                 price: 24.99,
-                hasColors: true,
+                hasColors: false,
                 image: "imagenes/16.png",
                 defaultColor: "blanco",
                 hasSizes: true,
@@ -1869,115 +1922,124 @@
                 tab: 2,
             },
                 
-            // Productos 17-24 (Pestaña 3)
-
+            // Productos 17-24 (Tab 3)
             {
                 id: 17,
-                name: "Shadow Grip 009",
-                description: "Sneakers negros chunky, textura detallada, modernos, urbanos, cómodos y firmes.",
+                name: "Color Rush 017",
+                description: "Sneakers multicolor chunky, diseño vibrante, modernos, cómodos, urbanos y atrevidos.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/09.png",
+                hasColors: false,
+                image: "imagenes/17.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 3,
             },
-                        {
+            {
                 id: 18,
-                name: "White Ridge 010",
-                description: "Sneakers blancos chunky, diseño profundo, modernos, urbanos, cómodos y resistentes.",
+                name: "Cream Lift  018",
+                description: "Sneakers crema con rayas negras, plataforma alta, modernos, cómodos y urbanos.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/10.png",
+                hasColors: false,
+                image: "imagenes/18.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 3,
             },
-                        {
+            {
                 id: 19,
-                name: "Retro Stripe  011",
-                description: "Sneakers blancos con rayas negras, suela goma, urbanos, cómodos, versátiles.",
+                name: "Noir Spark 019",
+                description: "Sneakers negros con glitter, plataforma beige, modernos, urbanos, cómodos y llamativos.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/11.png",
+                hasColors: false,
+                image: "imagenes/19.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 3,
             },
-                        {
+            {
                 id: 20,
-                name: "Silver Stripe 012",
-                description: "Sneakers blancos con rayas plateadas, suela goma, modernos y versátiles.",
+                name: "Gum Stripe 020",
+                description: "Sneakers blancos con rayas negras, suela goma, modernos, cómodos y urbanos.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/12.png",
+                hasColors: false,
+                image: "imagenes/20.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 3,
             },
-                        {
+            {
                 id: 21,
-                name: "Gold Line  013",
-                description: "Sneakers blancos con rayas doradas, suela goma, modernos y versátiles.",
+                name: "Glitter Step 021",
+                description: "Sneakers negros con rayas glitter, plataforma blanca, modernos, urbanos y llamativos.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/13.png",
+                hasColors: false,
+                image: "imagenes/21.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 3,
             },
-                        {
+            {
                 id: 22,
-                name: "Balance Core  014",
-                description: "Sneakers blancos New Balance, suela chunky, modernos, cómodos, urbanos y técnicos.",
+                name: "Red Rise 022",
+                description: "Sneakers rojos con rayas blancas, plataforma alta, modernos, urbanos y atrevidos.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/14.png",
+                hasColors: false,
+                image: "imagenes/22.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 3,
             },
-                        {
+            {
                 id: 23,
-                name: "White Pulse  015",
-                description: "Sneakers blancos deportivos, suela chunky, modernos, cómodos, urbanos y transpirables.",
+                name: "Black Core 023",
+                description: "Sneakers negros chunky, diseño texturizado, modernos, cómodos, urbanos y versátiles.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/15.png",
+                hasColors: false,
+                image: "imagenes/23.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 3,
             },
-                        {
+            {
                 id: 24,
-                name: "Elia AirStep 016",
-                description: "Sneakers negros con aire visible, modernos, cómodos, urbanos y versátiles.",
+                name: "Mint Flow 024",
+                description: "Sneakers crema y verde, plataforma chunky, modernos, cómodos, urbanos y vibrantes.",
                 price: 24.99,
-                hasColors: true,
-                image: "imagenes/16.png",
+                hasColors: false,
+                image: "imagenes/24.png",
                 defaultColor: "blanco",
                 hasSizes: true,
                 sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 3,
             },
-           
-
-
+            {
+                id: 25,
+                name: "Golden Sand 025",
+                description: "Sneakers beige y dorado, plataforma chunky, modernos, cómodos, urbanos y elegantes.",
+                price: 24.99,
+                hasColors: false,
+                image: "imagenes/25.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 4,
+            },
         ];
 
         // Estado del carrito
@@ -1991,10 +2053,16 @@
             images: []
         };
 
+        // Estado para los tabs
+        let currentTab = 1;
+        const productsPerTab = 8;
+        const totalTabs = Math.ceil(products.length / productsPerTab);
+
         // Elementos del DOM
-        const productsGrid1 = document.getElementById("products-grid-1");
-        const productsGrid2 = document.getElementById("products-grid-2");
-        const productsGrid3 = document.getElementById("products-grid-3");
+        const tabsContainer = document.getElementById("tabsContainer");
+        const tabsContentContainer = document.getElementById("tabsContentContainer");
+        const prevTabBtn = document.getElementById("prevTabBtn");
+        const nextTabBtn = document.getElementById("nextTabBtn");
         const cartCountElement = document.getElementById("cartCount");
         const cartModal = document.getElementById("cartModal");
         const modalCartItems = document.getElementById("modalCartItems");
@@ -2014,6 +2082,88 @@
         const zoomColorIndicator = document.getElementById('zoom-color-indicator');
         const colorSwatch = document.getElementById('color-swatch');
         const colorName = document.getElementById('color-name');
+
+        // Función para generar tabs dinámicamente
+        function generateTabs() {
+            // Limpiar contenedores
+            tabsContainer.innerHTML = '';
+            tabsContentContainer.innerHTML = '';
+            
+            // Generar tabs
+            for (let i = 1; i <= totalTabs; i++) {
+                // Crear botón del tab
+                const tabButton = document.createElement('button');
+                tabButton.className = `tab ${i === 1 ? 'active' : ''}`;
+                tabButton.textContent = i;
+                tabButton.onclick = () => changeTab(i);
+                tabsContainer.appendChild(tabButton);
+                
+                // Crear contenido del tab
+                const tabContent = document.createElement('div');
+                tabContent.id = `tab-${i}`;
+                tabContent.className = `tab-content ${i === 1 ? 'active' : ''}`;
+                
+                const productsGrid = document.createElement('div');
+                productsGrid.className = 'products-grid';
+                productsGrid.id = `products-grid-${i}`;
+                tabContent.appendChild(productsGrid);
+                tabsContentContainer.appendChild(tabContent);
+            }
+            
+            // Actualizar navegación
+            updateTabNavigation();
+        }
+
+        // Cambiar entre pestañas
+        function changeTab(tabNumber) {
+            if (tabNumber < 1 || tabNumber > totalTabs) return;
+            
+            currentTab = tabNumber;
+            
+            // Actualizar tabs activos
+            document.querySelectorAll('.tab').forEach((tab, index) => {
+                if (index + 1 === tabNumber) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Actualizar contenido activo
+            document.querySelectorAll('.tab-content').forEach((content, index) => {
+                if (index + 1 === tabNumber) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Actualizar navegación
+            updateTabNavigation();
+            
+            // Desplazar tabs si es necesario
+            scrollToTab(tabNumber);
+        }
+
+        // Actualizar navegación de tabs
+        function updateTabNavigation() {
+            prevTabBtn.disabled = currentTab === 1;
+            nextTabBtn.disabled = currentTab === totalTabs;
+        }
+
+        // Desplazar al tab visible
+        function scrollToTab(tabNumber) {
+            const tabs = document.querySelectorAll('.tab');
+            if (tabs[tabNumber - 1]) {
+                const tab = tabs[tabNumber - 1];
+                const container = tabsContainer;
+                const containerWidth = container.offsetWidth;
+                const tabOffset = tab.offsetLeft;
+                const tabWidth = tab.offsetWidth;
+                
+                container.scrollLeft = tabOffset - (containerWidth / 2) + (tabWidth / 2);
+            }
+        }
 
         // Función para manejar el carrito flotante
         function setupFloatingCart() {
@@ -2079,6 +2229,10 @@
                 
                 lastScrollTop = scrollTop;
             });
+            
+            // Navegación de tabs
+            prevTabBtn.addEventListener('click', () => changeTab(currentTab - 1));
+            nextTabBtn.addEventListener('click', () => changeTab(currentTab + 1));
         }
 
         // Abrir modal del carrito
@@ -2337,24 +2491,6 @@
             }
         }
 
-        // Cambiar entre pestañas
-        function changeTab(tabNumber) {
-            closeImageZoom();
-            closeCartModal();
-            
-            const tabs = document.querySelectorAll(".tab");
-            tabs.forEach((tab) => tab.classList.remove("active"));
-
-            const activeTab = document.querySelector(`.tab:nth-child(${tabNumber})`);
-            if (activeTab) activeTab.classList.add("active");
-
-            const tabContents = document.querySelectorAll(".tab-content");
-            tabContents.forEach((content) => content.classList.remove("active"));
-
-            const activeContent = document.getElementById(`tab-${tabNumber}`);
-            if (activeContent) activeContent.classList.add("active");
-        }
-
         // Función para obtener la imagen de un producto
         function getProductImage(product, colorCode = null) {
             if (colorCode && product.hasColors && product.colors) {
@@ -2382,9 +2518,13 @@
 
         // Cargar productos en las pestañas correspondientes
         function loadProducts() {
-            productsGrid1.innerHTML = "";
-            productsGrid2.innerHTML = "";
-             productsGrid3.innerHTML = "";
+            // Primero, limpiar todos los contenedores
+            for (let i = 1; i <= totalTabs; i++) {
+                const productsGrid = document.getElementById(`products-grid-${i}`);
+                if (productsGrid) {
+                    productsGrid.innerHTML = "";
+                }
+            }
 
             products.forEach((product) => {
                 const productCard = document.createElement("div");
@@ -2479,12 +2619,10 @@
                     </div>
                 `;
 
-                if (product.tab === 1) {
-                    productsGrid1.appendChild(productCard);
-                } else if (product.tab === 2) {
-                    productsGrid2.appendChild(productCard);
-                       } else if (product.tab === 3) {
-                    productsGrid3.appendChild(productCard);
+                // Agregar al grid correspondiente según el tab
+                const productsGrid = document.getElementById(`products-grid-${product.tab}`);
+                if (productsGrid) {
+                    productsGrid.appendChild(productCard);
                 }
             });
         }
@@ -2598,15 +2736,6 @@
                     return;
                 }
             }
-
-            /*Para seleccionar un color si no seleccion*/
-
-            /*if (product.hasColors) {
-                if (!selectedColor) {
-                    showNotification(`Por favor, selecciona un color para ${product.name}`);
-                    return;
-                }
-            }*/
 
             const selectedSize = product.hasSizes ? getSelectedSize(productId) : null;
 
@@ -2779,6 +2908,7 @@
 
         // Inicializar la página
         document.addEventListener("DOMContentLoaded", function () {
+            generateTabs();
             loadProducts();
             setupImageZoom();
             setupFloatingCart();
@@ -2787,4 +2917,3 @@
     </script>
 </body>
 </html>
-
