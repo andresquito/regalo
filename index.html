@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Viste Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -26,16 +27,18 @@
         }
 
         header {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             color: white;
             padding: 1px 0;
             text-align: center;
             border-radius: 0 0 10px 10px;
             margin-bottom: 2px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            
         }
 
         header h1 {
+            
             font-size: 1.8rem;
             display: flex;
             align-items: center;
@@ -71,7 +74,7 @@
             border-radius: 0px;
             position: relative;
             overflow: visible;
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             box-shadow: 
                 0 15px 35px rgba(75, 108, 183, 0.4),
                 0 5px 15px rgba(0, 0, 0, 0.1),
@@ -155,7 +158,7 @@
             position: absolute;
             top: -8px;
             right: -8px;
-            background: #ff4757;
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             color: white;
             font-weight: bold;
             font-size: 0.85rem;
@@ -256,7 +259,7 @@
 
         /* ENCABEZADO DEL MODAL CON LOS MISMOS COLORES DEL HEADER */
         .modal-header {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             color: white;
             padding: 20px;
             display: flex;
@@ -362,7 +365,7 @@
 
         /* Botón de enviar pedido CON ICONO GRANDE - FIJO VISIBLE */
         .modal-footer .send-order-btn {
-            background: #12af04;
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
             color: white;
             border: none;
             padding: 18px 35px;
@@ -386,7 +389,7 @@
         }
 
         .modal-footer .send-order-btn:hover {
-            background: #1da851;
+            background:linear-gradient(135deg, #28a745 0%, #218838 100%);
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
@@ -437,7 +440,7 @@
         }
 
         .tab.active {
-            background: #4b6cb7;
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             color: white;
         }
 
@@ -525,7 +528,7 @@
             gap: 10px;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: #4b6cb7 #f0f0f0;
+            scrollbar-color: #ecbbe3 #f0f0f0;
             flex-shrink: 0;
         }
 
@@ -788,7 +791,7 @@
         }
 .shipping-box {
     
-    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
     color: white !important;
     font-weight: 800 !important;
     box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
@@ -797,7 +800,7 @@
 }
 .payment-box {
   
-    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
     color: white !important;
     font-weight: 800 !important;
     box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3) !important;
@@ -1385,7 +1388,7 @@
 
     <header>
         <div class="container">
-            <h1><i class="fas fa-store"></i> Viste Online</h1>
+            <h1><i class="fas fa-store"></i> Para Ella Online</h1>
         </div>
     </header>
 
@@ -1393,20 +1396,30 @@
         <!-- Pestañas -->
         <div class="tabs-container">
             <div class="tabs">
-                <button class="tab active" onclick="changeTab(1)">Ropa de Hombre</button>
-                <button class="tab" onclick="changeTab(2)" style="display: none;">Más Productos</button>
+                <button class="tab active" onclick="changeTab(1)">1</button>
+                <button class="tab" onclick="changeTab(2)">2</button>
+                <button class="tab" onclick="changeTab(3)">3</button>
+                <button class="tab" onclick="changeTab(4)">4</button>
             </div>
 
-            <!-- Pestaña 1 (Productos 1-9) -->
+            <!-- Pestaña 1 (Productos 1-8) -->
             <div id="tab-1" class="tab-content active">
                 <div class="products-grid" id="products-grid-1">
                     <!-- Los productos 1-9 se cargan aquí -->
                 </div>
             </div>
 
-            <!-- Pestaña 2 (Productos 10-18) -->
+            <!-- Pestaña 2 (Productos 9-16) -->
             <div id="tab-2" class="tab-content">
                 <div class="products-grid" id="products-grid-2">
+                    <!-- Los productos 10-18 se cargan aquí -->
+                </div>
+            </div>
+
+            
+            <!-- Pestaña 3 (Productos 17-24) -->
+            <div id="tab-3" class="tab-content">
+                <div class="products-grid" id="products-grid-3">
                     <!-- Los productos 10-18 se cargan aquí -->
                 </div>
             </div>
@@ -1432,7 +1445,7 @@
 
         <footer>
             <div class="container">
-                <p>© 2026 Viste Online</p>
+                <p>© 2026 Para Ella Online</p>
             </div>
         </footer>
     </div>
@@ -1471,7 +1484,7 @@
                 name: "Blanco",
                 value: "#ffffff",
                 code: "blanco",
-                image: "imagenes/001/blanco.png",
+                image: "imagenes/01.png",
             },
             {
                 name: "Negro",
@@ -1618,132 +1631,109 @@
             // Productos 1-9 (Pestaña 1)
             {
                 id: 1,
-                name: "Camiseta Manga Corta de Algodón",
-                description: "Camiseta manga corta de algodón, cómoda, lisa con cuello redondo.",
-                price: 7.99,
+                name: "Bella Star AirLift 001",
+                description: "Sneakers crema con plataforma, aire visible, estilo urbano y elegante.",
+                price: 24.99,
                 hasColors: true,
-                colors: tshirtColors,
+                image: "imagenes/01.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["S", "M", "L"],
+                sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 1,
             },
-            {
+                        {
                 id: 2,
-                name: "Camiseta Manga Larga de Algodón",
-                description: "Camiseta manga larga de algodón, cómoda, lisa con cuello redondo.",
-                price: 12.99,
+                name: "Bella Star AirLift 002",
+                description: "Sneakers blanca con plataforma, aire visible, estilo urbano y elegante.",
+                price: 24.99,
                 hasColors: true,
-                colors: mangaLarga,
+                image: "imagenes/01.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["S", "M", "L"],
+                sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 1,
             },
-            {
+                        {
                 id: 3,
-                name: "Jean Clásico",
-                description: "Jean clásico para hombre, corte recto, tela resistente.",
-                price: 19.99,
+                name: "Bella Spark 003",
+                description: "Sneakers negros con glitter, plataforma blanca, modernos, urbanos y llamativos.",
+                price: 24.99,
                 hasColors: true,
-                colors: [
-                    {
-                        name: "Azul",
-                        value: "#2b59e2ff",
-                        code: "azul",
-                        image: "imagenes/003/azul.png",
-                    },
-                    {
-                        name: "Celeste",
-                        value: "#5071d4ff",
-                        code: "celeste",
-                        image: "imagenes/003/celeste.png",
-                    },
-                    {
-                        name: "Negro",
-                        value: "#0f0f10ff",
-                        code: "negro",
-                        image: "imagenes/003/negro.png",
-                    },
-                    {
-                        name: "Plomo",
-                        value: "#4b4d53ff",
-                        code: "plomo",
-                        image: "imagenes/003/plomo.png",
-                    },
-                ],
-                defaultColor: "azul",
+                image: "imagenes/03.png",
+                defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["38", "40", "42", "44"],
-                defaultSize: "40",
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
                 tab: 1,
             },
-            {
+                        {
                 id: 4,
-                name: "Calentador",
-                description: "Calentador deportivo para hombre, diseño cómodo.",
-                price: 9.99,
+                name: "Urban Mesh 004",
+                description: "Sneakers beige con negro, diseño moderno, suela chunky, cómodos y versátiles.",
+                price: 24.99,
                 hasColors: true,
-                colors: [
-                    {
-                        name: "Azul",
-                        value: "#071d5eff",
-                        code: "azul",
-                        image: "imagenes/004/azul.png",
-                    },
-                    {
-                        name: "Negro",
-                        value: "#0f0f10ff",
-                        code: "negro",
-                        image: "imagenes/004/negro.png",
-                    },
-                    {
-                        name: "Plomo",
-                        value: "#4b4d53ff",
-                        code: "plomo",
-                        image: "imagenes/004/plomo.png",
-                    },
-                ],
-                defaultColor: "plomo",
+                image: "imagenes/04.png",
+                defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["38", "40", "42", "44"],
-                defaultSize: "40",
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
                 tab: 1,
             },
-            {
+                        {
                 id: 5,
-                name: "Calentador Adidas",
-                description: "Calentador deportivo adidas para hombre.",
-                price: 9.99,
+                name: "Black Core 005",
+                description: "Sneakers negros chunky, textura mixta, modernos, resistentes, ideales para calle.",
+                price: 24.99,
                 hasColors: true,
-                colors: [
-                    {
-                        name: "Azul",
-                        value: "#0e3bc0ff",
-                        code: "azul",
-                        image: "imagenes/005/azul.png",
-                    },
-                    {
-                        name: "Negro",
-                        value: "#0f0f10ff",
-                        code: "negro",
-                        image: "imagenes/005/negro.png",
-                    },
-                    {
-                        name: "Plomo",
-                        value: "#545050ff",
-                        code: "plomo",
-                        image: "imagenes/005/plomo.png",
-                    },
-                ],
-                defaultColor: "negro",
+                image: "imagenes/05.png",
+                defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["38", "40", "42", "44"],
-                defaultSize: "40",
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
                 tab: 1,
             },
+                        {
+                id: 6,
+                name: "Zeta Trail  006",
+                description: "Sneakers beige con negro, suela gruesa, modernos, resistentes y urbanos.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/06.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 1,
+            },
+                        {
+                id: 7,
+                name: "Terra Rise 007",
+                description: "Sneakers chunky beige, suela profunda, modernos, cómodos, urbanos y resistentes.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/07.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 1,
+            },
+                        {
+                id: 8,
+                name: "Terra Rise 008",
+                description: "Sneakers blancos chunky, textura dinámica, modernos, cómodos, urbanos y versátiles.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/08.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 1,
+            },
+            /*
             {
                 id: 6,
                 name: "Chompa de Cuerina",
@@ -1770,117 +1760,224 @@
                 defaultSize: "M",
                 tab: 1,
             },
-           
+           */
             
-            // Productos 10-18 (Pestaña 2)
+            // Productos 9-16 (Pestaña 2)
+
             {
+                id: 9,
+                name: "Shadow Grip 009",
+                description: "Sneakers negros chunky, textura detallada, modernos, urbanos, cómodos y firmes.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/09.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 2,
+            },
+                        {
                 id: 10,
-                name: "Camiseta V-Neck",
-                description: "Camiseta con cuello en V, elegante y moderna.",
-                price: 22.99,
+                name: "White Ridge 010",
+                description: "Sneakers blancos chunky, diseño profundo, modernos, urbanos, cómodos y resistentes.",
+                price: 24.99,
                 hasColors: true,
-                colors: tshirtColors,
-                defaultColor: "gris",
+                image: "imagenes/10.png",
+                defaultColor: "blanco",
                 hasSizes: true,
-                sizes: sizes,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 2,
             },
-            {
+                        {
                 id: 11,
-                name: "Camiseta Estampada",
-                description: "Camiseta con estampado único, 100% algodón orgánico.",
-                price: 27.99,
+                name: "Retro Stripe  011",
+                description: "Sneakers blancos con rayas negras, suela goma, urbanos, cómodos, versátiles.",
+                price: 24.99,
                 hasColors: true,
-                colors: tshirtColors.slice(0, 3),
+                image: "imagenes/11.png",
                 defaultColor: "blanco",
                 hasSizes: true,
-                sizes: sizes,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 2,
             },
-            {
+                        {
                 id: 12,
-                name: "Medias Blancas",
-                description: "Pack de 3 pares de medias blancas de algodón.",
-                price: 8.75,
+                name: "Silver Stripe 012",
+                description: "Sneakers blancos con rayas plateadas, suela goma, modernos y versátiles.",
+                price: 24.99,
                 hasColors: true,
-                colors: sockColors,
+                image: "imagenes/12.png",
                 defaultColor: "blanco",
-                hasSizes: false,
-                tab: 2,
-            },
-            {
-                id: 13,
-                name: "Mochila Urbana",
-                description: "Mochila resistente con múltiples compartimientos.",
-                price: 38.5,
-                hasColors: true,
-                colors: backpackColors,
-                defaultColor: "negro",
-                hasSizes: false,
-                tab: 2,
-            },
-            {
-                id: 14,
-                name: "Boxer Algodón",
-                description: "Pack de 5 boxers de algodón suave y elástico.",
-                price: 22.5,
-                image: "imagenes/boxer/algodon.jpg",
-                hasColors: false,
                 hasSizes: true,
-                sizes: sizes,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
                 tab: 2,
             },
-            {
-                id: 15,
-                name: "Reloj Deportivo",
-                description: "Reloj digital resistente al agua con cronómetro.",
-                price: 65.25,
-                image: "imagenes/reloj/deportivo.jpg",
-                hasColors: false,
-                hasSizes: false,
-                tab: 2,
-            },
-            {
-                id: 16,
-                name: "Bufanda de Lana",
-                description: "Bufanda tejida en lana suave para el invierno.",
-                price: 27.99,
-                image: "imagenes/bufandas/lana.jpg",
+                        {
+                id: 13,
+                name: "Gold Line  013",
+                description: "Sneakers blancos con rayas doradas, suela goma, modernos y versátiles.",
+                price: 24.99,
                 hasColors: true,
-                colors: sockColors,
-                defaultColor: "negro",
-                hasSizes: false,
+                image: "imagenes/13.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
                 tab: 2,
             },
+                        {
+                id: 14,
+                name: "Balance Core  014",
+                description: "Sneakers blancos New Balance, suela chunky, modernos, cómodos, urbanos y técnicos.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/14.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 2,
+            },
+                        {
+                id: 15,
+                name: "White Pulse  015",
+                description: "Sneakers blancos deportivos, suela chunky, modernos, cómodos, urbanos y transpirables.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/15.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 2,
+            },
+                        {
+                id: 16,
+                name: "Elia AirStep 016",
+                description: "Sneakers negros con aire visible, modernos, cómodos, urbanos y versátiles.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/16.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 2,
+            },
+                
+            // Productos 17-24 (Pestaña 3)
+
             {
                 id: 17,
-                name: "Cinturón de Cuero",
-                description: "Cinturón de cuero genuino con hebilla metálica.",
-                price: 29.75,
-                image: "imagenes/cinturones/cuero.jpg",
-                hasColors: false,
-                hasSizes: true,
-                sizes: ["S", "M", "L", "XL"],
-                defaultSize: "M",
-                tab: 2,
-            },
-            {
-                id: 18,
-                name: "Guantes de Invierno",
-                description: "Guantes térmicos para climas fríos.",
-                price: 21.5,
-                image: "imagenes/guantes/invierno.jpg",
+                name: "Shadow Grip 009",
+                description: "Sneakers negros chunky, textura detallada, modernos, urbanos, cómodos y firmes.",
+                price: 24.99,
                 hasColors: true,
-                colors: sockColors,
-                defaultColor: "negro",
+                image: "imagenes/09.png",
+                defaultColor: "blanco",
                 hasSizes: true,
-                sizes: ["S", "M", "L"],
+                sizes: ["34", "35", "36","37", "38", "39","40"],
                 defaultSize: "M",
-                tab: 2,
+                tab: 3,
             },
+                        {
+                id: 18,
+                name: "White Ridge 010",
+                description: "Sneakers blancos chunky, diseño profundo, modernos, urbanos, cómodos y resistentes.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/10.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 3,
+            },
+                        {
+                id: 19,
+                name: "Retro Stripe  011",
+                description: "Sneakers blancos con rayas negras, suela goma, urbanos, cómodos, versátiles.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/11.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 3,
+            },
+                        {
+                id: 20,
+                name: "Silver Stripe 012",
+                description: "Sneakers blancos con rayas plateadas, suela goma, modernos y versátiles.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/12.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 3,
+            },
+                        {
+                id: 21,
+                name: "Gold Line  013",
+                description: "Sneakers blancos con rayas doradas, suela goma, modernos y versátiles.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/13.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 3,
+            },
+                        {
+                id: 22,
+                name: "Balance Core  014",
+                description: "Sneakers blancos New Balance, suela chunky, modernos, cómodos, urbanos y técnicos.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/14.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 3,
+            },
+                        {
+                id: 23,
+                name: "White Pulse  015",
+                description: "Sneakers blancos deportivos, suela chunky, modernos, cómodos, urbanos y transpirables.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/15.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 3,
+            },
+                        {
+                id: 24,
+                name: "Elia AirStep 016",
+                description: "Sneakers negros con aire visible, modernos, cómodos, urbanos y versátiles.",
+                price: 24.99,
+                hasColors: true,
+                image: "imagenes/16.png",
+                defaultColor: "blanco",
+                hasSizes: true,
+                sizes: ["34", "35", "36","37", "38", "39","40"],
+                defaultSize: "M",
+                tab: 3,
+            },
+           
+
+
         ];
 
         // Estado del carrito
@@ -1897,6 +1994,7 @@
         // Elementos del DOM
         const productsGrid1 = document.getElementById("products-grid-1");
         const productsGrid2 = document.getElementById("products-grid-2");
+        const productsGrid3 = document.getElementById("products-grid-3");
         const cartCountElement = document.getElementById("cartCount");
         const cartModal = document.getElementById("cartModal");
         const modalCartItems = document.getElementById("modalCartItems");
@@ -2286,6 +2384,7 @@
         function loadProducts() {
             productsGrid1.innerHTML = "";
             productsGrid2.innerHTML = "";
+             productsGrid3.innerHTML = "";
 
             products.forEach((product) => {
                 const productCard = document.createElement("div");
@@ -2384,6 +2483,8 @@
                     productsGrid1.appendChild(productCard);
                 } else if (product.tab === 2) {
                     productsGrid2.appendChild(productCard);
+                       } else if (product.tab === 3) {
+                    productsGrid3.appendChild(productCard);
                 }
             });
         }
@@ -2498,12 +2599,14 @@
                 }
             }
 
-            if (product.hasColors) {
+            /*Para seleccionar un color si no seleccion*/
+
+            /*if (product.hasColors) {
                 if (!selectedColor) {
                     showNotification(`Por favor, selecciona un color para ${product.name}`);
                     return;
                 }
-            }
+            }*/
 
             const selectedSize = product.hasSizes ? getSelectedSize(productId) : null;
 
@@ -2684,3 +2787,4 @@
     </script>
 </body>
 </html>
+
