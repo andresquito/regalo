@@ -37,11 +37,16 @@
         }
 
         header h1 {
+            
+            font-family: 'Brush Script MT', cursive;
             font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            color: #f7f2f2;
+            text-align: left;
+            margin: 10px 0 10px 0;
+            text-align: center;
+            font-weight: normal;
+            font-style: italic;
+            position: relative;
         }
 
         /* Título "Zapatos de mujer" */
@@ -403,59 +408,84 @@
             box-shadow: none;
         }
 
-        /* Estilos para pestañas mejorados */
-        .tabs-container {
-            margin: 30px 0;
+        /* Estilos para pestañas mejorados - EN LA PARTE INFERIOR */
+        .bottom-tabs-container {
+            margin: 40px 0 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
+            width: 100%;
         }
 
-        .tabs-wrapper {
-            position: relative;
+        .tabs-navigation {
             display: flex;
             align-items: center;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #ddd;
-            overflow-x: auto;
-            white-space: nowrap;
-            scroll-behavior: smooth;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            flex: 1;
-            margin: 0 10px;
-        }
-
-        .tabs::-webkit-scrollbar {
-            display: none;
-        }
-
-        .tab {
-            padding: 12px 25px;
+            justify-content: center;
+            gap: 5px;
             background: white;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #666;
-            border-radius: 10px 10px 0 0;
-            margin-right: 5px;
-            transition: all 0.3s;
-            position: relative;
-            min-width: 50px;
-            text-align: center;
-            flex-shrink: 0;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e75480;
         }
 
-        .tab:hover {
-            background: #f0f0f0;
-            color: #e75480;
-        }
-
-        .tab.active {
+        .tab-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
             color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .tab-nav-btn:hover:not(:disabled) {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .tab-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .tab-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: #333;
+            border: 2px solid #e75480;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0 5px;
+        }
+
+        .tab-number:hover {
+            background: #f8c8dc;
+            color: white;
+        }
+
+        .tab-number.active {
+            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
+            color: white;
+            border-color: #e75480;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(231, 84, 128, 0.4);
         }
 
         .tab-content {
@@ -472,42 +502,9 @@
             to { opacity: 1; }
         }
 
-        /* Flechas de navegación */
-        .tab-nav-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f8c8dc 0%, #e75480 100%);
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            flex-shrink: 0;
-            z-index: 2;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-
-        .tab-nav-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .tab-nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .prev-tab-btn {
-            order: 1;
-        }
-
-        .next-tab-btn {
-            order: 3;
+        /* Contenedor de tabs en la parte superior (solo para contenido) */
+        .top-tabs-container {
+            margin: 20px 0;
         }
 
         /* GALERÍA DE IMÁGENES */
@@ -515,7 +512,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
             gap: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .product-card {
@@ -1153,10 +1150,14 @@
                 transform: translateX(-50%);
             }
 
-            .tab {
-                min-width: 40px;
-                padding: 10px 15px;
-                font-size: 0.8rem;
+            .tabs-navigation {
+                padding: 8px 15px;
+            }
+            
+            .tab-number {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
             }
             
             .tab-nav-btn {
@@ -1229,6 +1230,23 @@
             
             .page-title {
                 font-size: 1.8rem;
+            }
+            
+            .tabs-navigation {
+                padding: 6px 12px;
+            }
+            
+            .tab-number {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+                margin: 0 3px;
+            }
+            
+            .tab-nav-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
             }
         }
 
@@ -1327,20 +1345,21 @@
                 margin: 15px 0;
             }
             
-            .tabs-wrapper {
-                margin: 0 -5px;
+            .tabs-navigation {
+                padding: 5px 10px;
             }
             
-            .tab {
-                padding: 8px 12px;
-                min-width: 35px;
-                font-size: 0.75rem;
+            .tab-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+                margin: 0 2px;
             }
             
             .tab-nav-btn {
                 width: 30px;
                 height: 30px;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             /* EN MÓVIL MUY PEQUEÑO - DOS CUADROS EN LÍNEA */
@@ -1421,6 +1440,23 @@
             .page-title {
                 font-size: 1.4rem;
             }
+            
+            .tabs-navigation {
+                padding: 4px 8px;
+            }
+            
+            .tab-number {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+                margin: 0 1px;
+            }
+            
+            .tab-nav-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -1487,26 +1523,14 @@
         <!-- Título principal -->
         <h1 class="page-title">Zapatos de mujer</h1>
 
-        <!-- Pestañas de productos -->
-        <div class="tabs-container">
-            <div class="tabs-wrapper">
-                <button class="tab-nav-btn prev-tab-btn" id="prevTabBtn">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="tabs" id="tabsContainer">
-                    <!-- Los tabs se generarán dinámicamente -->
-                </div>
-                
-                <button class="tab-nav-btn next-tab-btn" id="nextTabBtn">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
+        <!-- Contenedor de contenido de tabs en la parte superior -->
+        <div class="top-tabs-container" id="tabsContentContainer">
+            <!-- El contenido de los tabs se generará dinámicamente -->
+        </div>
 
-            <!-- Contenido de los tabs -->
-            <div id="tabsContentContainer">
-                <!-- El contenido de los tabs se generará dinámicamente -->
-            </div>
+        <!-- Tabs de navegación en la parte inferior -->
+        <div class="bottom-tabs-container" id="bottomTabsContainer">
+            <!-- Los tabs se generarán dinámicamente -->
         </div>
 
         <!-- Sección de envío gratis y pago al recibir EN DOS CUADROS EN LÍNEA -->
@@ -2057,12 +2081,11 @@
         let currentTab = 1;
         const productsPerTab = 8;
         const totalTabs = Math.ceil(products.length / productsPerTab);
+        let visibleTabs = []; // Para almacenar qué tabs son visibles
 
         // Elementos del DOM
-        const tabsContainer = document.getElementById("tabsContainer");
         const tabsContentContainer = document.getElementById("tabsContentContainer");
-        const prevTabBtn = document.getElementById("prevTabBtn");
-        const nextTabBtn = document.getElementById("nextTabBtn");
+        const bottomTabsContainer = document.getElementById("bottomTabsContainer");
         const cartCountElement = document.getElementById("cartCount");
         const cartModal = document.getElementById("cartModal");
         const modalCartItems = document.getElementById("modalCartItems");
@@ -2083,24 +2106,16 @@
         const colorSwatch = document.getElementById('color-swatch');
         const colorName = document.getElementById('color-name');
 
-        // Función para generar tabs dinámicamente
-        function generateTabs() {
-            // Limpiar contenedores
-            tabsContainer.innerHTML = '';
+        // Función para generar contenido de tabs dinámicamente
+        function generateTabsContent() {
+            // Limpiar contenedor
             tabsContentContainer.innerHTML = '';
             
-            // Generar tabs
+            // Generar contenido para cada tab
             for (let i = 1; i <= totalTabs; i++) {
-                // Crear botón del tab
-                const tabButton = document.createElement('button');
-                tabButton.className = `tab ${i === 1 ? 'active' : ''}`;
-                tabButton.textContent = i;
-                tabButton.onclick = () => changeTab(i);
-                tabsContainer.appendChild(tabButton);
-                
                 // Crear contenido del tab
                 const tabContent = document.createElement('div');
-                tabContent.id = `tab-${i}`;
+                tabContent.id = `tab-content-${i}`;
                 tabContent.className = `tab-content ${i === 1 ? 'active' : ''}`;
                 
                 const productsGrid = document.createElement('div');
@@ -2109,9 +2124,88 @@
                 tabContent.appendChild(productsGrid);
                 tabsContentContainer.appendChild(tabContent);
             }
+        }
+
+        // Función para generar tabs de navegación en la parte inferior
+        function generateBottomTabs() {
+            // Limpiar contenedor
+            bottomTabsContainer.innerHTML = '';
             
-            // Actualizar navegación
-            updateTabNavigation();
+            // Crear contenedor de navegación
+            const tabsNavigation = document.createElement('div');
+            tabsNavigation.className = 'tabs-navigation';
+            
+            // Calcular qué tabs mostrar (solo 2 a la vez)
+            updateVisibleTabs();
+            
+            // Botón de retroceder
+            const prevButton = document.createElement('button');
+            prevButton.className = 'tab-nav-btn';
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevButton.onclick = () => navigateTabs('prev');
+            prevButton.id = 'prevTabBtn';
+            tabsNavigation.appendChild(prevButton);
+            
+            // Generar los números de tabs visibles
+            visibleTabs.forEach(tabNumber => {
+                const tabNumberElement = document.createElement('div');
+                tabNumberElement.className = `tab-number ${tabNumber === currentTab ? 'active' : ''}`;
+                tabNumberElement.textContent = tabNumber;
+                tabNumberElement.onclick = () => changeTab(tabNumber);
+                tabsNavigation.appendChild(tabNumberElement);
+            });
+            
+            // Botón de avanzar
+            const nextButton = document.createElement('button');
+            nextButton.className = 'tab-nav-btn';
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextButton.onclick = () => navigateTabs('next');
+            nextButton.id = 'nextTabBtn';
+            tabsNavigation.appendChild(nextButton);
+            
+            bottomTabsContainer.appendChild(tabsNavigation);
+            
+            // Actualizar estado de botones
+            updateNavigationButtons();
+        }
+
+        // Actualizar qué tabs son visibles (solo 2)
+        function updateVisibleTabs() {
+            visibleTabs = [];
+            
+            // Si estamos en los primeros tabs
+            if (currentTab <= 2) {
+                visibleTabs = [1, 2];
+            } 
+            // Si estamos en los últimos tabs
+            else if (currentTab >= totalTabs - 1) {
+                visibleTabs = [totalTabs - 1, totalTabs];
+            }
+            // En el medio
+            else {
+                visibleTabs = [currentTab - 1, currentTab];
+            }
+            
+            // Asegurarse de que no mostremos tabs fuera de rango
+            visibleTabs = visibleTabs.filter(tab => tab >= 1 && tab <= totalTabs);
+            
+            // Si solo hay 1 tab, mostrarlo solo
+            if (totalTabs === 1) {
+                visibleTabs = [1];
+            }
+        }
+
+        // Navegar entre tabs
+        function navigateTabs(direction) {
+            if (direction === 'prev') {
+                if (currentTab > 1) {
+                    changeTab(currentTab - 1);
+                }
+            } else if (direction === 'next') {
+                if (currentTab < totalTabs) {
+                    changeTab(currentTab + 1);
+                }
+            }
         }
 
         // Cambiar entre pestañas
@@ -2119,15 +2213,6 @@
             if (tabNumber < 1 || tabNumber > totalTabs) return;
             
             currentTab = tabNumber;
-            
-            // Actualizar tabs activos
-            document.querySelectorAll('.tab').forEach((tab, index) => {
-                if (index + 1 === tabNumber) {
-                    tab.classList.add('active');
-                } else {
-                    tab.classList.remove('active');
-                }
-            });
             
             // Actualizar contenido activo
             document.querySelectorAll('.tab-content').forEach((content, index) => {
@@ -2138,30 +2223,22 @@
                 }
             });
             
-            // Actualizar navegación
-            updateTabNavigation();
+            // Actualizar navegación inferior
+            updateVisibleTabs();
+            generateBottomTabs();
+        }
+
+        // Actualizar botones de navegación
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevTabBtn');
+            const nextBtn = document.getElementById('nextTabBtn');
             
-            // Desplazar tabs si es necesario
-            scrollToTab(tabNumber);
-        }
-
-        // Actualizar navegación de tabs
-        function updateTabNavigation() {
-            prevTabBtn.disabled = currentTab === 1;
-            nextTabBtn.disabled = currentTab === totalTabs;
-        }
-
-        // Desplazar al tab visible
-        function scrollToTab(tabNumber) {
-            const tabs = document.querySelectorAll('.tab');
-            if (tabs[tabNumber - 1]) {
-                const tab = tabs[tabNumber - 1];
-                const container = tabsContainer;
-                const containerWidth = container.offsetWidth;
-                const tabOffset = tab.offsetLeft;
-                const tabWidth = tab.offsetWidth;
-                
-                container.scrollLeft = tabOffset - (containerWidth / 2) + (tabWidth / 2);
+            if (prevBtn) {
+                prevBtn.disabled = currentTab === 1;
+            }
+            
+            if (nextBtn) {
+                nextBtn.disabled = currentTab === totalTabs;
             }
         }
 
@@ -2229,10 +2306,6 @@
                 
                 lastScrollTop = scrollTop;
             });
-            
-            // Navegación de tabs
-            prevTabBtn.addEventListener('click', () => changeTab(currentTab - 1));
-            nextTabBtn.addEventListener('click', () => changeTab(currentTab + 1));
         }
 
         // Abrir modal del carrito
@@ -2908,7 +2981,8 @@
 
         // Inicializar la página
         document.addEventListener("DOMContentLoaded", function () {
-            generateTabs();
+            generateTabsContent();
+            generateBottomTabs();
             loadProducts();
             setupImageZoom();
             setupFloatingCart();
